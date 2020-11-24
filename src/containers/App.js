@@ -1,7 +1,7 @@
 import '../App.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from '../components/layouts/Header';
-import HomePage from '../components/HomePage';
+import Houses from './Houses';
 
 const App = () => (
     <BrowserRouter>
@@ -9,7 +9,7 @@ const App = () => (
 
         <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Houses} />
         </Switch>
       </div>
     </BrowserRouter>

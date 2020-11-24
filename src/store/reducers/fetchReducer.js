@@ -6,14 +6,15 @@ const initialState = {
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_HOUSES':
-      console.log(action)
       return {
         ...state,
+        loading: false,
         houses: action.payload,
       };
     case 'FETCH_HOUSE':
       return {
         ...state,
+        loading: false,
         house: action.payload,
       };
     default:
