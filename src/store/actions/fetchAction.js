@@ -1,6 +1,5 @@
 import Axios from 'axios';
 
-
 const fetchHouses = () => dispatch => {
   const url = '';
   Axios.get(url)
@@ -14,7 +13,6 @@ const fetchHouses = () => dispatch => {
     }));
 };
 
-
 export {
-  fetchHouses
+  fetchHouses,
 };

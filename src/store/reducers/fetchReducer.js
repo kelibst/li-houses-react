@@ -1,7 +1,7 @@
 const initialState = {
   loading: true,
   houses: [],
-  house: []
+  house: [],
 };
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
