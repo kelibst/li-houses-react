@@ -12,6 +12,21 @@ const fetchHouses = () => dispatch => {
     }));
 };
 
+const authUser = (data) => dispatch => {
+  const url = 'https://lihouses-api.herokuapp.com/api/v1/signin.json';
+  const userData = {
+    auth: data
+  }
+  Axios.post(url, userData)
+  .then(res => dispatch({
+    type: 'AUTH_USER',
+    payload: res.data
+  })).catch(err => dispatch({
+    type: 'CREATE_ERROR',
+    payload: err,
+  }))
+}
+
 export {
-  fetchHouses,
+  fetchHouses, authUser
 };

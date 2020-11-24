@@ -1,6 +1,7 @@
 const initialState = {
   loading: true,
   houses: [],
+  jwt: '',
   house: [],
 };
 const fetchReducer = (state = initialState, action) => {
@@ -10,6 +11,13 @@ const fetchReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         houses: action.payload,
+      };
+      case 'AUTH_USER':
+        const { jwt } =  action.payload
+        localStorage.setItem('jwt', jwt)
+      return {
+        ...state,
+        loading: false,
       };
     case 'FETCH_HOUSE':
       return {
