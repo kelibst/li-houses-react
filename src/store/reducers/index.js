@@ -3,7 +3,7 @@ import errorReducer from './errorReducer';
 import fetchReducer from './fetchReducer';
 
 const rootReducer = combineReducers({
-  houses: fetchReducer,
+  data: fetchReducer,
   error: errorReducer,
 });
 export default rootReducer;

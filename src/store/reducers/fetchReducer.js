@@ -6,6 +6,7 @@ const initialState = {
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_HOUSES':
+      console.log(action)
       return {
         ...state,
         houses: action.payload,
