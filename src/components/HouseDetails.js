@@ -9,9 +9,8 @@ class HouseDetails extends Component {
 
     componentDidMount(){
         const { house_id } = this.props.match.params;
-        const { loggedIn } = this.props
-        console.log(this.props)
-        loggedIn && fetchHouse(house_id) 
+        const { loggedIn, fetchHouse } = this.props
+        fetchHouse(house_id) 
     }
     render() {
        const { house, errors } = this.props

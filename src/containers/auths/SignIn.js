@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { authUser } from '../../store/actions/fetchAction'
-import { error } from 'jquery';
+import SignUp from './SignUp';
 
 class SignIn extends Component {
     

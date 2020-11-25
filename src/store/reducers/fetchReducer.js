@@ -2,6 +2,7 @@ const initialState = {
   loading: true,
   houses: [],
   loggedIn: false,
+  currentUser: {},
   house: [],
 };
 const fetchReducer = (state = initialState, action) => {
@@ -19,6 +20,14 @@ const fetchReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         loggedIn: true
+      };
+
+      case 'CREATE_USER':
+        
+      return {
+        ...state,
+        loading: false,
+        currentUser: action.payload
       };
     case 'FETCH_HOUSE':
       return {
