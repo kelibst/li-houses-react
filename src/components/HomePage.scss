@@ -35,3 +35,24 @@ $primary-color: rgb(233, 90, 7);
         border-radius: 2rem;
     }
 }
+
+.some{
+    &-content{
+        line-height: 2.5;
+    }
+
+    &-two{
+        flex-direction: row-reverse;
+    }
+}
+
+.pre-footer {
+    background: rgb(195,163,34);
+    background: linear-gradient(75deg, rgba(195,163,34,1) 0%, rgba(253,65,45,1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0;
+    padding: 3rem;
+}

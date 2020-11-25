@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Navbar.Brand href="/" className="font-weight-bolder"><span className="brand-icon"><Icofont icon="building" /></span> Li-HOUSES</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -22,8 +22,8 @@ const NavBar = () => {
             </NavDropdown>
             </Nav>
             <Nav>
-            <NavLink to="/signin" className="btn btn-primary pr-2 text-light">Sign In</NavLink>
-            <NavLink to="/signup" className="btn btn-primary text-light">Sign Up</NavLink>
+            <NavLink to="/signin" className="btn nav-btn pr-2">Sign In</NavLink>
+            <NavLink to="/signup" className="btn nav-btn">Sign Up</NavLink>
             </Nav>
         </Navbar.Collapse>
         </Navbar>
