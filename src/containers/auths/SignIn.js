@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { authUser } from '../../store/actions/fetchAction'
+import { error } from 'jquery';
 
 class SignIn extends Component {
     
@@ -13,6 +14,11 @@ class SignIn extends Component {
             password: '',
        }
    }
+   componentDidUpdate(){
+    const { loggedIn, errors } = this.props
+    loggedIn && this.props.history.push('/')
+    errors && console.log(errors)
+   }
 
     render() { 
         const handleChange = (e) => {
@@ -22,10 +28,12 @@ class SignIn extends Component {
             })
         
         }
-        const { authUser } = this.props
+        const { authUser, loggedIn, errors } = this.props
         const handleSubmit = (e) => {
             e.preventDefault()
             authUser(this.state)
+            loggedIn && this.props.history.push('/')
+            errors && console.log(errors)
         }
         return (
             <div className="container-lg">
@@ -62,6 +70,9 @@ class SignIn extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    errors:  state.error.err,
+    loggedIn: state.data.loggedIn
+  });
 
-
-export default  connect(null, { authUser }) (SignIn)
+export default  connect(mapStateToProps, { authUser }) (SignIn)

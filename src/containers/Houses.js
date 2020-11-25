@@ -14,7 +14,7 @@ class Houses extends Component {
         const housesLoad = houses.length ? (
             <div className="container-xl">
                 <div className="house-container my-4 py-3">
-                    { houses && houses.map(house => <HouseLists house={house} key={house.id} />)}
+                    { houses && houses.map(house => <HouseLists house={house} key={house.id} errors={ errors }/>)}
                 </div>
             </div>
             

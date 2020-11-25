@@ -1,7 +1,7 @@
 const initialState = {
   loading: true,
   houses: [],
-  jwt: '',
+  loggedIn: false,
   house: [],
 };
 const fetchReducer = (state = initialState, action) => {
@@ -18,6 +18,7 @@ const fetchReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        loggedIn: true
       };
     case 'FETCH_HOUSE':
       return {
