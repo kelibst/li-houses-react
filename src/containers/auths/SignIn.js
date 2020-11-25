@@ -36,10 +36,15 @@ class SignIn extends Component {
             errors && console.log(errors)
         }
         return (
-            <div className="container-lg">
+            <div className="container-lg auth">
+            <div className="auth-header-container">
+                <h1 className="auth-header py-5 text-center font-weight-bolder">Sign In</h1>
+                <p className="auth-desc pb-5 font-weight-bolder">
+                    Hey! Log In to manager your account.
+                </p>
+            </div>
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="email">
-                    <Form.Label>Email address</Form.Label>
+                <Form.Group controlId="email" className="pb-3">
                     <Form.Control 
                         required
                         type="email" 
@@ -51,8 +56,8 @@ class SignIn extends Component {
                     </Form.Text>
                 </Form.Group>
             
-                <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
+                <Form.Group controlId="password" className="pb-5">
+                 
                     <Form.Control 
                         required
                         type="password" 
@@ -61,7 +66,7 @@ class SignIn extends Component {
                         />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button  className="btn hero-btn w-100" type="submit">
                     Submit
                 </Button>
             </Form>

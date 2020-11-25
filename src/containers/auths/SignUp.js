@@ -54,12 +54,11 @@ class SignUp extends Component {
         }
 
         return (
-            <div className="container-lg">
-            <h1 className="display-6 font-weight-bolder text-center">Sign Up</h1>
+            <div className="container-lg auth">
+            <h1 className="display-6 py-5 font-weight-bolder text-center">Sign Up</h1>
             <Form onSubmit={handleSubmit}>
 
                 <Form.Group controlId="firstname">
-                    <Form.Label>First Name</Form.Label>
                     <Form.Control 
                         required
                         type="text" 
@@ -69,7 +68,6 @@ class SignUp extends Component {
                 </Form.Group>
 
                 <Form.Group controlId="lastname">
-                    <Form.Label>Last Name</Form.Label>
                     <Form.Control 
                         required
                         type="text" 
@@ -79,7 +77,7 @@ class SignUp extends Component {
                 </Form.Group>
 
                 <Form.Group controlId="username">
-                    <Form.Label>Username</Form.Label>
+                
                     <Form.Control 
                         required
                         type="text" 
@@ -89,7 +87,7 @@ class SignUp extends Component {
                 </Form.Group>
 
                 <Form.Group controlId="email">
-                    <Form.Label>Email address</Form.Label>
+                 
                     <Form.Control 
                         required
                         type="email" 
@@ -102,7 +100,7 @@ class SignUp extends Component {
                 </Form.Group>
             
                 <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
+                   
                     <Form.Control 
                         required
                         type="password" 
@@ -112,7 +110,7 @@ class SignUp extends Component {
                 </Form.Group>
 
                 <Form.Group controlId="password_confirmation">
-                    <Form.Label>Password Confirmation</Form.Label>
+                
                     <Form.Control 
                         required
                         type="password" 
@@ -121,7 +119,7 @@ class SignUp extends Component {
                         />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button className="btn hero-btn w-100" type="submit">
                     Submit
                 </Button>
             </Form>

@@ -19,4 +19,21 @@ $primary-color: rgb(233, 90, 7);
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    &-brand{
+        font-size: 2rem;
+    }
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.form-group{
+    margin: 0;
+    padding: 1rem 0;
 }

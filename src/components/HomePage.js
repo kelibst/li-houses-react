@@ -16,7 +16,7 @@ const HomePage = () => {
           priceless, let's offer you an opportunity to make one.
         </p>
         <div className="hero-buttons">
-          <Link to="#" className="btn hero-btn">
+          <Link to="#" className="btn shadow-lg hero-btn">
             Free Trial
           </Link>
         </div>
@@ -41,7 +41,7 @@ const HomePage = () => {
               nobis aliquam.
             </p>
 
-            <a href="#" className="btn hero-btn">
+            <a href="#" className="btn shadow-lg hero-btn">
               Learn More
             </a>
           </div>
@@ -69,7 +69,7 @@ const HomePage = () => {
             nobis aliquam.
           </p>
 
-          <a href="#" className="btn hero-btn">
+          <a href="#" className="btn shadow-lg hero-btn">
             Learn More
           </a>
         </div>
@@ -80,7 +80,7 @@ const HomePage = () => {
 
     <section className="pre-footer text-light">
         <h5 className="text-center font-weight-bolder text-uppercase mb-4">Welcome to a Serene Home!</h5>
-        <Link to="/#" className="btn hero-btn"> Free Trial</Link>
+        <Link to="/#" className="btn hero-btn shadow-lg"> Free Trial</Link>
     </section>
 
     <Footer />
