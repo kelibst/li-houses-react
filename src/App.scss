@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/bootstrap";
+
+$primary-color: rgb(233, 90, 7);
+.nav{
+    &-btn{
+        transition: all .5s;
+        &:hover{
+            background-color: $primary-color;
+            color: #f3f3f3;
+            padding: .5rem, 2rem;
+            border-radius: 2rem;
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &-brand{
+        font-size: 2rem;
+    }
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.form-group{
+    margin: 0;
+    padding: 1rem 0;
+}
