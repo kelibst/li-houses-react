@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { createUser, authUser } from '../../store/actions/fetchAction'
 
 class SignUp extends Component {
