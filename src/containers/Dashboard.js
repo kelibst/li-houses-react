@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Icofont from 'react-icofont'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import {fetchUser } from '../store/actions/fetchAction'
+import {fetchUser, logCurrentUserOut } from '../store/actions/fetchAction'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -11,10 +11,10 @@ class Dashboard extends Component {
     }
     componentDidMount(){
         const jwt = localStorage.getItem('jwt');
-        const { currentUser, fetchUser, errors } = this.props
+        const { fetchUser, errors } = this.props
        
         const { username } = this.props.match.params;
-        jwt.length && username ? fetchUser(username) : this.props.history.push('/signin');
+        jwt && username ? fetchUser(username) : this.props.history.push('/signin');
 
         if(errors.response){
              errors.response.status === 401 && this.props.history.push('/signin');
@@ -24,15 +24,22 @@ class Dashboard extends Component {
 
     render() {
         const {currentUser, loggedIn} = this.props
-        const fullName = `${currentUser.body.firstName} ${currentUser.body.lastName}`
-        console.log(currentUser)
+        const fullName = currentUser.body ? `${currentUser.body.firstName} ${currentUser.body.lastName}` : ""
+
+        const logUserOut = () => {
+            localStorage.removeItem('jwt');
+
+            this.props.history.push('/')
+        }
+        
+
         return (
-            <div className="dashboard">
-                <Navbar collapseOnSelect expand="false" className="sidebar col-md-3" bg="white" variant="light">
+            <div className="dashboard bg-white">
+                <Navbar collapseOnSelect expand="false" className="sidebar col-md-3" bg="light" variant="light">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Brand href="/" className="font-weight-bolder"><span className="brand-icon"><Icofont icon="building" /></span> Li-HOUSES</Navbar.Brand>
                 
-                <Navbar.Collapse id="responsive-navbar-nav" className="sidebar bg-white">
+                <Navbar.Collapse id="responsive-navbar-nav" className="sidebar bg-light">
                     <Nav className="mt-5">
                     <div className="nav-link user-pic">
                     
@@ -52,7 +59,7 @@ class Dashboard extends Component {
                     </Nav>
                     <Nav> 
                     <NavLink to="/addHouse" className="btn hero-btn my-2">Add a new House</NavLink>
-                    <NavLink to="/killSession" className="btn hero-btn my-2">Log Out</NavLink>
+                    <button className="btn hero-btn" onClick={logUserOut}>Log Out</button>
                     </Nav>
                 </Navbar.Collapse>
                 </Navbar>
@@ -67,4 +74,4 @@ const mapStateToProps = state => ({
     username: state.data.username,
     loggedIn: state.data.loggedIn
 });
-export default connect(mapStateToProps, { fetchUser }) (Dashboard)
+export default connect(mapStateToProps, { fetchUser, logCurrentUserOut }) (Dashboard)

@@ -17,8 +17,9 @@ class SignIn extends Component {
    }
    componentDidUpdate(){
     const { loggedIn, errors, username } = this.props
-    username && fetchUser(username)
-    loggedIn && this.props.history.push(`/dashboard/${username}`)
+    const jwt = localStorage.getItem('jwt')
+    jwt && username && fetchUser(username)
+    jwt && loggedIn && this.props.history.push(`/dashboard/${username}`)
     errors && console.log(errors)
    }
 

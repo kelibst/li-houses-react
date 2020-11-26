@@ -45,6 +45,14 @@ const fetchReducer = (state = initialState, action) => {
         loading: false,
         currentUser: action.payload,
       };
+
+      case 'LOG_OUT':
+        
+      return {
+        ...state,
+        currentUser: {},
+        username: ''
+      };
     default:
       return state;
   }

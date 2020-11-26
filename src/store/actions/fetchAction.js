@@ -80,7 +80,13 @@ const fetchUser = username => dispatch => {
     payload: err,
   }))
 }
+const logCurrentUserOut = () => dispatch => {
+  dispatch({
+    type: 'LOG_OUT',
+    payload: 'logout'
+  })
+}
 
 export {
-  fetchHouses, authUser, fetchHouse, createUser, fetchUser
+  fetchHouses, authUser, fetchHouse, createUser, fetchUser, logCurrentUserOut
 };
