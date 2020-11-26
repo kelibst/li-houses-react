@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { fetchHouse } from '../store/actions/fetchAction'
 class HouseDetails extends Component {
     constructor(props){
@@ -10,6 +9,7 @@ class HouseDetails extends Component {
     componentDidMount(){
         const { house_id } = this.props.match.params;
         const { loggedIn, fetchHouse } = this.props
+        console.log(house_id)
         fetchHouse(house_id) 
     }
     render() {

@@ -32,6 +32,7 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: action.payload
       };
     case 'FETCH_HOUSE':
+      console.log(action.payload)
       return {
         ...state,
         loading: false,

@@ -48,7 +48,7 @@ const fetchHouse = (id) => dispatch => {
   let token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
     baseURL: `http://127.0.0.1:4000`,
-    header: {
+    headers: {
       Authorization: `Bearer ${token}`
     },
   })
@@ -64,7 +64,6 @@ const fetchHouse = (id) => dispatch => {
 
 const fetchUser = username => dispatch => {
   let token = localStorage.getItem('jwt');
-  console.log(token)
   const userAxios = Axios.create({
     baseURL: `http://127.0.0.1:4000`,
     headers: {
