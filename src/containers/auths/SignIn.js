@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { authUser } from '../../store/actions/fetchAction'
+import { authUser, fetchUser } from '../../store/actions/fetchAction'
 import SignUp from './SignUp';
 
 class SignIn extends Component {
@@ -10,13 +10,15 @@ class SignIn extends Component {
    constructor(props) {
        super(props)
        this.state = {
+            username: '',
             email: '',
             password: '',
        }
    }
    componentDidUpdate(){
-    const { loggedIn, errors } = this.props
-    loggedIn && this.props.history.push('/')
+    const { loggedIn, errors, username } = this.props
+    username && fetchUser(username)
+    loggedIn && this.props.history.push(`/dashboard/${username}`)
     errors && console.log(errors)
    }
 
@@ -28,11 +30,12 @@ class SignIn extends Component {
             })
         
         }
-        const { authUser, loggedIn, errors } = this.props
+        const { authUser, username, loggedIn, errors } = this.props
         const handleSubmit = (e) => {
             e.preventDefault()
             authUser(this.state)
-            loggedIn && this.props.history.push('/')
+      
+            username && loggedIn && this.props.history.push(`/dashboard/${username}`)
             errors && console.log(errors)
         }
         return (
@@ -44,6 +47,16 @@ class SignIn extends Component {
                 </p>
             </div>
             <Form onSubmit={handleSubmit}>
+
+                <Form.Group controlId="username" className="pb-3">
+                <Form.Control 
+                    required
+                    type="username" 
+                    placeholder="Enter username" 
+                    onChange={handleChange}
+                    />
+                </Form.Group>
+
                 <Form.Group controlId="email" className="pb-3">
                     <Form.Control 
                         required
@@ -77,6 +90,7 @@ class SignIn extends Component {
 
 const mapStateToProps = state => ({
     errors:  state.error.err,
+    username: state.data.username,
     loggedIn: state.data.loggedIn
   });
 

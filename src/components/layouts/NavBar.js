@@ -2,6 +2,7 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Icofont from 'react-icofont'
 import { NavLink } from 'react-router-dom'
+import './NavBar.scss'
 
 
 const NavBar = () => {

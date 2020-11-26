@@ -1,0 +1,31 @@
+.navbar-collapse {
+    position: absolute;
+    top: 54px;
+    right: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: block;
+}
+.navbar-collapse.collapsing {
+    height: auto !important;
+    margin-right: 50%;
+    transition: all 0.3s ease;
+    display: block;
+}
+.navbar-collapse.show {
+    right: 0;
+    height: 100vh;
+    position: absolute;
+}
+
+.nav-link.user-pic {
+    width: 10rem;
+    min-height: 10rem;
+    border-radius: 10rem;
+    background: red;
+    justify-self: center;
+    align-self: center;
+}
