@@ -62,6 +62,27 @@ const fetchHouse = (id) => dispatch => {
   }))
 }
 
+const createHouse = (data) => dispatch => {
+  let token = localStorage.getItem('jwt');
+  const authAxios = Axios.create({
+    baseURL: `http://127.0.0.1:4000`,
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+  })
+  const hseData = {
+    house: data
+  }
+  authAxios.post(`/api/v1/houses.json`, hseData)
+  .then(res => dispatch({
+    type: 'FETCH_HOUSE',
+    payload: res.data
+  })).catch(err => dispatch({
+    type: 'CREATE_ERROR',
+    payload: err,
+  }))
+}
+
 const fetchUser = username => dispatch => {
   let token = localStorage.getItem('jwt');
   const userAxios = Axios.create({
@@ -87,5 +108,5 @@ const logCurrentUserOut = () => dispatch => {
 }
 
 export {
-  fetchHouses, authUser, fetchHouse, createUser, fetchUser, logCurrentUserOut
+  fetchHouses, authUser, fetchHouse, createUser, fetchUser, logCurrentUserOut, createHouse
 };

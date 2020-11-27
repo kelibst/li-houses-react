@@ -3,7 +3,8 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Icofont from 'react-icofont'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import {fetchUser, logCurrentUserOut } from '../store/actions/fetchAction'
+import AddHouse from '../components/houses/AddHouse'
+import {fetchHouses, fetchUser, logCurrentUserOut } from '../store/actions/fetchAction'
 import Houses from './Houses';
 
 class Dashboard extends Component {
@@ -23,8 +24,12 @@ class Dashboard extends Component {
        
     }
 
+    componentDidUpdate(){
+        fetchHouses()
+    }
+
     render() {
-        const {currentUser, loggedIn} = this.props
+        const {currentUser} = this.props
         const fullName = currentUser.body ? `${currentUser.body.firstName} ${currentUser.body.lastName}` : ""
 
         const logUserOut = () => {
@@ -59,7 +64,7 @@ class Dashboard extends Component {
                 </NavDropdown>
                 </Nav>
                 <Nav> 
-                <NavLink to="/addHouse" className="btn hero-btn my-2">Add a new House</NavLink>
+                <AddHouse />
                 <button className="btn hero-btn" onClick={logUserOut}>Log Out</button>
                 </Nav>
             </Navbar.Collapse>
