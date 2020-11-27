@@ -56,3 +56,16 @@ $primary-color: rgb(233, 90, 7);
     margin: 3rem 0;
     padding: 3rem;
 }
+
+.card-details {
+    font-weight: bolder;
+    display: flex;
+}
+
+.card-details p {
+    color: back;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: .5rem;
+}

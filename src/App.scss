@@ -41,3 +41,14 @@ $primary-color: rgb(233, 90, 7);
 .sidebar{
     align-self: baseline;
 }
+
+.house-container {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-actions{
+    display: flex;
+    justify-content: space-between;
+}

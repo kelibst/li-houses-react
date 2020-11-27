@@ -44,6 +44,11 @@ const fetchReducer = (state = initialState, action) => {
         loading: false,
         house: action.payload,
       };
+      case 'DROP_HOUSE':
+      return {
+        ...state,
+        loading: false,
+      };
 
       case 'FETCH_USER':
         

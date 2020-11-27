@@ -8,7 +8,6 @@ class Houses extends Component {
         const { fetchHouses } = this.props
         fetchHouses()
     }
-    
     render() {
         const {houses, errors, loading } = this.props
         const housesLoad = houses.length ? (
@@ -29,6 +28,7 @@ class Houses extends Component {
 const mapStateToProps = state => ({
     houses: state.data.houses,
     loading: state.data.loading,
-    errors:  state.error.err
+    errors:  state.error.err,
+    house: state.data.house
   });
 export default connect(mapStateToProps, { fetchHouses })(Houses)

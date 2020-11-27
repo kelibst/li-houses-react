@@ -1,4 +1,4 @@
-.navbar-collapse {
+.sidebar.navbar-collapse {
     position: absolute;
     top: 54px;
     right: 100%;
@@ -9,13 +9,13 @@
     transition: all 0.3s ease;
     display: block;
 }
-.navbar-collapse.collapsing {
+.sidebar.navbar-collapse.collapsing {
     height: auto !important;
     margin-right: 50%;
     transition: all 0.3s ease;
     display: block;
 }
-.navbar-collapse.show {
+.sidebar.navbar-collapse.show {
     right: 0;
     height: 100vh;
     position: absolute;

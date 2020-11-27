@@ -42,6 +42,7 @@ class AddHouseForm extends Component {
             e.preventDefault()
             createHouse(this.state)
             house && close()
+            window.location.reload(false)
         }
 
         return (
