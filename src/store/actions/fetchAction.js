@@ -192,6 +192,32 @@ const logCurrentUserOut = () => (dispatch) => {
   });
 };
 
+const addToFav = (data) => (dispatch) => {
+  let token = localStorage.getItem("jwt");
+  const authAxios = Axios.create({
+    baseURL: `http://127.0.0.1:4000`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  const hseData = {
+    favorite: data,
+  };
+  console.log(hseData)
+  authAxios
+    .post(`/api/v1/favorites.json`, hseData)
+    .then((res) =>
+      (console.log(res))
+    )
+    .catch((err) =>
+      dispatch({
+        type: "CREATE_ERROR",
+        payload: err,
+      })
+    );
+};
+
 export {
   fetchHouses,
   authUser,
@@ -201,5 +227,6 @@ export {
   logCurrentUserOut,
   createHouse,
   dropHouse,
-  updateHouse
+  updateHouse,
+  addToFav
 };
