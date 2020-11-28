@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Button, Card } from "react-bootstrap";
 import Icofont from "react-icofont";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchHouse, dropHouse, fetchUser, addToFav, removeFromFav } from "../store/actions/fetchAction";
+import ErrOrs from "./ErrOrs";
 import AddHouse from "./houses/AddHouse";
-import DashSidebar from "./layouts/DashSidebar";
 import Footer from "./layouts/Footer";
 import NavBar from "./layouts/NavBar";
+import Loading from "./Loading";
 class HouseDetails extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,7 @@ class HouseDetails extends Component {
 
   componentDidMount() {
     const { house_id } = this.props.match.params;
-    const { fetchHouse, fetchUser, currentUser, house } = this.props;
+    const { fetchHouse, fetchUser, currentUser } = this.props;
         const jwt = localStorage.getItem('jwt');
         const username = localStorage.getItem('username');
         jwt && username && fetchUser(username)
@@ -125,9 +125,12 @@ class HouseDetails extends Component {
         <Footer />
       </div>
     ) : loading ? (
-      "Loading..."
+      <Loading />
     ) : (
-      "Sorry something went wrong!"
+      <div className="loading">
+        { errors && <ErrOrs />}
+      </div>
+     
     );
     return <div>{houseDetails}</div>;
   }

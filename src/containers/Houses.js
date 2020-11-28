@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import ErrOrs from '../components/ErrOrs';
 import HouseLists from '../components/HouseLists';
+import Loading from '../components/Loading';
 import { fetchHouses } from '../store/actions/fetchAction'
 
 class Houses extends Component {
@@ -19,7 +21,12 @@ class Houses extends Component {
             </div>
             
         ) : (
-            loading ? <div className="loading">Loading</div>: <div className="errors">There was an error</div>
+            <div className="loading">
+                { loading && <Loading /> } 
+                {errors && <ErrOrs /> }
+            </div>
+            
+           
         )
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Loading from './Loading'
 
 const HouseLists = (props) => {
     const { house, errors } = props
@@ -25,7 +26,7 @@ const HouseLists = (props) => {
         </Card.Body>
         </div>
     ) : (
-        errors ? "there is an error" : "Loading"
+        <Loading />
     )
     return (
         houseDetails
