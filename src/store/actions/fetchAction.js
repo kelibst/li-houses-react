@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const fetchHouses = () => (dispatch) => {
-  const url = "http://127.0.0.1:4000/api/v1/houses.json";
+  const url = "https://lihouses-api.herokuapp.com/api/v1/houses.json";
   Axios.get(url)
     .then((res) =>
       dispatch({
@@ -18,7 +18,7 @@ const fetchHouses = () => (dispatch) => {
 };
 
 const authUser = (data) => (dispatch) => {
-  const url = "http://127.0.0.1:4000/api/v1/auth/signin.json";
+  const url = "https://lihouses-api.herokuapp.com/api/v1/auth/signin.json";
   const userData = {
     auth: data,
   };
@@ -40,7 +40,7 @@ const authUser = (data) => (dispatch) => {
 };
 
 const createUser = (data) => (dispatch) => {
-  const url = "http://127.0.0.1:4000/api/v1/signup.json";
+  const url = "https://lihouses-api.herokuapp.com/api/v1/signup.json";
   const userData = {
     user: data,
   };
@@ -62,7 +62,7 @@ const createUser = (data) => (dispatch) => {
 const fetchHouse = (id) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -86,7 +86,7 @@ const fetchHouse = (id) => (dispatch) => {
 const dropHouse = (id) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -110,7 +110,7 @@ const dropHouse = (id) => (dispatch) => {
 const createHouse = (data) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -137,7 +137,7 @@ const createHouse = (data) => (dispatch) => {
 const updateHouse = (data, id) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -164,7 +164,7 @@ const updateHouse = (data, id) => (dispatch) => {
 const fetchUser = (username) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const userAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -195,7 +195,7 @@ const logCurrentUserOut = () => (dispatch) => {
 const addToFav = (data) => (dispatch) => {
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ const removeFromFav = (house_id, favs) => (dispatch) => {
   
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
-    baseURL: `http://127.0.0.1:4000`,
+    baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
