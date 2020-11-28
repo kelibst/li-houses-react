@@ -4,6 +4,7 @@ const initialState = {
   loggedIn: false,
   currentUser: {},
   username: '',
+  fav: false,
   house: [],
 };
 const fetchReducer = (state = initialState, action) => {
@@ -74,6 +75,13 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: {},
         username: ''
       };
+
+      case 'UPDATE_FAV':
+        
+        return {
+          ...state,
+          fav: true
+        };
     default:
       return state;
   }

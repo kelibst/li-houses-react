@@ -49,8 +49,8 @@ class AddHouseForm extends Component {
             }else if(status === 'Update'){
                 updateHouse(this.state, house.id)
             }
-                // house && close()
-                // window.location.reload(false)
+                house && close()
+                window.location.reload(false)
         }
 
         return (

@@ -4,6 +4,7 @@ import Icofont from 'react-icofont'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { fetchUser } from '../../store/actions/fetchAction'
+import AddHouse from '../houses/AddHouse'
 import './NavBar.scss'
 
 
@@ -30,7 +31,7 @@ class NavBar extends Component {
         }
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="light" className="mb-5" variant="light">
         <Navbar.Brand href="/" className="font-weight-bolder"><span className="brand-icon"><Icofont icon="building" /></span> Li-HOUSES</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
@@ -44,7 +45,9 @@ class NavBar extends Component {
                 <Nav>
                     <NavLink to={`/dashboard/${username}`} className="btn nav-btn pr-2">Dashboard</NavLink>
                     <NavLink to={`/users`} className="btn nav-btn pr-2">Users</NavLink>
+                    <AddHouse status="Add" house={{}} />
                     <button className="btn hero-btn" onClick={logUserOut}>Log Out</button>
+
                 </Nav>
             )}
            

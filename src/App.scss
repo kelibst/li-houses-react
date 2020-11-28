@@ -56,3 +56,27 @@ $primary-color: rgb(233, 90, 7);
 .card-img-top{
     max-height: 350px;
 }
+.btn{
+    padding: .5rem 1.7rem;
+    border-radius: 2rem;
+}
+
+/* Small devices  */
+@media (max-width: 576px) { 
+    .container-fluid.card-list {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .custom-control.custom-switch {
+        padding: 0;
+    }
+}
+
+// @media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }

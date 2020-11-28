@@ -8,6 +8,7 @@ import HouseDetails from '../components/HouseDetails'
 import HouseLists from '../components/HouseLists'
 import AddHouse from '../components/houses/AddHouse'
 import DashSidebar from '../components/layouts/DashSidebar'
+import Footer from '../components/layouts/Footer'
 import NavBar from '../components/layouts/NavBar'
 import {fetchHouses, fetchUser, logCurrentUserOut } from '../store/actions/fetchAction'
 import Houses from './Houses';
@@ -22,7 +23,7 @@ class Dashboard extends Component {
        
         const { username } = this.props.match.params;
         jwt && username ? fetchUser(username) : this.props.history.push('/signin');
-
+        
         if(errors.response){
              errors.response.status === 401 && this.props.history.push('/signin');
         }
@@ -47,12 +48,13 @@ class Dashboard extends Component {
         return (
             <div className="dashboard bg-white">
             <NavBar />
-            <div className="container-fluid">
+            <div className="container-fluid card-list">
                 <Switch>
                     <Route exact path="/dashboard/:username" component={Houses} />
                     <Route exact path="/houses/:house_id" component={HouseDetails} />
                 </Switch>
             </div>
+            <Footer />
             </div>
         )
     }

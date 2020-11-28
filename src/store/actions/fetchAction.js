@@ -204,11 +204,39 @@ const addToFav = (data) => (dispatch) => {
   const hseData = {
     favorite: data,
   };
-  console.log(hseData)
+
   authAxios
     .post(`/api/v1/favorites.json`, hseData)
     .then((res) =>
       (console.log(res))
+    )
+    .catch((err) =>
+      dispatch({
+        type: "CREATE_ERROR",
+        payload: err,
+      })
+    );
+};
+
+const removeFromFav = (house_id, favs) => (dispatch) => {
+  const fav = favs.filter((favv => favv.house_id == house_id.toString()))
+  
+  let token = localStorage.getItem("jwt");
+  const authAxios = Axios.create({
+    baseURL: `http://127.0.0.1:4000`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  const {id} = fav[0]
+  authAxios
+    .delete(`/api/v1/favorites/${id}.json`)
+    .then((res) =>
+      dispatch({
+      type: "UPDATE_FAV",
+      payload: res,
+    })
     )
     .catch((err) =>
       dispatch({
@@ -228,5 +256,6 @@ export {
   createHouse,
   dropHouse,
   updateHouse,
-  addToFav
+  addToFav,
+  removeFromFav
 };
