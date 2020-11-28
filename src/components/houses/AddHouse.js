@@ -8,7 +8,6 @@ class AddHouse extends Component {
 
         this.state = {
             show: false,
-           
         }
 
         
@@ -33,7 +32,7 @@ class AddHouse extends Component {
         
         return (
             <div>
-            <Button variant="transparent" className="btn hero-btn my-2 w-100" onClick={handleShow}>
+            <Button variant="transparent" className="btn hero-btn cus-btn w-100" onClick={handleShow}>
                 {`${status}  House`}
             </Button>
     

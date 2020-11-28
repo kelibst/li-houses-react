@@ -45,8 +45,14 @@ class NavBar extends Component {
                 <Nav>
                     <NavLink to={`/dashboard/${username}`} className="btn nav-btn pr-2">Dashboard</NavLink>
                     <NavLink to={`/users`} className="btn nav-btn pr-2">Users</NavLink>
-                    <AddHouse status="Add" house={{}} />
-                    <button className="btn hero-btn" onClick={logUserOut}>Log Out</button>
+                    <AddHouse status="Add" house={ {body: { address: "",
+                                                    country: "Ghana",
+                                                    image: "",
+                                                    location: "",
+                                                    region: "Volta",
+                                                    status: "available",
+                                                    user: 1},} } />
+                    <button className="btn hero-btn cus-btn" onClick={logUserOut}>Log Out</button>
 
                 </Nav>
             )}

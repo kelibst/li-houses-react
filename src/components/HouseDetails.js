@@ -42,7 +42,6 @@ class HouseDetails extends Component {
       fav,
       removeFromFav
     } = this.props;
-    console.log(currentUser)
     const { house_id } = this.props.match.params;
     const imgSrc =
       "https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9";

@@ -61,7 +61,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter a unique House name" 
-                value={this.state.name ? this.state.name : house.name}
+                value={house.name && status === 'Update' ? house.name : this.state.name}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -72,7 +72,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter house address" 
-                value={this.state.address.length ? this.state.address : house.body.address}
+                value={house.body && status === 'Update' ? house.body.address : this.state.address }
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -82,7 +82,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter house location" 
-                value={this.state.location.length ? this.state.location : house.body.location}
+                value={house.body && status === 'Update' ? house.body.location : this.state.location}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -92,7 +92,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter link to the house image" 
-                value={this.state.image ? this.state.image : house.body.image}
+                value={house.body && status === 'Update' ? house.body.image :this.state.image}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -101,7 +101,7 @@ class AddHouseForm extends Component {
             <Form.Label>Select a House Status</Form.Label>
             <Form.Control
               as="select"
-              value={this.state.status ? this.state.status : house.body.status}
+              value={house.body && status === 'Update' ?  house.body.status : this.state.status}
               onChange={handleChange}
             >
               {availability.map((hstate) => (
