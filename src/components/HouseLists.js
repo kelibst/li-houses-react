@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 
 const HouseLists = (props) => {
     const { house, errors } = props
-
+    const srcImg = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const houseDetails = house ? (
-        <div className="card shadow-large p-0">
-        <Card.Img variant="top" src={house.body.image} />
+        <div className="card shadow-lg p-0">
+        <Card.Img variant="top" src={house.body.image ? house.body.image : srcImg} />
         <Card.Body>
         <Card.Title className='text-uppercase font-weight-bolder'>{ house.name }</Card.Title>
         <div className="card-details">

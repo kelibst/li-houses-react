@@ -1,34 +1,64 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Icofont from 'react-icofont'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { fetchUser } from '../../store/actions/fetchAction'
 import './NavBar.scss'
 
 
-const NavBar = () => {
+class NavBar extends Component {
+    constructor(props){
+        super(props)
+    }
+
+    componentDidMount(){
+        const jwt = localStorage.getItem('jwt');
+        const username = localStorage.getItem('username');
+        jwt && username && fetchUser(username)
+    }
+    
+    render(){
+        const jwt = localStorage.getItem('jwt');
+        const username = localStorage.getItem('username');
+        const { currentUser } = this.props
+
+        const logUserOut = () => {
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('username')
+            window.location.reload(false)
+        }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Navbar.Brand href="/" className="font-weight-bolder"><span className="brand-icon"><Icofont icon="building" /></span> Li-HOUSES</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-            </Nav>
-            <Nav>
-            <NavLink to="/signin" className="btn nav-btn pr-2">Sign In</NavLink>
-            <NavLink to="/signup" className="btn nav-btn">Sign Up</NavLink>
-            </Nav>
+        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+           
+            {jwt === null && username ===null ? ( 
+                <Nav>
+                <NavLink to="/signin" className="btn nav-btn pr-2">Sign In</NavLink>
+                <NavLink to="/signup" className="btn nav-btn">Sign Up</NavLink> 
+                </Nav>
+            ):(
+                <Nav>
+                    <NavLink to={`/dashboard/${username}`} className="btn nav-btn pr-2">Dashboard</NavLink>
+                    <NavLink to={`/users`} className="btn nav-btn pr-2">Users</NavLink>
+                    <button className="btn hero-btn" onClick={logUserOut}>Log Out</button>
+                </Nav>
+            )}
+           
+           
         </Navbar.Collapse>
         </Navbar>
     )
 }
+}
+const mapStateToProps = (state) => ({
+    errors: state.error.err,
+    currentUser: state.data.currentUser,
+    loading: state.data.loading,
+    loggedIn: state.data.loggedIn,
+  });
 
-export default NavBar
+export default connect(mapStateToProps, { fetchUser })(NavBar)

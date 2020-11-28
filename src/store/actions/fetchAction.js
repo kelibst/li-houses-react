@@ -136,7 +136,6 @@ const createHouse = (data) => (dispatch) => {
 
 const updateHouse = (data, id) => (dispatch) => {
   let token = localStorage.getItem("jwt");
-  console.log('id', id)
   const authAxios = Axios.create({
     baseURL: `http://127.0.0.1:4000`,
     headers: {
@@ -146,7 +145,6 @@ const updateHouse = (data, id) => (dispatch) => {
   const hseData = {
     house: data,
   };
-  console.log(hseData)
   authAxios
     .patch(`/api/v1/houses/${id}.json`, hseData)
     .then((res) =>
@@ -171,6 +169,7 @@ const fetchUser = (username) => (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  username = username.trim()
   userAxios
     .get(`/api/v1/dashboard/${username}.json`)
     .then((res) =>

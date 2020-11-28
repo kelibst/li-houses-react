@@ -8,6 +8,7 @@ import HouseDetails from '../components/HouseDetails'
 import HouseLists from '../components/HouseLists'
 import AddHouse from '../components/houses/AddHouse'
 import DashSidebar from '../components/layouts/DashSidebar'
+import NavBar from '../components/layouts/NavBar'
 import {fetchHouses, fetchUser, logCurrentUserOut } from '../store/actions/fetchAction'
 import Houses from './Houses';
 
@@ -45,7 +46,7 @@ class Dashboard extends Component {
 
         return (
             <div className="dashboard bg-white">
-            <DashSidebar />
+            <NavBar />
             <div className="container-fluid">
                 <Switch>
                     <Route exact path="/dashboard/:username" component={Houses} />

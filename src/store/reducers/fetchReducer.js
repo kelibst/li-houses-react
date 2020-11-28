@@ -17,6 +17,7 @@ const fetchReducer = (state = initialState, action) => {
       case 'AUTH_USER':
         const { jwt } =  action.payload
         localStorage.setItem('jwt', jwt)
+        localStorage.setItem('username', action.username)
       return {
         ...state,
         loading: false,

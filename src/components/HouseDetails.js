@@ -18,15 +18,11 @@ class HouseDetails extends Component {
   }
   render() {
     const { house, currentUser, dropHouse, errors, loading } = this.props;
-
+        const imgSrc = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const handleDelete = () => {
         dropHouse(house.id)
         errors &&  console.log(errors)
         this.props.history.push('/')
-    }
-
-    const handleUpdate = () => {
-
     }
 
     const houseDetails = house.body ? (
@@ -36,7 +32,7 @@ class HouseDetails extends Component {
         
    
         <div className="card shadow-lg col-md-8 d-md-flex p-0">
-          <Card.Img variant="top" src={house.body ? house.body.image : ""} />
+          <Card.Img variant="top" src={house.body && house.body.image ? house.body.image : imgSrc} />
           <Card.Body>
             <Card.Title className="text-uppercase text-center font-weight-bolder">
               {house.name}
