@@ -1,43 +1,45 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { createHouse, fetchHouses, updateHouse } from '../../store/actions/fetchAction'
 
 class AddHouseForm extends Component {
-    constructor(props){
-        super(props)
+    constructor(props, context){
+        super(props,)
+        const { house, status } = this.props
         this.state= {
-            name: "",
+            name: house.name  && status === 'Update' ? house.name : "",
             country: "Ghana",
-            address: "",
+            address: house.body && status === 'Update' ? house.body.address : "",
             region: "Volta",
-            location: "",
-            status: "available",
-            user_id: 0
+            image: house.body && status === 'Update' ? house.body.image : "",
+            location: house.body && status === 'Update' ? house.body.location : "",
+            status: house.body && status === 'Update' ? house.body.status : "available",
+            user_id: house.body && status === 'Update' ? house.body.user : 0
         }
     }
 
     componentDidMount(){
-        const { currentUser, house } = this.props
+        const { currentUser } = this.props
         
         currentUser ? this.setState({
             ...this.state,
             user_id: currentUser.id
         }) :
-        (<Redirect to="/signin" />)
-         console.log(this.state)
+        (this.props.history.push('/signin'))
+         
     }
     
     render() { 
-        const { createHouse, house, status, updateHouse, close } = this.props
+        const { createHouse, house, status, loading, updateHouse, close } = this.props
+        const { history } = this.props
         const availability = ['available', 'processing', 'unavailable']
             const handleChange = (e) => {
                 const { id, value } = e.target
                 this.setState({
                     [id]: value
-                })
-            
+                }) 
         }
         
         const handleSubmit = (e) => {
@@ -45,12 +47,15 @@ class AddHouseForm extends Component {
             e.preventDefault()
             if (status === 'Add'){
                 createHouse(this.state)
-                
+                !loading && close()
+                !loading &&  this.props.history.push(`/houses/${house.id}`)
             }else if(status === 'Update'){
                 updateHouse(this.state, house.id)
+               
+                !loading && close()
+                !loading && window.location.reload(false)
             }
-                house && close()
-                window.location.reload(false)
+               
         }
 
         return (
@@ -61,7 +66,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter a unique House name" 
-                value={house.name && status === 'Update' ? house.name : this.state.name}
+                value={ this.state.name}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -72,7 +77,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter house address" 
-                value={house.body && status === 'Update' ? house.body.address : this.state.address }
+                value={this.state.address }
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -82,7 +87,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter house location" 
-                value={house.body && status === 'Update' ? house.body.location : this.state.location}
+                value={ this.state.location}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -92,7 +97,7 @@ class AddHouseForm extends Component {
                 required
                 type="text" 
                 placeholder="Enter link to the house image" 
-                value={house.body && status === 'Update' ? house.body.image :this.state.image}
+                value={this.state.image}
                 onChange={handleChange}
                 />
             </Form.Group>
@@ -101,7 +106,7 @@ class AddHouseForm extends Component {
             <Form.Label>Select a House Status</Form.Label>
             <Form.Control
               as="select"
-              value={house.body && status === 'Update' ?  house.body.status : this.state.status}
+              value={ this.state.status}
               onChange={handleChange}
             >
               {availability.map((hstate) => (
@@ -124,4 +129,7 @@ const mapStateToProps = state => ({
     house: state.data.house,
     loading: state.data.loading
   });
-export default connect(mapStateToProps, { createHouse, fetchHouses, updateHouse }) (AddHouseForm)
+
+
+const ShowTheLocationWithRouter = withRouter(AddHouseForm);
+export default connect(mapStateToProps, { createHouse, fetchHouses, updateHouse }) (ShowTheLocationWithRouter)

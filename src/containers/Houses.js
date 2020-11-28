@@ -10,6 +10,7 @@ class Houses extends Component {
     }
     render() {
         const {houses, errors, loading } = this.props
+        
         const housesLoad = houses.length ? (
             <div className="container-xl">
                 <div className="house-container my-4 py-3">
@@ -18,7 +19,7 @@ class Houses extends Component {
             </div>
             
         ) : (
-            loading ? "loading" : "There was an error" 
+            loading ? <div className="loading">Loading</div>: <div className="errors">There was an error</div>
         )
 
 

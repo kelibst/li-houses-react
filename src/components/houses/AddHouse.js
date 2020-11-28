@@ -9,8 +9,6 @@ class AddHouse extends Component {
         this.state = {
             show: false,
         }
-
-        
     }
     
 
@@ -41,7 +39,7 @@ class AddHouse extends Component {
                 <Modal.Title>Add a new House</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                   <AddHouseForm close={handleClose} house={house} status={status} />
+                   <AddHouseForm close={handleClose} house={house} history={this.props.history} status={status} />
                 </Modal.Body>
                 <Modal.Footer>
                

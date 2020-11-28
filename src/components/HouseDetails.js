@@ -48,7 +48,7 @@ class HouseDetails extends Component {
     const handleDelete = () => {
       dropHouse(house.id);
       errors && console.log(errors);
-      this.props.history.push("/");
+      !loading && this.props.history.push(`/dashboard/${currentUser.username}`);
     };
 
     const isFav = currentUser.favorites && currentUser.favorites.some( (fav => { 
