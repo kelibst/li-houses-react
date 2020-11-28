@@ -4,6 +4,7 @@ import Icofont from "react-icofont";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchHouse, dropHouse } from "../store/actions/fetchAction";
+import AddHouse from "./houses/AddHouse";
 import DashSidebar from "./layouts/DashSidebar";
 class HouseDetails extends Component {
   constructor(props) {
@@ -13,17 +14,19 @@ class HouseDetails extends Component {
   componentDidMount() {
     const { house_id } = this.props.match.params;
     const { fetchHouse } = this.props;
-    console.log(house_id);
     fetchHouse(house_id);
   }
   render() {
     const { house, currentUser, dropHouse, errors, loading } = this.props;
-    console.log(house);
 
     const handleDelete = () => {
         dropHouse(house.id)
         errors &&  console.log(errors)
         this.props.history.push('/')
+    }
+
+    const handleUpdate = () => {
+
     }
 
     const houseDetails = house.body ? (
@@ -54,7 +57,7 @@ class HouseDetails extends Component {
         {
             currentUser && currentUser.id === house.body.user ? (
                 <div className="card-actions">
-                    <Button className="btn btn-success">Update House</Button>
+                    <AddHouse status="Update" house={house} />
                     <Button onClick={handleDelete}  className="btn btn-danger">Delete House</Button>
                 </div>
                 

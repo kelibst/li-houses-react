@@ -29,11 +29,12 @@ class AddHouse extends Component {
                 show: false
             })
         }
-
+        const { house, status } = this.props
+        
         return (
             <div>
             <Button variant="transparent" className="btn hero-btn my-2 w-100" onClick={handleShow}>
-                Add a new House
+                {`${status}  House`}
             </Button>
     
             <Modal show={this.state.show} onHide={handleClose}>
@@ -41,7 +42,7 @@ class AddHouse extends Component {
                 <Modal.Title>Add a new House</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                   <AddHouseForm close={handleClose} />
+                   <AddHouseForm close={handleClose} house={house} status={status} />
                 </Modal.Body>
                 <Modal.Footer>
                

@@ -38,6 +38,14 @@ const fetchReducer = (state = initialState, action) => {
         house: action.payload,
       };
 
+      case 'UPDATE_HOUSE':
+        console.log(action.payload)
+      return {
+        ...state,
+        loading: false,
+        house: action.payload,
+      };
+
       case 'CREATE_HOUSE':
       return {
         ...state,
