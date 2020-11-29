@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Button, Modal } from "react-bootstrap";
-import AddHouseForm from "./AddHouseForm";
+import React, { Component } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import AddHouseForm from './AddHouseForm';
 
 class AddHouse extends Component {
   constructor(props) {
@@ -14,18 +15,17 @@ class AddHouse extends Component {
   render() {
     const handleShow = () => {
       this.setState({
-        ...this.state,
         show: true,
       });
     };
 
     const handleClose = () => {
       this.setState({
-        ...this.state,
         show: false,
       });
     };
     const { house, status } = this.props;
+    const { show } = this.state;
 
     return (
       <div>
@@ -37,7 +37,7 @@ class AddHouse extends Component {
           {`${status}  House`}
         </Button>
 
-        <Modal show={this.state.show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Add a new House</Modal.Title>
           </Modal.Header>
@@ -45,14 +45,17 @@ class AddHouse extends Component {
             <AddHouseForm
               close={handleClose}
               house={house}
-              history={this.props.history}
               status={status}
             />
           </Modal.Body>
-          <Modal.Footer></Modal.Footer>
+          <Modal.Footer />
         </Modal>
       </div>
     );
   }
 }
+AddHouse.propTypes = {
+  house: PropTypes.shape.isRequired,
+  status: PropTypes.shape.isRequired,
+};
 export default AddHouse;

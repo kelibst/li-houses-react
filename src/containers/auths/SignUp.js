@@ -1,51 +1,62 @@
-import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import { createUser, authUser } from "../../store/actions/fetchAction";
+/* eslint-disable no-unused-expressions */
+import React, { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import ErrOrs from '../../components/ErrOrs';
+import { createUser, authUser } from '../../store/actions/fetchAction';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      username: "",
-      firstname: "",
-      lastname: "",
-      password_confirmation: "",
+      email: '',
+      password: '',
+      username: '',
+      firstname: '',
+      lastname: '',
+      password_confirmation: '',
     };
   }
 
   render() {
-    const handleChange = (e) => {
+    const handleChange = e => {
       const { id, value } = e.target;
       this.setState({
         [id]: value,
       });
     };
-    const { createUser, currentUser, loggedIn, authUser, errors } = this.props;
-    const handleSubmit = (e) => {
+    const {
+      createUser,
+      currentUser,
+      loggedIn,
+      authUser,
+      errors,
+      history,
+    } = this.props;
+    const handleSubmit = e => {
       e.preventDefault();
       createUser(this.state);
       if (currentUser.id) {
+        const { email, password } = this.state;
         const data = {
-          email: this.state.email,
-          password: this.state.password,
+          email,
+          password,
         };
         authUser(data);
-        this.props.history.push("/");
+        history.push('/');
       }
-      loggedIn &&
-        this.setState({
-          email: "",
-          password: "",
-          username: "",
-          firstname: "",
-          lastname: "",
-          password_confirmation: "",
+      loggedIn
+        && this.setState({
+          email: '',
+          password: '',
+          username: '',
+          firstname: '',
+          lastname: '',
+          password_confirmation: '',
         });
 
-      errors && console.log(errors);
+      errors && <ErrOrs />;
     };
 
     return (
@@ -89,7 +100,7 @@ class SignUp extends Component {
               onChange={handleChange}
             />
             <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
+              We will never share your email with anyone else.
             </Form.Text>
           </Form.Group>
 
@@ -119,8 +130,15 @@ class SignUp extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
+SignUp.propTypes = {
+  currentUser: PropTypes.shape.isRequired,
+  errors: PropTypes.shape.isRequired,
+  loggedIn: PropTypes.shape.isRequired,
+  createUser: PropTypes.func.isRequired,
+  authUser: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
   errors: state.error.err,
   loggedIn: state.data.loggedIn,
   currentUser: state.data.currentUser,

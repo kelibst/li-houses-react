@@ -1,27 +1,32 @@
-import React, { Component } from "react";
-import Switch from "react-bootstrap/esm/Switch";
-import { connect } from "react-redux";
-import { Route } from "react-router-dom";
-import HouseDetails from "../components/HouseDetails";
-import Footer from "../components/layouts/Footer";
-import NavBar from "../components/layouts/NavBar";
+/* eslint-disable no-unused-expressions */
+import React, { Component } from 'react';
+import Switch from 'react-bootstrap/esm/Switch';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import HouseDetails from '../components/HouseDetails';
+import Footer from '../components/layouts/Footer';
+import NavBar from '../components/layouts/NavBar';
+
 import {
   fetchHouses,
   fetchUser,
   logCurrentUserOut,
-} from "../store/actions/fetchAction";
-import Houses from "./Houses";
+} from '../store/actions/fetchAction';
+import Houses from './Houses';
 
 class Dashboard extends Component {
   componentDidMount() {
-    const jwt = localStorage.getItem("jwt");
-    const { fetchUser, errors } = this.props;
+    const jwt = localStorage.getItem('jwt');
+    const {
+      fetchUser, errors, history, match,
+    } = this.props;
 
-    const { username } = this.props.match.params;
-    jwt && username ? fetchUser(username) : this.props.history.push("/signin");
+    const { username } = match.params;
+    jwt && username ? fetchUser(username) : history.push('/signin');
 
     if (errors.response) {
-      errors.response.status === 401 && this.props.history.push("/signin");
+      errors.response.status === 401 && history.push('/signin');
     }
   }
 
@@ -45,12 +50,20 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+Dashboard.propTypes = {
+  errors: PropTypes.shape.isRequired,
+  match: PropTypes.shape.isRequired,
+  username: PropTypes.shape.isRequired,
+  fetchUser: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
   errors: state.error.err,
   currentUser: state.data.currentUser,
   username: state.data.username,
   loggedIn: state.data.loggedIn,
 });
 export default connect(mapStateToProps, { fetchUser, logCurrentUserOut })(
-  Dashboard
+  Dashboard,
 );

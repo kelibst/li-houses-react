@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Alert, Button } from "react-bootstrap";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Alert, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class ErrOrs extends Component {
   constructor(props) {
@@ -9,16 +10,18 @@ class ErrOrs extends Component {
       show: true,
     };
   }
+
   render() {
     const setShow = () => {
       this.setState({
         show: false,
       });
     };
+    const { show } = this.state;
     const { errors } = this.props;
     return (
       <div>
-        <Alert show={this.state.show} variant="danger">
+        <Alert show={show} variant="danger">
           <Alert.Heading>Sorry Something went wrong!</Alert.Heading>
           <div>
             {errors.request && (
@@ -39,8 +42,11 @@ class ErrOrs extends Component {
     );
   }
 }
+ErrOrs.propTypes = {
+  errors: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   errors: state.error.err,
 });
 export default connect(mapStateToProps, null)(ErrOrs);

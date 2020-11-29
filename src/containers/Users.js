@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { Navbar } from 'react-bootstrap';
 
-export default class Users extends Component {
-    render() {
-        return (
-            <div className="text-center">
-                Users index page is commig soon!
-            </div>
-        )
-    }
-}
+const Users = () => (
+  <div>
+    <Navbar />
+    <div className="container d-flex justify-content-center">Coming Soon!</div>
+  </div>
+);
+
+export default Users;

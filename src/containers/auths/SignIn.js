@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { authUser, fetchUser } from "../../store/actions/fetchAction";
+import ErrOrs from "../../components/ErrOrs";
 
 class SignIn extends Component {
   constructor(props) {
@@ -13,12 +15,16 @@ class SignIn extends Component {
       password: "",
     };
   }
+  componentDidMount() {
+    document.querySelector(".App").classList.add("signin");
+  }
+
   componentDidUpdate() {
-    const { loggedIn, errors, username } = this.props;
+    const { loggedIn, errors, username, history } = this.props;
     const jwt = localStorage.getItem("jwt");
     jwt && username && fetchUser(username);
-    jwt && loggedIn && this.props.history.push(`/dashboard/${username}`);
-    errors && console.log(errors);
+    jwt && loggedIn && history.push(`/dashboard/${username}`);
+    errors && <ErrOrs />;
   }
 
   render() {
@@ -28,13 +34,13 @@ class SignIn extends Component {
         [id]: value,
       });
     };
-    const { authUser, username, loggedIn, errors } = this.props;
+    const { authUser, username, loggedIn, errors, history } = this.props;
     const handleSubmit = (e) => {
       e.preventDefault();
       authUser(this.state);
 
-      username && loggedIn && this.props.history.push(`/dashboard/${username}`);
-      errors && console.log(errors);
+      username && loggedIn && history.push(`/dashboard/${username}`);
+      errors && <ErrOrs />;
     };
     return (
       <div className="container-lg auth">
@@ -64,7 +70,7 @@ class SignIn extends Component {
               onChange={handleChange}
             />
             <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
+              We will never share your email with anyone else.
             </Form.Text>
           </Form.Group>
 
@@ -85,6 +91,14 @@ class SignIn extends Component {
     );
   }
 }
+
+SignIn.propTypes = {
+  errors: PropTypes.shape.isRequired,
+  loggedIn: PropTypes.shape.isRequired,
+  username: PropTypes.shape.isRequired,
+  authUser: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   errors: state.error.err,

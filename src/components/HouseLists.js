@@ -1,12 +1,11 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Loading from "./Loading";
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Loading from './Loading';
 
-const HouseLists = (props) => {
+const HouseLists = props => {
   const { house } = props;
-  const srcImg =
-    "https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9";
+  const srcImg = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
   const houseDetails = house ? (
     <div className="card shadow-lg p-0">
       <Card.Img
@@ -37,7 +36,7 @@ const HouseLists = (props) => {
       </Card.Body>
     </div>
   ) : (
-    <div className="loading">{<Loading />}</div>
+    <div className="loading"><Loading /></div>
   );
   return houseDetails;
 };

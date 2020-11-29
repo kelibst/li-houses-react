@@ -1,26 +1,27 @@
-import React, { Component } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import Icofont from "react-icofont";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { fetchUser } from "../../store/actions/fetchAction";
-import AddHouse from "../houses/AddHouse";
-import "./NavBar.scss";
+/* eslint-disable no-unused-expressions */
+import React, { Component } from 'react';
+import { Nav, Navbar } from 'react-bootstrap';
+import Icofont from 'react-icofont';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { fetchUser } from '../../store/actions/fetchAction';
+import AddHouse from '../houses/AddHouse';
+import './NavBar.scss';
 
 class NavBar extends Component {
   componentDidMount() {
-    const jwt = localStorage.getItem("jwt");
-    const username = localStorage.getItem("username");
+    const jwt = localStorage.getItem('jwt');
+    const username = localStorage.getItem('username');
     jwt && username && fetchUser(username);
   }
 
   render() {
-    const jwt = localStorage.getItem("jwt");
-    const username = localStorage.getItem("username");
+    const jwt = localStorage.getItem('jwt');
+    const username = localStorage.getItem('username');
 
     const logUserOut = () => {
-      localStorage.removeItem("jwt");
-      localStorage.removeItem("username");
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('username');
       window.location.reload(false);
     };
 
@@ -35,7 +36,8 @@ class NavBar extends Component {
         <Navbar.Brand href="/" className="font-weight-bolder">
           <span className="brand-icon">
             <Icofont icon="building" />
-          </span>{" "}
+          </span>
+          {' '}
           Li-HOUSES
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -60,24 +62,24 @@ class NavBar extends Component {
               >
                 Dashboard
               </NavLink>
-              <NavLink to={`/users`} className="btn nav-btn pr-2">
+              <NavLink to="/users" className="btn nav-btn pr-2">
                 Users
               </NavLink>
               <AddHouse
                 status="Add"
                 house={{
                   body: {
-                    address: "",
-                    country: "Ghana",
-                    image: "",
-                    location: "",
-                    region: "Volta",
-                    status: "available",
+                    address: '',
+                    country: 'Ghana',
+                    image: '',
+                    location: '',
+                    region: 'Volta',
+                    status: 'available',
                     user: 1,
                   },
                 }}
               />
-              <button className="btn hero-btn cus-btn" onClick={logUserOut}>
+              <button type="button" className="btn hero-btn cus-btn" onClick={logUserOut}>
                 Log Out
               </button>
             </Nav>
@@ -87,7 +89,7 @@ class NavBar extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   errors: state.error.err,
   currentUser: state.data.currentUser,
   loading: state.data.loading,

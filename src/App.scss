@@ -87,3 +87,10 @@ $primary-color: rgb(233, 90, 7);
 
 // Extra large devices (large desktops, 1200px and up)
 // @media (min-width: 1200px) { ... }
+
+.signin {
+  background-image: url(https://images.unsplash.com/photo-1554427518-efad17b1dfae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

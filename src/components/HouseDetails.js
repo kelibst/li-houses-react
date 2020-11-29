@@ -1,20 +1,25 @@
 /* eslint-disable array-callback-return */
-import React, { Component } from "react";
-import { Button, Card } from "react-bootstrap";
-import Icofont from "react-icofont";
-import { connect } from "react-redux";
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable  consistent-return */
+import React, { Component } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import Icofont from 'react-icofont';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   fetchHouse,
   dropHouse,
   fetchUser,
   addToFav,
   removeFromFav,
-} from "../store/actions/fetchAction";
-import ErrOrs from "./ErrOrs";
-import AddHouse from "./houses/AddHouse";
-import Footer from "./layouts/Footer";
-import NavBar from "./layouts/NavBar";
-import Loading from "./Loading";
+} from '../store/actions/fetchAction';
+import ErrOrs from './ErrOrs';
+import AddHouse from './houses/AddHouse';
+import Footer from './layouts/Footer';
+import NavBar from './layouts/NavBar';
+import Loading from './Loading';
+
 class HouseDetails extends Component {
   constructor(props) {
     super(props);
@@ -25,18 +30,20 @@ class HouseDetails extends Component {
   }
 
   componentDidMount() {
-    const { house_id } = this.props.match.params;
-    const { fetchHouse, fetchUser, currentUser } = this.props;
-    const jwt = localStorage.getItem("jwt");
-    const username = localStorage.getItem("username");
+    const {
+      fetchHouse, fetchUser, currentUser, match,
+    } = this.props;
+    const { house_id } = match.params;
+    const jwt = localStorage.getItem('jwt');
+    const username = localStorage.getItem('username');
     jwt && username && fetchUser(username);
     fetchHouse(house_id);
     this.setState({
-      ...this.state,
       user_id: currentUser.id,
-      house_id: house_id,
+      house_id,
     });
   }
+
   render() {
     const {
       house,
@@ -46,20 +53,20 @@ class HouseDetails extends Component {
       loading,
       addToFav,
       fav,
+      history,
+      match,
       removeFromFav,
     } = this.props;
-    const { house_id } = this.props.match.params;
-    const imgSrc =
-      "https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9";
+    const { house_id } = match.params;
+    const imgSrc = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const handleDelete = () => {
       dropHouse(house.id);
-      errors && console.log(errors);
-      !loading && this.props.history.push(`/dashboard/${currentUser.username}`);
+      errors && <ErrOrs />;
+      !loading && history.push(`/dashboard/${currentUser.username}`);
     };
 
-    const isFav =
-      currentUser.favorites &&
-      currentUser.favorites.some((fav) => {
+    const isFav = currentUser.favorites
+      && currentUser.favorites.some(fav => {
         if (fav.house_id) {
           return fav.house_id === house.id;
         }
@@ -68,13 +75,12 @@ class HouseDetails extends Component {
     const addToFavorite = () => {
       this.setState(
         {
-          ...this.state,
           user_id: currentUser.id,
-          house_id: house_id,
+          house_id,
         },
         () => {
           addToFav(this.state);
-        }
+        },
       );
 
       window.location.reload(false);
@@ -96,20 +102,29 @@ class HouseDetails extends Component {
             />
             <Card.Body>
               <Card.Title className="text-uppercase text-center font-weight-bolder">
-                {house.name}{" "}
+                {house.name}
+                {' '}
                 {!isFav && !fav ? (
                   <button
+                    type="button"
                     onClick={addToFavorite}
                     className=" btn btn-transparent hero-btn"
                   >
-                    <Icofont icon="heart" /> Add to Favorites{" "}
+                    <Icofont icon="heart" />
+                    {' '}
+                    Add to Favorites
+                    {' '}
                   </button>
                 ) : (
                   <button
+                    type="button"
                     onClick={rmFromFav}
                     className=" btn btn-transparent hero-btn"
                   >
-                    <Icofont icon="heart-alt" /> Remove from Favorites{" "}
+                    <Icofont icon="heart-alt" />
+                    {' '}
+                    Remove from Favorites
+                    {' '}
                   </button>
                 )}
               </Card.Title>
@@ -151,7 +166,23 @@ class HouseDetails extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+HouseDetails.propTypes = {
+  errors: PropTypes.shape.isRequired,
+  match: PropTypes.shape.isRequired,
+  house: PropTypes.shape.isRequired,
+  loading: PropTypes.shape.isRequired,
+  fav: PropTypes.shape.isRequired,
+  username: PropTypes.shape.isRequired,
+  addToFav: PropTypes.func.isRequired,
+  currentUser: PropTypes.func.isRequired,
+  dropHouse: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired,
+  fetchHouse: PropTypes.func.isRequired,
+  removeFromFav: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
   house: state.data.house,
   errors: state.error.err,
   currentUser: state.data.currentUser,
