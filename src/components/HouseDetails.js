@@ -124,10 +124,9 @@ class HouseDetails extends Component {
         </div>
         <Footer />
       </div>
-    ) : loading ? (
-      <Loading />
     ) : (
       <div className="loading">
+        {loading && <Loading />}
         { errors && <ErrOrs />}
       </div>
      
