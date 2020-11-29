@@ -3,6 +3,9 @@ import Header from "./layouts/Header";
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
 import Footer from "./layouts/Footer";
+import ilus1 from '../assets/ilus1.svg'
+import ilus2 from '../assets/ilus2.svg'
+
 const HomePage = () => {
   return (
     <div className="content">
@@ -29,7 +32,7 @@ const HomePage = () => {
           Comfortable Rooms from Reliable People.
         </h3>
         <div className="some-one d-sm-flex">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <h4 className="text-center py-4">All at your fingertip</h4>
             <p className="some-content py-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
@@ -45,6 +48,9 @@ const HomePage = () => {
               Learn More
             </a>
           </div>
+          <div className="row">
+          <img src={ilus1} className="ilus" />
+          </div>
         </div>
       </section>
 
@@ -57,7 +63,7 @@ const HomePage = () => {
         Comfortable Rooms from Reliable People.
       </h3>
       <div className="some-two d-sm-flex container">
-        <div className="col-md-6">
+        <div className="col-md-4">
           <h4 className="text-center py-4">All at your fingertip</h4>
           <p className="some-content py-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
@@ -74,6 +80,9 @@ const HomePage = () => {
           </a>
         </div>
 
+        <div className="row">
+          <img src={ilus2}  className="ilus"/>
+        </div>
         
       </div>
     </section>
