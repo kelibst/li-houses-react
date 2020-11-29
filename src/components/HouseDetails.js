@@ -1,8 +1,15 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from "react";
 import { Button, Card } from "react-bootstrap";
 import Icofont from "react-icofont";
 import { connect } from "react-redux";
-import { fetchHouse, dropHouse, fetchUser, addToFav, removeFromFav } from "../store/actions/fetchAction";
+import {
+  fetchHouse,
+  dropHouse,
+  fetchUser,
+  addToFav,
+  removeFromFav,
+} from "../store/actions/fetchAction";
 import ErrOrs from "./ErrOrs";
 import AddHouse from "./houses/AddHouse";
 import Footer from "./layouts/Footer";
@@ -20,16 +27,15 @@ class HouseDetails extends Component {
   componentDidMount() {
     const { house_id } = this.props.match.params;
     const { fetchHouse, fetchUser, currentUser } = this.props;
-        const jwt = localStorage.getItem('jwt');
-        const username = localStorage.getItem('username');
-        jwt && username && fetchUser(username)
-        fetchHouse(house_id);
-        this.setState({
-            ...this.state,
-          user_id: currentUser.id,
-          house_id: house_id
-        }
-      )
+    const jwt = localStorage.getItem("jwt");
+    const username = localStorage.getItem("username");
+    jwt && username && fetchUser(username);
+    fetchHouse(house_id);
+    this.setState({
+      ...this.state,
+      user_id: currentUser.id,
+      house_id: house_id,
+    });
   }
   render() {
     const {
@@ -40,7 +46,7 @@ class HouseDetails extends Component {
       loading,
       addToFav,
       fav,
-      removeFromFav
+      removeFromFav,
     } = this.props;
     const { house_id } = this.props.match.params;
     const imgSrc =
@@ -51,31 +57,33 @@ class HouseDetails extends Component {
       !loading && this.props.history.push(`/dashboard/${currentUser.username}`);
     };
 
-    const isFav = currentUser.favorites && currentUser.favorites.some( (fav => { 
-        if(fav.house_id){
-            return fav.house_id === house.id
+    const isFav =
+      currentUser.favorites &&
+      currentUser.favorites.some((fav) => {
+        if (fav.house_id) {
+          return fav.house_id === house.id;
         }
-    } ))
+      });
 
     const addToFavorite = () => {
-     
-      this.setState({
-        ...this.state,
-        user_id: currentUser.id,
-        house_id: house_id
-      },
-      () => {
-      addToFav(this.state) 
-      }
-    ) 
-    
-      window.location.reload(false)
+      this.setState(
+        {
+          ...this.state,
+          user_id: currentUser.id,
+          house_id: house_id,
+        },
+        () => {
+          addToFav(this.state);
+        }
+      );
+
+      window.location.reload(false);
     };
 
     const rmFromFav = () => {
-        removeFromFav(house_id, currentUser.favorites)
-        window.location.reload(false)
-    }
+      removeFromFav(house_id, currentUser.favorites);
+      window.location.reload(false);
+    };
 
     const houseDetails = house.body ? (
       <div className="house-content">
@@ -89,12 +97,21 @@ class HouseDetails extends Component {
             <Card.Body>
               <Card.Title className="text-uppercase text-center font-weight-bolder">
                 {house.name}{" "}
-                {!isFav && !fav ?  <button onClick={addToFavorite} className=" btn btn-transparent hero-btn">
-                  <Icofont icon="heart" /> Add to Favorites{" "}
-                </button> : <button onClick={rmFromFav} className=" btn btn-transparent hero-btn">
-                <Icofont icon="heart-alt" /> Remove from Favorites{" "}
-              </button>}
-               
+                {!isFav && !fav ? (
+                  <button
+                    onClick={addToFavorite}
+                    className=" btn btn-transparent hero-btn"
+                  >
+                    <Icofont icon="heart" /> Add to Favorites{" "}
+                  </button>
+                ) : (
+                  <button
+                    onClick={rmFromFav}
+                    className=" btn btn-transparent hero-btn"
+                  >
+                    <Icofont icon="heart-alt" /> Remove from Favorites{" "}
+                  </button>
+                )}
               </Card.Title>
               <div className="card-details">
                 <p>Location:</p>
@@ -127,9 +144,8 @@ class HouseDetails extends Component {
     ) : (
       <div className="loading">
         {loading && <Loading />}
-        { errors && <ErrOrs />}
+        {errors && <ErrOrs />}
       </div>
-     
     );
     return <div>{houseDetails}</div>;
   }
@@ -144,6 +160,10 @@ const mapStateToProps = (state) => ({
   loggedIn: state.data.loggedIn,
 });
 
-export default connect(mapStateToProps, { fetchHouse, dropHouse, addToFav, fetchUser, removeFromFav })(
-  HouseDetails
-);
+export default connect(mapStateToProps, {
+  fetchHouse,
+  dropHouse,
+  addToFav,
+  fetchUser,
+  removeFromFav,
+})(HouseDetails);

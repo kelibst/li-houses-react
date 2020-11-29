@@ -3,85 +3,81 @@ const initialState = {
   houses: [],
   loggedIn: false,
   currentUser: {},
-  username: '',
+  username: "",
   fav: false,
   house: [],
 };
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_HOUSES':
+    case "FETCH_HOUSES":
       return {
         ...state,
         loading: false,
         houses: action.payload,
       };
-      case 'AUTH_USER':
-        const { jwt } =  action.payload
-        localStorage.setItem('jwt', jwt)
-        localStorage.setItem('username', action.username)
+    case "AUTH_USER":
+      const { jwt } = action.payload;
+      localStorage.setItem("jwt", jwt);
+      localStorage.setItem("username", action.username);
       return {
         ...state,
         loading: false,
         loggedIn: true,
-        username: action.username
+        username: action.username,
       };
 
-      case 'CREATE_USER':
-        
+    case "CREATE_USER":
       return {
         ...state,
         loading: false,
-        currentUser: action.payload
+        currentUser: action.payload,
       };
-      case 'FETCH_HOUSE':
+    case "FETCH_HOUSE":
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
 
-      case 'UPDATE_HOUSE':
-        console.log(action.payload)
+    case "UPDATE_HOUSE":
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
 
-      case 'CREATE_HOUSE':
+    case "CREATE_HOUSE":
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
-      case 'DROP_HOUSE':
+    case "DROP_HOUSE":
       return {
         ...state,
         loading: false,
       };
 
-      case 'FETCH_USER':
-        
+    case "FETCH_USER":
       return {
         ...state,
         loading: false,
         currentUser: action.payload,
       };
 
-      case 'LOG_OUT':
-        
+    case "LOG_OUT":
       return {
         ...state,
         currentUser: {},
-        username: ''
+        username: "",
       };
 
-      case 'UPDATE_FAV':
-        
-        return {
-          ...state,
-          fav: true
-        };
+    case "UPDATE_FAV":
+      return {
+        ...state,
+        fav: true,
+      };
     default:
       return state;
   }

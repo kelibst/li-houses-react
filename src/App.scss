@@ -1,79 +1,83 @@
 @import "~bootstrap/scss/bootstrap";
 
 $primary-color: rgb(233, 90, 7);
-.nav{
-    &-btn{
-        transition: all .5s;
-        &:hover{
-            background-color: $primary-color;
-            color: #f3f3f3;
-            padding: .5rem, 2rem;
-            border-radius: 2rem;
-        }
+
+.nav {
+  &-btn {
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #f3f3f3;
+      padding: 5px, 20px;
+      border-radius: 2rem;
     }
+  }
 }
 
 .footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    &-brand{
-        font-size: 2rem;
-    }
+  &-brand {
+    font-size: 2rem;
+  }
 }
 
 .auth {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-.form-group{
-    margin: 0;
-    padding: 1rem 0;
+.form-group {
+  margin: 0;
+  padding: 1rem 0;
 }
 
-.sidebar{
-    align-self: baseline;
+.sidebar {
+  align-self: baseline;
 }
 
 .house-container {
-    display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.card-actions{
-    display: flex;
-    justify-content: space-between;
+.card-actions {
+  display: flex;
+  justify-content: space-between;
 }
 
-.card-img-top{
-    max-height: 350px;
+.card-img-top {
+  max-height: 350px;
 }
-.btn{
-    padding: .5rem 1.7rem;
-    border-radius: 2rem;
+
+.btn {
+  padding: 0.5rem 1.7rem;
+  border-radius: 2rem;
 }
 
 /* Small devices  */
-@media (max-width: 576px) { 
-    .container-fluid.card-list {
-        padding: 0;
-        margin: 0;
-    }
-    
-    .custom-control.custom-switch {
-        padding: 0;
-    }
-    .cus-btn{
-        margin: .5rem 0;
-    }
+@media (max-width: 576px) {
+  .container-fluid.card-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-control.custom-switch {
+    padding: 0;
+  }
+
+  .cus-btn {
+    margin: 0.5rem 0;
+  }
 }
 
 // @media (min-width: 768px) { ... }

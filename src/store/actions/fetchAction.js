@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq*/
 import Axios from "axios";
 
 const fetchHouses = () => (dispatch) => {
@@ -169,7 +170,7 @@ const fetchUser = (username) => (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  username = username.trim()
+  username = username.trim();
   userAxios
     .get(`/api/v1/dashboard/${username}.json`)
     .then((res) =>
@@ -198,7 +199,7 @@ const addToFav = (data) => (dispatch) => {
     baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
   const hseData = {
@@ -207,9 +208,7 @@ const addToFav = (data) => (dispatch) => {
 
   authAxios
     .post(`/api/v1/favorites.json`, hseData)
-    .then((res) =>
-      (console.log(res))
-    )
+    .then((res) => console.log(res))
     .catch((err) =>
       dispatch({
         type: "CREATE_ERROR",
@@ -219,24 +218,24 @@ const addToFav = (data) => (dispatch) => {
 };
 
 const removeFromFav = (house_id, favs) => (dispatch) => {
-  const fav = favs.filter((favv => favv.house_id == house_id.toString()))
-  
+  const fav = favs.filter((favv) => favv.house_id == house_id.toString());
+
   let token = localStorage.getItem("jwt");
   const authAxios = Axios.create({
     baseURL: `https://lihouses-api.herokuapp.com`,
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
-  const {id} = fav[0]
+  const { id } = fav[0];
   authAxios
     .delete(`/api/v1/favorites/${id}.json`)
     .then((res) =>
       dispatch({
-      type: "UPDATE_FAV",
-      payload: res,
-    })
+        type: "UPDATE_FAV",
+        payload: res,
+      })
     )
     .catch((err) =>
       dispatch({
@@ -257,5 +256,5 @@ export {
   dropHouse,
   updateHouse,
   addToFav,
-  removeFromFav
+  removeFromFav,
 };
