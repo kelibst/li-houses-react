@@ -6,6 +6,7 @@ import SignUp from './auths/SignUp';
 import HomePage from '../components/HomePage';
 import Dashboard from './Dashboard';
 import Users from './Users';
+import Favorites from './Favorites';
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => (
         <Route exact path="/dashboard/:username" component={Dashboard} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/houses/:house_id" component={HouseDetails} />
+        <Route exact path="/user/favorites" component={Favorites} />
       </Switch>
     </div>
   </BrowserRouter>

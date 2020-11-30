@@ -4,7 +4,6 @@ import Switch from 'react-bootstrap/esm/Switch';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import HouseDetails from '../components/HouseDetails';
 import Footer from '../components/layouts/Footer';
 import NavBar from '../components/layouts/NavBar';
 
@@ -41,7 +40,6 @@ class Dashboard extends Component {
         <div className="container-fluid card-list">
           <Switch>
             <Route exact path="/dashboard/:username" component={Houses} />
-            <Route exact path="/houses/:house_id" component={HouseDetails} />
           </Switch>
         </div>
         <Footer />

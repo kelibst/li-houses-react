@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Icofont from 'react-icofont';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +12,7 @@ import './NavBar.scss';
 class NavBar extends Component {
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
+    const { fetchUser } = this.props;
     const username = localStorage.getItem('username');
     jwt && username && fetchUser(username);
   }
@@ -24,7 +26,7 @@ class NavBar extends Component {
       localStorage.removeItem('username');
       window.location.reload(false);
     };
-
+    const { currentUser } = this.props;
     return (
       <Navbar
         collapseOnSelect
@@ -62,9 +64,19 @@ class NavBar extends Component {
               >
                 Dashboard
               </NavLink>
-              <NavLink to="/users" className="btn nav-btn pr-2">
-                Users
-              </NavLink>
+
+              <NavDropdown title={currentUser ? currentUser.username : 'Dropdown'} id="basic-nav-dropdown">
+                <NavDropdown.Item href="/users">Users</NavDropdown.Item>
+                <NavDropdown.Item href="/user/favorites">
+                  <Icofont icon="heart" />
+                  {' '}
+                  Favs
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Messages</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Notifications</NavDropdown.Item>
+              </NavDropdown>
+
               <AddHouse
                 status="Add"
                 house={{
@@ -79,9 +91,11 @@ class NavBar extends Component {
                   },
                 }}
               />
+
               <button type="button" className="btn hero-btn cus-btn" onClick={logUserOut}>
                 Log Out
               </button>
+
             </Nav>
           )}
         </Navbar.Collapse>
@@ -89,6 +103,12 @@ class NavBar extends Component {
     );
   }
 }
+
+NavBar.propTypes = {
+  fetchUser: PropTypes.func.isRequired,
+  currentUser: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
   errors: state.error.err,
   currentUser: state.data.currentUser,

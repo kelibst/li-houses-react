@@ -4,17 +4,10 @@ A basic npx create-react-app for the li-houses api
 
 
 # Expectations
-- Homepage fetches all hospitals from the api
-- Each hospital detail page with reviews and review form 
-
-- Basic Review management application
-- Users can:
-    - Add a new hospital
-    - Update a hospital
-    - Delete a hospital
-    - Add a new review
-    - Update and existing review
-    - Delete and existing review
+1. The user logs in the app, only by typing the username email and password
+2. The user is presented with a list of houses: apartment, house, room, etc.
+3. When a user selects a house, detailed information about the house is presented and the possibility add it to favourites
+4. The user can access a list of favourite apartments
 
 # Screenshot
 ![Screenshot](./screenshot.gif)
@@ -64,6 +57,8 @@ git clone https://github.com/kelibst/hospitalreviews-react.git
 # 🤝 Contributing
 Contributions, issues and feature requests are welcome!
 Feel free to check the issues page
+
+Design idea by [Alexey Savitskiy on Behance](https://www.behance.net/alexey_savitskiy)
 
 # Show your support
 Give a ⭐️ if you like this project!

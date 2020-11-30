@@ -1,41 +1,46 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import { authUser, fetchUser } from "../../store/actions/fetchAction";
-import ErrOrs from "../../components/ErrOrs";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { authUser, fetchUser } from '../../store/actions/fetchAction';
+import ErrOrs from '../../components/ErrOrs';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      email: "",
-      password: "",
+      username: '',
+      email: '',
+      password: '',
     };
   }
+
   componentDidMount() {
-    document.querySelector(".App").classList.add("signin");
+    document.querySelector('.App').classList.add('signin');
   }
 
   componentDidUpdate() {
-    const { loggedIn, errors, username, history } = this.props;
-    const jwt = localStorage.getItem("jwt");
+    const {
+      loggedIn, errors, username, history,
+    } = this.props;
+    const jwt = localStorage.getItem('jwt');
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
     errors && <ErrOrs />;
   }
 
   render() {
-    const handleChange = (e) => {
+    const handleChange = e => {
       const { id, value } = e.target;
       this.setState({
         [id]: value,
       });
     };
-    const { authUser, username, loggedIn, errors, history } = this.props;
-    const handleSubmit = (e) => {
+    const {
+      authUser, username, loggedIn, errors, history,
+    } = this.props;
+    const handleSubmit = e => {
       e.preventDefault();
       authUser(this.state);
 
@@ -100,7 +105,7 @@ SignIn.propTypes = {
   history: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   errors: state.error.err,
   username: state.data.username,
   loggedIn: state.data.loggedIn,
