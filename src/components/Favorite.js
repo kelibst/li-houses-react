@@ -12,7 +12,7 @@ class Favorite extends Component {
   render() {
     const { house } = this.props;
     return (
-      <div>
+      <div className=".fav">
         {house.name}
       </div>
     );
