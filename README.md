@@ -13,9 +13,8 @@ A basic npx create-react-app for the li-houses api
 ![Screenshot](./screenshot.gif)
 
 # Live Demo
-[Live Demo Link](https://li-houses-react.herokuapp.com/) 
+[Live Demo Link](https://lihouses-react.herokuapp.com/) 
 
-[![](screenshot.png)](https://www.loom.com/share/77ad47b927854afab0ef9d348ca6c8e4) 
 
 # Built With
 
@@ -34,14 +33,14 @@ A basic npx create-react-app for the li-houses api
 ### Usage
 - Clone the project 
 ```
-git clone https://github.com/kelibst/hospitalreviews-react.git
+git clone https://github.com/kelibst/lihouses-react.git
 ```
 - Run `npm install` to install the local dependencies
 - Run `npm start` to launch local development server
 - The project should launch in your default browser
-- you can get the Rails [api](https://github.com/kelibst/review_manager) code here
+- you can get the Rails [api](https://github.com/kelibst/lihouses-api) code here
 - visit http://127.0.0.1:3000/
-- You can also visit [live](https://hospitalreviews-react.herokuapp.com/) version for the full appp
+- You can also visit [live](https://lihouses-react.herokuapp.com/) version for the full appp
 
 
 ## Authors
