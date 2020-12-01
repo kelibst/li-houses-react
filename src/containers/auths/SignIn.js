@@ -17,9 +17,7 @@ class SignIn extends Component {
   }
 
   componentDidUpdate() {
-    const {
-      loggedIn, username, history,
-    } = this.props;
+    const { loggedIn, username, history } = this.props;
     const jwt = localStorage.getItem('jwt');
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
@@ -39,11 +37,17 @@ class SignIn extends Component {
       e.preventDefault();
       authUser(this.state);
 
-      currentUser && loggedIn && history.push(`/dashboard/${currentUser.username}`);
+      currentUser
+        && loggedIn
+        && history.push(`/dashboard/${currentUser.username}`);
     };
     return (
       <div className="container-lg signin auth">
-        {errors && <div className="loading"><ErrOrs /></div>}
+        {errors && (
+          <div className="loading">
+            <ErrOrs />
+          </div>
+        )}
         <div className="auth-header-container">
           <h1 className="auth-header py-5 text-center font-weight-bolder">
             Sign In
@@ -86,9 +90,11 @@ class SignIn extends Component {
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
-          <a href="/signup" className="btn my-3 bg-success hero-btn w-100"> Register</a>
+          <a href="/signup" className="btn my-3 bg-success hero-btn w-100">
+            {' '}
+            Register
+          </a>
         </Form>
-
       </div>
     );
   }

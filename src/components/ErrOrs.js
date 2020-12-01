@@ -42,7 +42,10 @@ class ErrOrs extends Component {
             {errors.response && (
               <h6 className="my-5">{errors.response.data.error}</h6>
             )}
-            <h6 className="content">If you are trying to login double check your username,email and password</h6>
+            <h6 className="content">
+              If you are trying to login double check your username,email and
+              password
+            </h6>
           </div>
           <hr />
           <div className="d-flex justify-content-end">

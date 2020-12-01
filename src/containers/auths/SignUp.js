@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ErrOrs from '../../components/ErrOrs';
 import {
-  createUser, authUser, fetchUser, unLoad,
+  createUser,
+  authUser,
+  fetchUser,
+  unLoad,
 } from '../../store/actions/fetchAction';
 import Loading from '../../components/Loading';
 
@@ -75,8 +78,16 @@ class SignUp extends Component {
 
     return (
       <div className="container-lg signup auth">
-        {loading && <div className="loading"><Loading /></div>}
-        {errors && <div className="loading"><ErrOrs /></div>}
+        {loading && (
+          <div className="loading">
+            <Loading />
+          </div>
+        )}
+        {errors && (
+          <div className="loading">
+            <ErrOrs />
+          </div>
+        )}
         <h1 className="display-6 py-5 font-weight-bolder text-center">
           Sign Up
         </h1>
@@ -141,9 +152,11 @@ class SignUp extends Component {
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
-          <a href="/signin" className="btn my-3 bg-primary hero-btn w-100"> Log In</a>
+          <a href="/signin" className="btn my-3 bg-primary hero-btn w-100">
+            {' '}
+            Log In
+          </a>
         </Form>
-
       </div>
     );
   }
@@ -167,5 +180,8 @@ const mapStateToProps = state => ({
   currentUser: state.data.currentUser,
 });
 export default connect(mapStateToProps, {
-  createUser, authUser, fetchUser, unLoad,
+  createUser,
+  authUser,
+  fetchUser,
+  unLoad,
 })(SignUp);

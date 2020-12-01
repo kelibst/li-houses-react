@@ -65,7 +65,10 @@ class NavBar extends Component {
                 Dashboard
               </NavLink>
 
-              <NavDropdown title={currentUser ? currentUser.username : 'Dropdown'} id="basic-nav-dropdown">
+              <NavDropdown
+                title={currentUser ? currentUser.username : 'Dropdown'}
+                id="basic-nav-dropdown"
+              >
                 <NavDropdown.Item href="/users">Users</NavDropdown.Item>
                 <NavDropdown.Item href="/user/favorites">
                   <Icofont icon="heart" />
@@ -74,7 +77,9 @@ class NavBar extends Component {
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Messages</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Notifications</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">
+                  Notifications
+                </NavDropdown.Item>
               </NavDropdown>
 
               <AddHouse
@@ -92,10 +97,13 @@ class NavBar extends Component {
                 }}
               />
 
-              <button type="button" className="btn hero-btn cus-btn" onClick={logUserOut}>
+              <button
+                type="button"
+                className="btn hero-btn cus-btn"
+                onClick={logUserOut}
+              >
                 Log Out
               </button>
-
             </Nav>
           )}
         </Navbar.Collapse>

@@ -129,11 +129,7 @@ class AddHouseForm extends Component {
 
         <Form.Group controlId="status">
           <Form.Label>Select a House Status</Form.Label>
-          <Form.Control
-            as="select"
-            value={stateUs}
-            onChange={handleChange}
-          >
+          <Form.Control as="select" value={stateUs} onChange={handleChange}>
             {availability.map(hstate => (
               <option key={hstate}>{hstate}</option>
             ))}
