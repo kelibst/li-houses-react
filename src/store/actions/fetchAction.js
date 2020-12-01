@@ -2,7 +2,13 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
 import Axios from 'axios';
-
+const unLoad = (states) => dispatch => {
+  dispatch({
+      type: 'CLEAR_STATE',
+      payload: states,
+    })
+    
+};
 const fetchHouses = () => dispatch => {
   const url = 'https://lihouses-api.herokuapp.com/api/v1/houses.json';
   Axios.get(url)
@@ -21,7 +27,7 @@ const authUser = data => dispatch => {
   const userData = {
     auth: data,
   };
-
+ 
   Axios.post(url, userData)
     .then(res => dispatch({
       type: 'AUTH_USER',
@@ -30,12 +36,12 @@ const authUser = data => dispatch => {
     }))
     .catch(err => dispatch({
       type: 'CREATE_ERROR',
-      payload: err,
+      payload: err
     }));
 };
 
 const createUser = data => dispatch => {
-  const url = 'https://lihouses-api.herokuapp.com/api/v1/signup.json';
+  const url = 'https://lihouses-api.herokuapp.com/api/v1/create/signup.json';
   const userData = {
     user: data,
   };
@@ -220,4 +226,5 @@ export {
   updateHouse,
   addToFav,
   removeFromFav,
+  unLoad
 };

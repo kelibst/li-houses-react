@@ -5,4 +5,10 @@ const searchError = message => dispatch => {
   });
 };
 
-export default searchError;
+const unloadError = () => dispatch => {
+  dispatch({
+    type: 'UNLOAD_ERROR',
+    payload: '',
+  });
+};
+export { searchError, unloadError }

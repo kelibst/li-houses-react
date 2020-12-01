@@ -13,6 +13,7 @@ import {
   fetchUser,
   addToFav,
   removeFromFav,
+  unLoad,
 } from '../store/actions/fetchAction';
 import ErrOrs from './ErrOrs';
 import AddHouse from './houses/AddHouse';
@@ -55,11 +56,13 @@ class HouseDetails extends Component {
       fav,
       history,
       match,
+      unLoad,
       removeFromFav,
     } = this.props;
     const { house_id } = match.params;
     const imgSrc = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const handleDelete = () => {
+      unLoad({loading: true})
       dropHouse(house.id);
       errors && <ErrOrs />;
       !loading && history.push(`/dashboard/${currentUser.username}`);
@@ -179,6 +182,7 @@ HouseDetails.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   fetchHouse: PropTypes.func.isRequired,
   removeFromFav: PropTypes.func.isRequired,
+  unLoad: PropTypes.func.isRequired,
   history: PropTypes.func.isRequired,
 };
 
@@ -197,4 +201,5 @@ export default connect(mapStateToProps, {
   addToFav,
   fetchUser,
   removeFromFav,
+  unLoad,
 })(HouseDetails);

@@ -5,11 +5,13 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ErrOrs from '../ErrOrs'
 
 import {
   createHouse,
   fetchHouses,
   updateHouse,
+  unLoad
 } from '../../store/actions/fetchAction';
 
 class AddHouseForm extends Component {
@@ -48,6 +50,8 @@ class AddHouseForm extends Component {
       loading,
       updateHouse,
       history,
+      unLoad,
+      errors,
       close,
     } = this.props;
 
@@ -63,9 +67,12 @@ class AddHouseForm extends Component {
       e.preventDefault();
       if (status === 'Add') {
         createHouse(this.state);
+        unLoad({loading: true})
         !loading && close();
         !loading && history.push(`/houses/${house.id}`);
       } else if (status === 'Update') {
+        
+        unLoad({loading: true})
         updateHouse(this.state, house.id);
 
         !loading && close();
@@ -80,6 +87,7 @@ class AddHouseForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit}>
+      {errors && <ErrOrs />}
         <Form.Group controlId="name" className="pb-3">
           <Form.Control
             required
@@ -142,8 +150,9 @@ class AddHouseForm extends Component {
 }
 
 AddHouseForm.propTypes = {
+  unload: PropTypes.shape.isRequired,
   loading: PropTypes.shape.isRequired,
-  status: PropTypes.shape.isRequired,
+  status: PropTypes.string.isRequired,
   currentUser: PropTypes.shape.isRequired,
   updateHouse: PropTypes.shape.isRequired,
   house: PropTypes.shape.isRequired,
@@ -164,4 +173,5 @@ export default connect(mapStateToProps, {
   createHouse,
   fetchHouses,
   updateHouse,
+  unLoad
 })(ShowTheLocationWithRouter);
