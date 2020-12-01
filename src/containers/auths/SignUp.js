@@ -74,7 +74,7 @@ class SignUp extends Component {
     };
 
     return (
-      <div className="container-lg auth">
+      <div className="container-lg signup auth">
       {loading && <div className="loading">{<Loading />}</div>}
         {errors && <div className="loading">{<ErrOrs />}</div>}
         <h1 className="display-6 py-5 font-weight-bolder text-center">

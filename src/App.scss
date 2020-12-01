@@ -63,6 +63,25 @@ $primary-color: rgb(233, 90, 7);
   border-radius: 2rem;
 }
 
+input.form-control {
+  border-radius: 1.5rem;
+  padding: .5rem 2rem;
+}
+
+.signin {
+  background-image: url(https://images.unsplash.com/photo-1554427518-efad17b1dfae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.signup {
+  background-image: url(https://images.unsplash.com/photo-1534889156217-d643df14f14a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
 /* Small devices  */
 @media (max-width: 576px) {
   .container-fluid.card-list {
@@ -87,9 +106,4 @@ $primary-color: rgb(233, 90, 7);
 // Extra large devices (large desktops, 1200px and up)
 // @media (min-width: 1200px) { ... }
 
-.signin {
-  background-image: url(https://images.unsplash.com/photo-1554427518-efad17b1dfae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+
