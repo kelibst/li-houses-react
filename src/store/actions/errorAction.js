@@ -11,4 +11,4 @@ const unloadError = () => dispatch => {
     payload: '',
   });
 };
-export { searchError, unloadError }
+export { searchError, unloadError };

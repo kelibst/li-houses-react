@@ -11,21 +11,22 @@ class ErrOrs extends Component {
       show: true,
     };
   }
-  componentWillUnmount(){
-    const { unloadError } = this.props
-    unloadError()
+
+  componentWillUnmount() {
+    const { unloadError } = this.props;
+    unloadError();
   }
 
   render() {
     const { show } = this.state;
     const { errors } = this.props;
-    
+
     const setShow = () => {
       this.setState({
         show: false,
       });
     };
-    
+
     return (
       <div>
         <Alert show={show} variant="danger">
@@ -62,4 +63,4 @@ ErrOrs.propTypes = {
 const mapStateToProps = state => ({
   errors: state.error.err,
 });
-export default connect(mapStateToProps, {unloadError})(ErrOrs);
+export default connect(mapStateToProps, { unloadError })(ErrOrs);

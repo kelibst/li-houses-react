@@ -5,7 +5,6 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { authUser, fetchUser } from '../../store/actions/fetchAction';
 import ErrOrs from '../../components/ErrOrs';
-import Loading from '../../components/Loading';
 
 class SignIn extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class SignIn extends Component {
       });
     };
     const {
-      authUser, currentUser, loggedIn, errors, loading, history,
+      authUser, currentUser, loggedIn, errors, history,
     } = this.props;
     const handleSubmit = e => {
       e.preventDefault();
@@ -44,7 +43,7 @@ class SignIn extends Component {
     };
     return (
       <div className="container-lg signin auth">
-        {errors && <div className="loading">{<ErrOrs />}</div>}
+        {errors && <div className="loading"><ErrOrs /></div>}
         <div className="auth-header-container">
           <h1 className="auth-header py-5 text-center font-weight-bolder">
             Sign In
@@ -90,7 +89,6 @@ class SignIn extends Component {
           <a href="/signup" className="btn my-3 bg-success hero-btn w-100"> Register</a>
         </Form>
 
-        
       </div>
     );
   }
@@ -99,7 +97,6 @@ class SignIn extends Component {
 SignIn.propTypes = {
   errors: PropTypes.shape.isRequired,
   loggedIn: PropTypes.shape.isRequired,
-  loading: PropTypes.bool.isRequired,
   username: PropTypes.shape.isRequired,
   currentUser: PropTypes.shape.isRequired,
   authUser: PropTypes.func.isRequired,

@@ -62,7 +62,7 @@ class HouseDetails extends Component {
     const { house_id } = match.params;
     const imgSrc = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const handleDelete = () => {
-      unLoad({loading: true})
+      unLoad({ loading: true });
       dropHouse(house.id);
       errors && <ErrOrs />;
       !loading && history.push(`/dashboard/${currentUser.username}`);
