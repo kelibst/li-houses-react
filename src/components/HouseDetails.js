@@ -20,6 +20,7 @@ import AddHouse from './houses/AddHouse';
 import Footer from './layouts/Footer';
 import NavBar from './layouts/NavBar';
 import Loading from './Loading';
+import MobileNav from './layouts/MobileNav';
 
 class HouseDetails extends Component {
   constructor(props) {
@@ -97,6 +98,7 @@ class HouseDetails extends Component {
     const houseDetails = house.body ? (
       <div className="house-content">
         <NavBar />
+        <MobileNav />
         <div className="house-details d-flex justify-content-center">
           <div className="card shadow-lg col-sm-8 col-lg-6 d-md-flex p-0">
             <Card.Img

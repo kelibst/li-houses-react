@@ -1,29 +1,29 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from 'react';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import Icofont from 'react-icofont';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { fetchUser } from '../../store/actions/fetchAction';
-import AddHouse from '../houses/AddHouse';
-import './NavBar.scss';
+import React, { Component } from "react";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import PropTypes from "prop-types";
+import Icofont from "react-icofont";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchUser } from "../../store/actions/fetchAction";
+import AddHouse from "../houses/AddHouse";
+import "./NavBar.scss";
 
 class NavBar extends Component {
   componentDidMount() {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     const { fetchUser } = this.props;
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem("username");
     jwt && username && fetchUser(username);
   }
 
   render() {
-    const jwt = localStorage.getItem('jwt');
-    const username = localStorage.getItem('username');
+    const jwt = localStorage.getItem("jwt");
+    const username = localStorage.getItem("username");
 
     const logUserOut = () => {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('username');
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("username");
       window.location.reload(false);
     };
     const { currentUser } = this.props;
@@ -38,14 +38,13 @@ class NavBar extends Component {
         <Navbar.Brand href="/" className="font-weight-bolder">
           <span className="brand-icon">
             <Icofont icon="building" />
-          </span>
-          {' '}
+          </span>{" "}
           Li-HOUSES
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="d-none d-sm-block"/>
         <Navbar.Collapse
           id="responsive-navbar-nav"
-          className="justify-content-end"
+          className="justify-content-end d-none d-sm-block"
         >
           {jwt === null && username === null ? (
             <Nav>
@@ -65,33 +64,16 @@ class NavBar extends Component {
                 Dashboard
               </NavLink>
 
-              <NavDropdown
-                title={currentUser ? currentUser.username : 'Dropdown'}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item href="/users">Users</NavDropdown.Item>
-                <NavDropdown.Item href="/user/favorites">
-                  <Icofont icon="heart" />
-                  {' '}
-                  Favs
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Messages</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Notifications
-                </NavDropdown.Item>
-              </NavDropdown>
-
               <AddHouse
                 status="Add"
                 house={{
                   body: {
-                    address: '',
-                    country: 'Ghana',
-                    image: '',
-                    location: '',
-                    region: 'Volta',
-                    status: 'available',
+                    address: "",
+                    country: "Ghana",
+                    image: "",
+                    location: "",
+                    region: "Volta",
+                    status: "available",
                     user: 1,
                   },
                 }}
@@ -104,6 +86,25 @@ class NavBar extends Component {
               >
                 Log Out
               </button>
+
+              <NavDropdown
+                title={<Icofont icon="user" className="nav-icon" />}
+                id="basic-nav-dropdown"
+                className="text-center"
+              >
+                <NavDropdown.Item href={`/dashboard/${currentUser.username}`}>
+                  {currentUser ? currentUser.username : "Profile"}
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/users">Users</NavDropdown.Item>
+                <NavDropdown.Item href="/user/favorites">
+                  <Icofont icon="heart" /> Favs
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Messages</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Notifications
+                </NavDropdown.Item>
+              </NavDropdown>
             </Nav>
           )}
         </Navbar.Collapse>
@@ -114,10 +115,13 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   fetchUser: PropTypes.func.isRequired,
+  errors: PropTypes.shape.isRequired,
+  loading: PropTypes.string.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   currentUser: PropTypes.shape.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.error.err,
   currentUser: state.data.currentUser,
   loading: state.data.loading,

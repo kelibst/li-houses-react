@@ -13,6 +13,7 @@ import {
   logCurrentUserOut,
 } from '../store/actions/fetchAction';
 import Houses from './Houses';
+import MobileNav from '../components/layouts/MobileNav';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard bg-white">
         <NavBar />
+        <MobileNav />
         <div className="container-fluid card-list">
           <Switch>
             <Route exact path="/dashboard/:username" component={Houses} />
@@ -51,9 +53,9 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   errors: PropTypes.shape.isRequired,
   match: PropTypes.shape.isRequired,
-  username: PropTypes.shape.isRequired,
+  username: PropTypes.string.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 };
 
 const mapStateToProps = state => ({

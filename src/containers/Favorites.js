@@ -7,6 +7,7 @@ import NavBar from '../components/layouts/NavBar';
 import Favorite from '../components/Favorite';
 import ErrOrs from '../components/ErrOrs';
 import Loading from '../components/Loading';
+import MobileNav from '../components/layouts/MobileNav';
 
 class Favorites extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class Favorites extends Component {
     return (
       <div className="favorites">
         <NavBar />
+        <MobileNav />
         <div className="fav-container">{favList}</div>
       </div>
     );

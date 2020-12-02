@@ -6,7 +6,7 @@ $primary-color: rgb(233, 90, 7);
   &-btn {
     transition: all 0.5s;
 
-    &:hover {
+    &:hover, &:active {
       background-color: $primary-color;
       color: #f3f3f3;
       border-radius: 2rem;
@@ -87,6 +87,9 @@ input.form-control {
   .container-fluid.card-list {
     padding: 0;
     margin: 0;
+  }
+  .nav-btn{
+    padding: .5rem .5rem;
   }
 
   .custom-control.custom-switch {
