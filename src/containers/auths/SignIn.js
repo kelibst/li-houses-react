@@ -46,7 +46,7 @@ class SignIn extends Component {
       });
       const { data } = this.state;
       authUser(data);
-
+      debugger
       currentUser
         && loggedIn
         && history.push(`/dashboard/${currentUser.username}`);
