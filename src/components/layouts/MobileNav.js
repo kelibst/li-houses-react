@@ -43,7 +43,7 @@ class MobileNav extends Component {
           </Nav>
         ) : (
           <Nav className="mobile ">
-            <NavLink to={`/dashboard/${currentUser.username}`} className="btn active nav-btn pr-2">
+            <NavLink to={`/dashboard/${currentUser.username}`} className="btn active active nav-btn pr-2">
               <Icofont icon="dashboard mobile-icon" />
             </NavLink>
             <NavDropdown
