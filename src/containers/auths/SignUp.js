@@ -99,11 +99,11 @@ class SignUp extends Component {
             <ErrOrs />
           </div>
         )}
-        <h1 className="display-6 py-5 font-weight-bolder text-center">
+        <h1 className="display-6 mb-3  font-weight-bolder text-center">
           Sign Up
         </h1>
         <Form
-          className="user-form p-5 shadow-lg bg-white"
+          className="user-form p-5 mb-2 shadow-lg bg-white"
           onSubmit={handleSubmit}
         >
           <Form.Group controlId="firstname">
