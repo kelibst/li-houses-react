@@ -16,12 +16,15 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      username: '',
-      firstname: '',
-      lastname: '',
-      password_confirmation: '',
+      isSubmit: false,
+      userData: {
+        email: '',
+        password: '',
+        username: '',
+        firstname: '',
+        lastname: '',
+        password_confirmation: '',
+      }
     };
   }
 
@@ -38,7 +41,11 @@ class SignUp extends Component {
     const handleChange = e => {
       const { id, value } = e.target;
       this.setState({
-        [id]: value,
+        ...this.state,
+        userData: {
+          ...this.state.userData,
+          [id]: value,
+        }
       });
     };
     const {
@@ -54,31 +61,34 @@ class SignUp extends Component {
 
     const handleSubmit = e => {
       e.preventDefault();
-      createUser(this.state);
+      this.setState({ isSubmit: true})
+      createUser(this.state.userData);
       unLoad({ loading: true });
       if (currentUser.id) {
-        const { email, password } = this.state;
+        const { email, password } = this.state.userData;
         const data = {
           email,
           password,
         };
         authUser(data);
-        history.push('/');
+        history.push(`/dashboard/${currentUser.username}`);
       }
       loggedIn
         && this.setState({
-          email: '',
-          password: '',
-          username: '',
-          firstname: '',
-          lastname: '',
-          password_confirmation: '',
+            userData: {
+              email: '',
+              password: '',
+              username: '',
+              firstname: '',
+              lastname: '',
+              password_confirmation: '',
+          }
         });
     };
 
     return (
       <div className="container-lg signup auth">
-        {loading && (
+        { this.state.isSubmit  && (
           <div className="loading">
             <Loading />
           </div>

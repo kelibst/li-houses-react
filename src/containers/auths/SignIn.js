@@ -3,18 +3,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { authUser, fetchUser } from '../../store/actions/fetchAction';
+import { authUser, fetchUser, unLoad } from '../../store/actions/fetchAction';
 import ErrOrs from '../../components/ErrOrs';
+import Loading from '../../components/Loading';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
-      password: '',
+      isSubmit: false,
+      data: {
+        username: '',
+        email: '',
+        password: '',
+      }
     };
   }
+  
 
   componentDidUpdate() {
     const { loggedIn, username, history } = this.props;
@@ -27,16 +32,21 @@ class SignIn extends Component {
     const handleChange = e => {
       const { id, value } = e.target;
       this.setState({
-        [id]: value,
+        data : {
+          [id]: value,
+        }
       });
     };
     const {
-      authUser, currentUser, loggedIn, errors, history,
+      authUser, currentUser, loggedIn, errors, loading, history,
     } = this.props;
     const handleSubmit = e => {
       e.preventDefault();
-      authUser(this.state);
-
+      this.setState({
+        isSubmit:true
+      })
+      authUser(this.state.data);
+      
       currentUser
         && loggedIn
         && history.push(`/dashboard/${currentUser.username}`);
@@ -46,6 +56,11 @@ class SignIn extends Component {
         {errors && (
           <div className="loading">
             <ErrOrs />
+          </div>
+        )}
+        {loading && this.state.isSubmit && !errors && (
+          <div className="loading">
+            <Loading />
           </div>
         )}
         <div className="auth-header-container">
@@ -103,9 +118,10 @@ class SignIn extends Component {
 SignIn.propTypes = {
   errors: PropTypes.shape.isRequired,
   loggedIn: PropTypes.shape.isRequired,
-  username: PropTypes.shape.isRequired,
+  username: PropTypes.string.isRequired,
   currentUser: PropTypes.shape.isRequired,
   authUser: PropTypes.func.isRequired,
+  unLoad: PropTypes.func.isRequired,
   history: PropTypes.func.isRequired,
 };
 
@@ -117,4 +133,4 @@ const mapStateToProps = state => ({
   loggedIn: state.data.loggedIn,
 });
 
-export default connect(mapStateToProps, { authUser })(SignIn);
+export default connect(mapStateToProps, { authUser, unLoad })(SignIn);
