@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -24,7 +25,7 @@ class SignUp extends Component {
         firstname: '',
         lastname: '',
         password_confirmation: '',
-      }
+      },
     };
   }
 
@@ -39,13 +40,14 @@ class SignUp extends Component {
 
   render() {
     const handleChange = e => {
+      const { userData } = this.state;
       const { id, value } = e.target;
       this.setState({
         ...this.state,
         userData: {
-          ...this.state.userData,
+          ...userData,
           [id]: value,
-        }
+        },
       });
     };
     const {
@@ -56,16 +58,17 @@ class SignUp extends Component {
       errors,
       history,
       unLoad,
-      loading,
     } = this.props;
+    const { isSubmit } = this.state;
 
     const handleSubmit = e => {
       e.preventDefault();
-      this.setState({ isSubmit: true})
-      createUser(this.state.userData);
+      const { userData } = this.state;
+      this.setState({ isSubmit: true });
+      createUser(userData);
       unLoad({ loading: true });
       if (currentUser.id) {
-        const { email, password } = this.state.userData;
+        const { email, password } = userData;
         const data = {
           email,
           password,
@@ -75,20 +78,20 @@ class SignUp extends Component {
       }
       loggedIn
         && this.setState({
-            userData: {
-              email: '',
-              password: '',
-              username: '',
-              firstname: '',
-              lastname: '',
-              password_confirmation: '',
-          }
+          userData: {
+            email: '',
+            password: '',
+            username: '',
+            firstname: '',
+            lastname: '',
+            password_confirmation: '',
+          },
         });
     };
 
     return (
       <div className="signup auth">
-        { this.state.isSubmit  && (
+        { isSubmit && (
           <div className="loading">
             <Loading />
           </div>
@@ -177,7 +180,6 @@ SignUp.propTypes = {
   loggedIn: PropTypes.shape.isRequired,
   createUser: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
   authUser: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   unLoad: PropTypes.func.isRequired,
