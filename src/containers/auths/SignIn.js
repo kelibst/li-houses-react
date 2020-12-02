@@ -52,7 +52,7 @@ class SignIn extends Component {
         && history.push(`/dashboard/${currentUser.username}`);
     };
     return (
-      <div className="container-lg signin auth">
+      <div className="signin auth">
         {errors && (
           <div className="loading">
             <ErrOrs />
@@ -71,12 +71,12 @@ class SignIn extends Component {
             Hey! Log In to manager your account.
           </p>
         </div>
-        <Form onSubmit={handleSubmit}>
+        <Form className="user-form p-5 shadow-lg bg-white" onSubmit={handleSubmit}>
           <Form.Group controlId="username" className="pb-3">
             <Form.Control
               required
               type="username"
-              placeholder="Enter username"
+              placeholder="Enter Username"
               onChange={handleChange}
             />
           </Form.Group>

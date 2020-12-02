@@ -83,6 +83,13 @@ input.form-control {
   background-position: center;
 }
 
+.user{
+
+  &-form{
+    border-radius: 1rem;
+  }
+}
+
 /* Small devices  */
 @media (max-width: 576px) {
   .container-fluid.card-list {

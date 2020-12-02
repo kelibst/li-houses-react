@@ -87,7 +87,7 @@ class SignUp extends Component {
     };
 
     return (
-      <div className="container-lg signup auth">
+      <div className="signup auth">
         { this.state.isSubmit  && (
           <div className="loading">
             <Loading />
@@ -101,7 +101,7 @@ class SignUp extends Component {
         <h1 className="display-6 py-5 font-weight-bolder text-center">
           Sign Up
         </h1>
-        <Form onSubmit={handleSubmit}>
+        <Form className="user-form p-5 shadow-lg bg-white" onSubmit={handleSubmit}>
           <Form.Group controlId="firstname">
             <Form.Control
               required
