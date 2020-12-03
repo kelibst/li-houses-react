@@ -21,6 +21,7 @@ import Footer from './layouts/Footer';
 import NavBar from './layouts/NavBar';
 import Loading from './Loading';
 import MobileNav from './layouts/MobileNav';
+import styled from 'styled-components';
 
 class HouseDetails extends Component {
   constructor(props) {
@@ -46,7 +47,16 @@ class HouseDetails extends Component {
     });
   }
 
+  
+
   render() {
+    const statusBtn = styled.div`
+      text-transform: capitalize;
+      padding: 1rem;
+      font-weight: bolder;
+      background: ${props => props.available ? "orange" : "violet"};
+      color: black;
+    `
     const {
       house,
       currentUser,
@@ -75,6 +85,7 @@ class HouseDetails extends Component {
           return fav.house_id === house.id;
         }
       });
+      const { status } = house.body ? house.body : ''
 
     const addToFavorite = () => {
       this.setState(
@@ -105,6 +116,10 @@ class HouseDetails extends Component {
               variant="top"
               src={house.body && house.body.image ? house.body.image : imgSrc}
             />
+            {house.body && <div className="house-status">
+              <div className="house-state">{house.body.status}</div>
+             {house.body.status === 'available' && <button type='button' className="house-btn btn hero-btn">Make an offer</button> } 
+            </div>   }
             <Card.Body>
               <Card.Title className="text-uppercase text-center font-weight-bolder">
                 {house.name}

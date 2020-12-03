@@ -74,3 +74,19 @@ $primary-color: rgb(233, 90, 7);
 .ilus {
   width: 100%;
 }
+
+.house-status {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between; 
+  position: absolute;
+}
+
+.house-state {
+  padding: 1rem;
+  text-transform: capitalize;
+  font-weight: bolder;
+  background: white;
+  border-radius: 1.6rem;
+  margin-right: 1rem;
+}

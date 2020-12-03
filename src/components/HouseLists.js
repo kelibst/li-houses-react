@@ -12,6 +12,10 @@ const HouseLists = props => {
         variant="top"
         src={house.body.image ? house.body.image : srcImg}
       />
+      {house.body && <div className="house-status">
+      <div className="house-state">{house.body.status}</div>
+     {house.body.status === 'available' && <button type='button' className="house-btn btn hero-btn">Make an offer</button> } 
+    </div>   }
       <Card.Body>
         <Card.Title className="text-uppercase font-weight-bolder">
           {house.name}
@@ -28,7 +32,7 @@ const HouseLists = props => {
           <p>Region:</p>
           <p>{house.body.region}</p>
         </div>
-
+       
         <hr />
         <Link to={`/houses/${house.id}`} className="btn hero-btn w-100">
           View House
