@@ -13,6 +13,7 @@ import {
   updateHouse,
   unLoad,
 } from '../../store/actions/fetchAction';
+import Uploader from '../../containers/Uploader';
 
 class AddHouseForm extends Component {
   constructor(props) {
@@ -41,7 +42,6 @@ class AddHouseForm extends Component {
       })
       : history.push('/signin');
   }
-
   render() {
     const {
       createHouse,
@@ -52,6 +52,7 @@ class AddHouseForm extends Component {
       history,
       unLoad,
       errors,
+      houseImgUrl,
       close,
     } = this.props;
 
@@ -66,16 +67,36 @@ class AddHouseForm extends Component {
     const handleSubmit = e => {
       e.preventDefault();
       if (status === 'Add') {
-        createHouse(this.state);
         unLoad({ loading: true });
-        !loading && close();
-        !loading && history.push(`/houses/${house.id}`);
+        houseImgUrl.image && this.setState({
+          ...this.state,
+          image: houseImgUrl.image,
+        }, ()=>{
+          createHouse(this.state) 
+          !loading && close();
+          !loading && history.push(`/houses/${house.id}`);
+        })
+        
+        
+       
       } else if (status === 'Update') {
         unLoad({ loading: true });
-        updateHouse(this.state, house.id);
 
-        !loading && close();
-        !loading && window.location.reload(false);
+        if(houseImgUrl.image){
+          this.setState({
+            ...this.state,
+            image: houseImgUrl.image
+          }, ()=>{
+            debugger
+            updateHouse(this.state, house.id)
+            !loading && close();
+            !loading && window.location.reload(false);
+          })
+        } else {
+            updateHouse(this.state, house.id)
+            !loading && close();
+            !loading && window.location.reload(false);
+        }
       }
     };
 
@@ -85,6 +106,9 @@ class AddHouseForm extends Component {
     const { status: stateUs } = this.state;
 
     return (
+      <div className="form-container">
+      
+
       <Form onSubmit={handleSubmit}>
         {errors && <ErrOrs />}
         <Form.Group controlId="name" className="pb-3">
@@ -117,16 +141,6 @@ class AddHouseForm extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="image" className="pb-3">
-          <Form.Control
-            required
-            type="text"
-            placeholder="Enter link to the house image"
-            value={image}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
         <Form.Group controlId="status">
           <Form.Label>Select a House Status</Form.Label>
           <Form.Control as="select" value={stateUs} onChange={handleChange}>
@@ -139,7 +153,8 @@ class AddHouseForm extends Component {
         <Button className="btn hero-btn w-100" type="submit">
           Submit
         </Button>
-      </Form>
+      </Form>      
+      </div>
     );
   }
 }
@@ -147,6 +162,7 @@ class AddHouseForm extends Component {
 AddHouseForm.propTypes = {
   errors: PropTypes.shape.isRequired,
   unLoad: PropTypes.shape.isRequired,
+  houseImgUrl: PropTypes.shape.isRequired,
   loading: PropTypes.shape.isRequired,
   status: PropTypes.string.isRequired,
   currentUser: PropTypes.shape.isRequired,
@@ -159,6 +175,7 @@ AddHouseForm.propTypes = {
 
 const mapStateToProps = state => ({
   errors: state.error.err,
+  houseImgUrl: state.data.houseImgUrl,
   currentUser: state.data.currentUser,
   house: state.data.house,
   loading: state.data.loading,

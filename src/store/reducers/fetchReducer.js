@@ -7,6 +7,7 @@ const initialState = {
   username: '',
   fav: false,
   house: [],
+  houseImgUrl: '',
 };
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,11 +78,17 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: {},
         username: '',
       };
+      case 'ADD_IMAGE':
+        return {
+          ...state, 
+          houseImgUrl: action.payload,
+        };
 
     case 'UPDATE_FAV':
+      
       return {
         ...state,
-        fav: true,
+       fav: true,
       };
     default:
       return state;

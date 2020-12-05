@@ -22,6 +22,7 @@ import NavBar from './layouts/NavBar';
 import Loading from './Loading';
 import MobileNav from './layouts/MobileNav';
 import styled from 'styled-components';
+import Uploader from '../containers/Uploader';
 
 class HouseDetails extends Component {
   constructor(props) {

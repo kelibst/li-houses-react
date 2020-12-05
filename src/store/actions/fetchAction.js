@@ -130,6 +130,7 @@ const updateHouse = (data, id) => dispatch => {
   const hseData = {
     house: data,
   };
+  
   authAxios
     .patch(`/api/v1/houses/${id}.json`, hseData)
     .then(res => dispatch({
@@ -161,6 +162,8 @@ const fetchUser = username => dispatch => {
       payload: err,
     }));
 };
+
+
 const logCurrentUserOut = () => dispatch => {
   dispatch({
     type: 'LOG_OUT',
@@ -214,6 +217,27 @@ const removeFromFav = (house_id, favs) => dispatch => {
     }));
 };
 
+const uploadImage = image => dispatch => {
+  const token = localStorage.getItem('jwt');
+  const userAxios = Axios.create({
+    baseURL: 'http://127.0.0.1:3000',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  
+  userAxios
+    .post(`/api/v1/image_uploaders.json`, image)
+    .then(res => dispatch({
+      type: 'ADD_IMAGE',
+      payload: res.data,
+    }))
+    .catch(err => dispatch({
+      type: 'CREATE_ERROR',
+      payload: err,
+    }));
+};
+
 export {
   fetchHouses,
   authUser,
@@ -227,4 +251,5 @@ export {
   addToFav,
   removeFromFav,
   unLoad,
+  uploadImage,
 };

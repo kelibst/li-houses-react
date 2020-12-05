@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AddHouseForm from './AddHouseForm';
+import Uploader from '../../containers/Uploader';
 
 class AddHouse extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class AddHouse extends Component {
             <Modal.Title>Add a new House</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Uploader status={status}/>
             <AddHouseForm
               close={handleClose}
               house={house}
@@ -50,6 +52,7 @@ class AddHouse extends Component {
           </Modal.Body>
           <Modal.Footer />
         </Modal>
+      
       </div>
     );
   }
