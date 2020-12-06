@@ -13,7 +13,6 @@ import {
   updateHouse,
   unLoad,
 } from '../../store/actions/fetchAction';
-import Uploader from '../../containers/Uploader';
 
 class AddHouseForm extends Component {
   constructor(props) {
@@ -42,6 +41,7 @@ class AddHouseForm extends Component {
       })
       : history.push('/signin');
   }
+
   render() {
     const {
       createHouse,
@@ -68,91 +68,91 @@ class AddHouseForm extends Component {
       e.preventDefault();
       if (status === 'Add') {
         unLoad({ loading: true });
-        houseImgUrl.image && this.setState({
-          ...this.state,
-          image: houseImgUrl.image,
-        }, ()=>{
-          createHouse(this.state) 
-          !loading && close();
-          !loading && history.push(`/houses/${house.id}`);
-        })
-        
-        
-       
+        houseImgUrl.image
+          && this.setState(
+            {
+              ...this.state,
+              image: houseImgUrl.image,
+            },
+            () => {
+              createHouse(this.state);
+              !loading && close();
+              !loading && history.push(`/houses/${house.id}`);
+            },
+          );
       } else if (status === 'Update') {
         unLoad({ loading: true });
 
-        if(houseImgUrl.image){
-          this.setState({
-            ...this.state,
-            image: houseImgUrl.image
-          }, ()=>{
-            updateHouse(this.state, house.id)
-            !loading && close();
-            !loading && window.location.reload(false);
-          })
+        if (houseImgUrl.image) {
+          this.setState(
+            {
+              ...this.state,
+              image: houseImgUrl.image,
+            },
+            () => {
+              updateHouse(this.state, house.id);
+              !loading && close();
+              !loading && window.location.reload(false);
+            },
+          );
         } else {
-            updateHouse(this.state, house.id)
-            !loading && close();
-            !loading && window.location.reload(false);
+          updateHouse(this.state, house.id);
+          !loading && close();
+          !loading && window.location.reload(false);
         }
       }
     };
 
-    const {
-      name, address, location, image,
-    } = this.state;
+    const { name, address, location } = this.state;
     const { status: stateUs } = this.state;
 
     return (
       <div className="form-container">
-      
+        <Form onSubmit={handleSubmit}>
+          {errors && <ErrOrs />}
+          <Form.Group controlId="name" className="pb-3">
+            <Form.Control
+              required
+              type="text"
+              placeholder="Enter a unique House name"
+              value={name}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-      <Form onSubmit={handleSubmit}>
-        {errors && <ErrOrs />}
-        <Form.Group controlId="name" className="pb-3">
-          <Form.Control
-            required
-            type="text"
-            placeholder="Enter a unique House name"
-            value={name}
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group controlId="address" className="pb-3">
+            <Form.Control
+              required
+              type="text"
+              placeholder="Enter house address"
+              value={address}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="address" className="pb-3">
-          <Form.Control
-            required
-            type="text"
-            placeholder="Enter house address"
-            value={address}
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group controlId="location" className="pb-3">
+            <Form.Control
+              required
+              type="text"
+              placeholder="Enter house location"
+              value={location}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="location" className="pb-3">
-          <Form.Control
-            required
-            type="text"
-            placeholder="Enter house location"
-            value={location}
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group controlId="status">
+            <Form.Label>Select a House Status</Form.Label>
+            <Form.Control as="select" value={stateUs} onChange={handleChange}>
+              {availability.map(hstate => (
+                <option key={hstate}>{hstate}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId="status">
-          <Form.Label>Select a House Status</Form.Label>
-          <Form.Control as="select" value={stateUs} onChange={handleChange}>
-            {availability.map(hstate => (
-              <option key={hstate}>{hstate}</option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-
-        <Button className="btn hero-btn w-100" type="submit">
-          Submit
-        </Button>
-      </Form>      
+          <Button className="btn hero-btn w-100" type="submit">
+            Submit
+          </Button>
+        </Form>
       </div>
     );
   }

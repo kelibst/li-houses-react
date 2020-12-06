@@ -72,11 +72,11 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: action.payload,
       };
 
-      case 'CLEAR_IMG':
-        return {
-          ...state,
-          houseImgUrl: {},
-        };
+    case 'CLEAR_IMG':
+      return {
+        ...state,
+        houseImgUrl: {},
+      };
 
     case 'LOG_OUT':
       return {
@@ -84,17 +84,17 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: {},
         username: '',
       };
-      case 'ADD_IMAGE':
-        return {
-          ...state, 
-          houseImgUrl: action.payload,
-        };
-
-    case 'UPDATE_FAV':
-      
+    case 'ADD_IMAGE':
       return {
         ...state,
-       fav: true,
+        houseImgUrl: action.payload,
+      };
+
+    case 'UPDATE_FAV':
+
+      return {
+        ...state,
+        fav: true,
       };
     default:
       return state;

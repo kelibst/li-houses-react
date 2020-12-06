@@ -21,8 +21,6 @@ import Footer from './layouts/Footer';
 import NavBar from './layouts/NavBar';
 import Loading from './Loading';
 import MobileNav from './layouts/MobileNav';
-import styled from 'styled-components';
-import Uploader from '../containers/Uploader';
 
 class HouseDetails extends Component {
   constructor(props) {
@@ -48,16 +46,7 @@ class HouseDetails extends Component {
     });
   }
 
-  
-
   render() {
-    const statusBtn = styled.div`
-      text-transform: capitalize;
-      padding: 1rem;
-      font-weight: bolder;
-      background: ${props => props.available ? "orange" : "violet"};
-      color: black;
-    `
     const {
       house,
       currentUser,
@@ -72,7 +61,6 @@ class HouseDetails extends Component {
       removeFromFav,
     } = this.props;
     const { house_id } = match.params;
-    const imgSrc = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const handleDelete = () => {
       unLoad({ loading: true });
       dropHouse(house.id);
@@ -86,7 +74,6 @@ class HouseDetails extends Component {
           return fav.house_id === house.id;
         }
       });
-      const { status } = house.body ? house.body : ''
 
     const addToFavorite = () => {
       this.setState(
@@ -113,14 +100,17 @@ class HouseDetails extends Component {
         <MobileNav />
         <div className="house-details d-flex justify-content-center">
           <div className="card shadow-lg col-sm-8 col-lg-6 d-md-flex p-0">
-            <Card.Img
-              variant="top"
-              src={house.body.image}
-            />
-            {house.body && <div className="house-status">
-              <div className="house-state">{house.body.status}</div>
-             {house.body.status === 'available' && <button type='button' className="house-btn btn hero-btn">Make an offer</button> } 
-            </div>   }
+            <Card.Img variant="top" src={house.body.image} />
+            {house.body && (
+              <div className="house-status">
+                <div className="house-state">{house.body.status}</div>
+                {house.body.status === 'available' && (
+                  <button type="button" className="house-btn btn hero-btn">
+                    Make an offer
+                  </button>
+                )}
+              </div>
+            )}
             <Card.Body>
               <Card.Title className="text-uppercase text-center font-weight-bolder">
                 {house.name}

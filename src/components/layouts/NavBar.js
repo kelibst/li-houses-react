@@ -42,7 +42,10 @@ class NavBar extends Component {
           {' '}
           Li-HOUSES
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="d-none" />
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          className="d-none"
+        />
         <Navbar.Collapse
           id="responsive-navbar-nav"
           className="justify-content-end d-none d-sm-block"

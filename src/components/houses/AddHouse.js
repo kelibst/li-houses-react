@@ -43,16 +43,11 @@ class AddHouse extends Component {
             <Modal.Title>Add a new House</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Uploader status={status}/>
-            <AddHouseForm
-              close={handleClose}
-              house={house}
-              status={status}
-            />
+            <Uploader status={status} />
+            <AddHouseForm close={handleClose} house={house} status={status} />
           </Modal.Body>
           <Modal.Footer />
         </Modal>
-      
       </div>
     );
   }

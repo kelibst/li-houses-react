@@ -23,7 +23,9 @@ class Favorites extends Component {
   render() {
     const { currentUser, loading, errors } = this.props;
     const favList = currentUser.favorites && !loading ? (
-      currentUser.favorites.map(fav => <Favorite id={fav.house_id} key={fav.house_id} />)
+      currentUser.favorites.map(fav => (
+        <Favorite id={fav.house_id} key={fav.house_id} />
+      ))
     ) : (
       <div className="loading">
         {loading && <Loading />}

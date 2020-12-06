@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/no-access-state-in-setstate */
-import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import ErrOrs from "../../components/ErrOrs";
+import React, { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import ErrOrs from '../../components/ErrOrs';
 import {
   createUser,
   authUser,
   fetchUser,
   unLoad,
-} from "../../store/actions/fetchAction";
-import Loading from "../../components/Loading";
+} from '../../store/actions/fetchAction';
+import Loading from '../../components/Loading';
 
 class SignUp extends Component {
   constructor(props) {
@@ -19,25 +19,27 @@ class SignUp extends Component {
     this.state = {
       isSubmit: false,
       userData: {
-        email: "",
-        password: "",
-        username: "",
-        firstname: "",
-        lastname: "",
-        password_confirmation: "",
+        email: '',
+        password: '',
+        username: '',
+        firstname: '',
+        lastname: '',
+        password_confirmation: '',
       },
     };
   }
 
   componentDidMount() {
-    const { loggedIn, username, history, fetchUser } = this.props;
-    const jwt = localStorage.getItem("jwt");
+    const {
+      loggedIn, username, history, fetchUser,
+    } = this.props;
+    const jwt = localStorage.getItem('jwt');
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
   render() {
-    const handleChange = (e) => {
+    const handleChange = e => {
       const { userData } = this.state;
       const { id, value } = e.target;
       this.setState({
@@ -59,7 +61,7 @@ class SignUp extends Component {
     } = this.props;
     const { isSubmit } = this.state;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
       e.preventDefault();
       const { userData } = this.state;
       this.setState({ isSubmit: true });
@@ -74,15 +76,15 @@ class SignUp extends Component {
         authUser(data);
         history.push(`/dashboard/${currentUser.username}`);
       }
-      loggedIn &&
-        this.setState({
+      loggedIn
+        && this.setState({
           userData: {
-            email: "",
-            password: "",
-            username: "",
-            firstname: "",
-            lastname: "",
-            password_confirmation: "",
+            email: '',
+            password: '',
+            username: '',
+            firstname: '',
+            lastname: '',
+            password_confirmation: '',
           },
         });
     };
@@ -167,7 +169,7 @@ class SignUp extends Component {
             Submit
           </Button>
           <a href="/signin" className="btn my-3 bg-primary hero-btn w-100">
-            {" "}
+            {' '}
             Log In
           </a>
         </Form>
@@ -186,7 +188,7 @@ SignUp.propTypes = {
   unLoad: PropTypes.func.isRequired,
   history: PropTypes.func.isRequired,
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.data.loading,
   errors: state.error.err,
   loggedIn: state.data.loggedIn,

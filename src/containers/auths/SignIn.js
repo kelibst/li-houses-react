@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import { authUser, fetchUser } from "../../store/actions/fetchAction";
-import ErrOrs from "../../components/ErrOrs";
-import Loading from "../../components/Loading";
+/* eslint-disable react/no-access-state-in-setstate */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { authUser, fetchUser } from '../../store/actions/fetchAction';
+import ErrOrs from '../../components/ErrOrs';
+import Loading from '../../components/Loading';
 
 class SignIn extends Component {
   constructor(props) {
@@ -13,27 +14,28 @@ class SignIn extends Component {
     this.state = {
       isSubmit: false,
       data: {
-        username: "",
-        email: "",
-        password: "",
+        username: '',
+        email: '',
+        password: '',
       },
     };
   }
 
   componentDidUpdate() {
     const { loggedIn, username, history } = this.props;
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
   render() {
-    const handleChange = (e) => {
+    const handleChange = e => {
       const { id, value } = e.target;
+      const { data } = this.state;
       this.setState({
         ...this.state,
         data: {
-          ...this.state.data,
+          ...data,
           [id]: value,
         },
       });
@@ -46,16 +48,16 @@ class SignIn extends Component {
       loading,
       history,
     } = this.props;
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
       e.preventDefault();
       this.setState({
         isSubmit: true,
       });
       const { data } = this.state;
       authUser(data);
-      currentUser &&
-        loggedIn &&
-        history.push(`/dashboard/${currentUser.username}`);
+      currentUser
+        && loggedIn
+        && history.push(`/dashboard/${currentUser.username}`);
     };
     const { isSubmit } = this.state;
     return (
@@ -116,7 +118,7 @@ class SignIn extends Component {
             Submit
           </Button>
           <a href="/signup" className="btn my-3 bg-success hero-btn w-100">
-            {" "}
+            {' '}
             Register
           </a>
         </Form>
@@ -135,7 +137,7 @@ SignIn.propTypes = {
   history: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   errors: state.error.err,
   username: state.data.username,
   loading: state.data.loading,

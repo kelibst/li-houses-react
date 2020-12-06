@@ -130,7 +130,7 @@ const updateHouse = (data, id) => dispatch => {
   const hseData = {
     house: data,
   };
-  
+
   authAxios
     .patch(`/api/v1/houses/${id}.json`, hseData)
     .then(res => dispatch({
@@ -162,7 +162,6 @@ const fetchUser = username => dispatch => {
       payload: err,
     }));
 };
-
 
 const logCurrentUserOut = () => dispatch => {
   dispatch({
@@ -225,9 +224,9 @@ const uploadImage = image => dispatch => {
       Authorization: `Bearer ${token}`,
     },
   });
-  
+
   userAxios
-    .post(`/api/v1/image_uploaders.json`, image)
+    .post('/api/v1/image_uploaders.json', image)
     .then(res => dispatch({
       type: 'ADD_IMAGE',
       payload: res.data,
@@ -240,9 +239,9 @@ const uploadImage = image => dispatch => {
 
 const clearImg = () => dispatch => {
   dispatch({
-  type: 'CLEAR_IMG'
- })
-}
+    type: 'CLEAR_IMG',
+  });
+};
 
 export {
   fetchHouses,
