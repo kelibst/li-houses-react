@@ -115,7 +115,7 @@ class HouseDetails extends Component {
           <div className="card shadow-lg col-sm-8 col-lg-6 d-md-flex p-0">
             <Card.Img
               variant="top"
-              src={house.body && house.body.image ? house.body.image : imgSrc}
+              src={house.body.image}
             />
             {house.body && <div className="house-status">
               <div className="house-state">{house.body.status}</div>

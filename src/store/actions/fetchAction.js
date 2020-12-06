@@ -220,7 +220,7 @@ const removeFromFav = (house_id, favs) => dispatch => {
 const uploadImage = image => dispatch => {
   const token = localStorage.getItem('jwt');
   const userAxios = Axios.create({
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: 'https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -238,6 +238,12 @@ const uploadImage = image => dispatch => {
     }));
 };
 
+const clearImg = () => dispatch => {
+  dispatch({
+  type: 'CLEAR_IMG'
+ })
+}
+
 export {
   fetchHouses,
   authUser,
@@ -252,4 +258,5 @@ export {
   removeFromFav,
   unLoad,
   uploadImage,
+  clearImg,
 };

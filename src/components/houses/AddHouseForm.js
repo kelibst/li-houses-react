@@ -87,7 +87,6 @@ class AddHouseForm extends Component {
             ...this.state,
             image: houseImgUrl.image
           }, ()=>{
-            debugger
             updateHouse(this.state, house.id)
             !loading && close();
             !loading && window.location.reload(false);

@@ -72,6 +72,12 @@ const fetchReducer = (state = initialState, action) => {
         currentUser: action.payload,
       };
 
+      case 'CLEAR_IMG':
+        return {
+          ...state,
+          houseImgUrl: {},
+        };
+
     case 'LOG_OUT':
       return {
         ...state,
