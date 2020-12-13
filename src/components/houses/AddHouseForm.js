@@ -159,17 +159,17 @@ class AddHouseForm extends Component {
 }
 
 AddHouseForm.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  unLoad: PropTypes.shape.isRequired,
-  houseImgUrl: PropTypes.shape.isRequired,
-  loading: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
+  unLoad: PropTypes.any,
+  houseImgUrl: PropTypes.any,
+  loading: PropTypes.any,
   status: PropTypes.string.isRequired,
-  currentUser: PropTypes.shape.isRequired,
-  updateHouse: PropTypes.shape.isRequired,
-  house: PropTypes.shape.isRequired,
-  createHouse: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
+  updateHouse: PropTypes.any,
+  house: PropTypes.any,
+  createHouse: PropTypes.any,
   close: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
 };
 
 const mapStateToProps = state => ({

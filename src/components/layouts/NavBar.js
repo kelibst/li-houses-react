@@ -121,7 +121,7 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   fetchUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
 };
 
 const mapStateToProps = state => ({

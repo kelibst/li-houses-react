@@ -68,14 +68,6 @@ class HouseDetails extends Component {
       !loading && history.push(`/dashboard/${currentUser.username}`);
     };
 
-    const isFav = currentUser.favorites
-      && currentUser.favorites.some(fav => {
-        if (fav.house_id) {
-          return fav.house_id === house.id;
-        }
-      });
-      console.log(isFav, fav, currentUser)
-
     const addToFavorite = () => {
       this.setState(
         {
@@ -115,7 +107,7 @@ class HouseDetails extends Component {
               <Card.Title className="text-uppercase text-center font-weight-bolder">
                 {house.name}
                 {' '}
-                {!isFav && !fav ? (
+                {!fav ? (
                   <button
                     type="button"
                     onClick={addToFavorite}
@@ -178,20 +170,20 @@ class HouseDetails extends Component {
 }
 
 HouseDetails.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  match: PropTypes.shape.isRequired,
-  house: PropTypes.shape.isRequired,
-  loading: PropTypes.shape.isRequired,
-  fav: PropTypes.shape.isRequired,
-  username: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
+  match: PropTypes.any,
+  house: PropTypes.any,
+  loading: PropTypes.any,
+  fav: PropTypes.any,
+  username: PropTypes.any,
   addToFav: PropTypes.func.isRequired,
-  currentUser: PropTypes.func.isRequired,
+  currentUser: PropTypes.any,
   dropHouse: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   fetchHouse: PropTypes.func.isRequired,
   removeFromFav: PropTypes.func.isRequired,
   unLoad: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
 };
 
 const mapStateToProps = state => ({

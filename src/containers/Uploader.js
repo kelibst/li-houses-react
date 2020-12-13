@@ -99,7 +99,7 @@ class Uploader extends Component {
   }
 }
 Uploader.propTypes = {
-  houseImgUrl: PropTypes.shape.isRequired,
+  houseImgUrl: PropTypes.any,
   uploadImage: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
   clearImg: PropTypes.func.isRequired,

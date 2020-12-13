@@ -101,7 +101,7 @@ class MobileNav extends Component {
 
 MobileNav.propTypes = {
   fetchUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
 };
 
 const mapStateToProps = state => ({

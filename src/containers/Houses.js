@@ -36,9 +36,9 @@ class Houses extends Component {
 }
 
 Houses.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  houses: PropTypes.shape.isRequired,
-  loading: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
+  houses: PropTypes.any,
+  loading: PropTypes.any,
   fetchHouses: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({

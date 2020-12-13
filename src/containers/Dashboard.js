@@ -59,11 +59,12 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  match: PropTypes.shape.isRequired,
-  username: PropTypes.string.isRequired,
+  errors: PropTypes.any,
+  match: PropTypes.objectOf(PropTypes.any),
+  currentUser: PropTypes.any,
+  username: PropTypes.string,
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.shape.isRequired,
+  history: PropTypes.objectOf(PropTypes.any),
 };
 
 const mapStateToProps = state => ({

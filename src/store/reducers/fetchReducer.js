@@ -99,7 +99,7 @@ const fetchReducer = (state = initialState, action) => {
     case 'REMOVE_FAV':
     return {
       ...state,
-      fav: true,
+      fav: false,
     };
     default:
       return state;

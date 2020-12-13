@@ -53,7 +53,7 @@ class AddHouse extends Component {
   }
 }
 AddHouse.propTypes = {
-  house: PropTypes.shape.isRequired,
-  status: PropTypes.shape.isRequired,
+  house: PropTypes.any,
+  status: PropTypes.any,
 };
 export default AddHouse;
