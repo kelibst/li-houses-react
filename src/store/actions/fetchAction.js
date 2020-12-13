@@ -145,6 +145,7 @@ const updateHouse = (data, id) => dispatch => {
 
 const fetchUser = username => dispatch => {
   const token = localStorage.getItem('jwt');
+  
   const userAxios = Axios.create({
     baseURL: 'https://lihouses-api.herokuapp.com',
     headers: {
@@ -207,7 +208,7 @@ const removeFromFav = (house_id, favs) => dispatch => {
   authAxios
     .delete(`/api/v1/favorites/${id}.json`)
     .then(res => dispatch({
-      type: 'UPDATE_FAV',
+      type: 'REMOVE_FAV',
       payload: res,
     }))
     .catch(err => dispatch({

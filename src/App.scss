@@ -90,6 +90,16 @@ input.form-control {
   }
 }
 
+.fav {
+  &-container {
+  display: flex;
+  overflow: auto;
+  }
+  &-card{
+    min-width: 400px;
+  }
+}
+
 .uploaded {
   width: 100%;
   max-height: 500px;

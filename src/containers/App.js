@@ -20,7 +20,7 @@ const App = () => (
         <Route exact path="/dashboard/:username" component={Dashboard} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/houses/:house_id" component={HouseDetails} />
-        <Route exact path="/user/favorites" component={Favorites} />
+        <Route exact path="/dashboard/:username/favorites" component={Favorites} />
       </Switch>
     </div>
   </BrowserRouter>

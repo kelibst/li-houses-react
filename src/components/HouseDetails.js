@@ -74,6 +74,7 @@ class HouseDetails extends Component {
           return fav.house_id === house.id;
         }
       });
+      console.log(isFav, fav, currentUser)
 
     const addToFavorite = () => {
       this.setState(
@@ -85,13 +86,12 @@ class HouseDetails extends Component {
           addToFav(this.state);
         },
       );
-
-      window.location.reload(false);
+        
     };
 
     const rmFromFav = () => {
       removeFromFav(house_id, currentUser.favorites);
-      window.location.reload(false);
+      
     };
 
     const houseDetails = house.body ? (

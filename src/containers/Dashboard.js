@@ -24,14 +24,22 @@ class Dashboard extends Component {
 
     const { username } = match.params;
     jwt && username ? fetchUser(username) : history.push('/signin');
-
     if (errors.response) {
       errors.response.status === 401 && history.push('/signin');
     }
+    
   }
 
   componentDidUpdate() {
+    const {
+       errors, history,
+    } = this.props;
+
     fetchHouses();
+    if (errors.response) {
+      errors.response.status === 401 && history.push('/signin');
+    }
+    
   }
 
   render() {

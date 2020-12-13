@@ -100,7 +100,7 @@ class NavBar extends Component {
                   {currentUser ? currentUser.username : 'Profile'}
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/users">Users</NavDropdown.Item>
-                <NavDropdown.Item href="/user/favorites">
+                <NavDropdown.Item href={`/dashboard/${currentUser.username}/favorites`}>
                   <Icofont icon="heart" />
                   {' '}
                   Favs

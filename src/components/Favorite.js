@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import { fetchHouse } from '../store/actions/fetchAction';
 
 class Favorite extends Component {
-  componentDidMount() {
-    const { id, fetchHouse } = this.props;
-    fetchHouse(id);
-  }
+  
 
   render() {
     const { house } = this.props;
+    debugger
     return (
-      <div className=".fav">
+      <div className="fav">
         {house.name}
       </div>
     );
