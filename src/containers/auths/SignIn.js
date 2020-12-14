@@ -13,6 +13,7 @@ class SignIn extends Component {
     super(props);
     this.state = {
       isSubmit: false,
+      err: false,
       data: {
         username: '',
         email: '',

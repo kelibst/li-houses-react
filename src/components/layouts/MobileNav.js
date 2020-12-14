@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Icofont from 'react-icofont';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchUser } from '../../store/actions/fetchAction';
 import AddHouse from '../houses/AddHouse';
@@ -18,13 +18,14 @@ class MobileNav extends Component {
 
   render() {
     const jwt = localStorage.getItem('jwt');
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('username'); 
+    const { currentUser, history } = this.props;
     const logUserOut = () => {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
-      window.location.reload(false);
+      history.push('/signin')
     };
-    const { currentUser } = this.props;
+   
 
     return (
       <Navbar
@@ -111,4 +112,5 @@ const mapStateToProps = state => ({
   loggedIn: state.data.loggedIn,
 });
 
-export default connect(mapStateToProps, { fetchUser })(MobileNav);
+const ShowTheLocationWithRouter = withRouter(MobileNav)
+export default connect(mapStateToProps, { fetchUser })(ShowTheLocationWithRouter);

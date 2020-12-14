@@ -22,9 +22,13 @@ class ErrOrs extends Component {
     const { errors } = this.props;
 
     const setShow = () => {
+      const { unloadError } = this.props
+      unloadError()
       this.setState({
         show: false,
       });
+      
+
     };
 
     return (
@@ -39,7 +43,7 @@ class ErrOrs extends Component {
               <h6 className="my-5">{errors.response.data.error}</h6>
             )}
 
-            {errors.response.status === 401 && (
+            {errors.response && errors.response.status === 401 && (
               <h6 className="my-5 text-center">Your Login session has expired. Kindly login again.</h6>
             )}
 
@@ -63,7 +67,7 @@ class ErrOrs extends Component {
   }
 }
 ErrOrs.propTypes = {
-  errors: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
   unloadError: PropTypes.func.isRequired,
 };
 

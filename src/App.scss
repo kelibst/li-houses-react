@@ -96,7 +96,8 @@ input.form-control {
   overflow: auto;
   }
   &-card{
-    min-width: 400px;
+    min-width: 350px;
+    max-width: 400px;
   }
 }
 

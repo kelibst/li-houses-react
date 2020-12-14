@@ -5,6 +5,7 @@ const initialState = {
   const userReducer =  (state = initialState, action ) => {
       switch(action.type){
           case 'USER_FAVS':
+              debugger
               return {
                   ...state,
                   user_favorites: action.payload

@@ -8,6 +8,7 @@ const fetchUserFavs = (id) => dispatch => {
       Authorization: `Bearer ${token}`,
     },
   });
+  debugger
     favAxios.get(`/api/v1/user/${id}/favorites.json`)
       .then(res => dispatch({
         type: 'USER_FAVS',

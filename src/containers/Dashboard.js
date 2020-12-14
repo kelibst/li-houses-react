@@ -35,7 +35,7 @@ class Dashboard extends Component {
     const jwt = localStorage.getItem('jwt');
     
     const {
-       errors, history, match, currentUser
+       errors, history, match
     } = this.props;
     const { username } = match.params;
     fetchHouses();
