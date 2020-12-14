@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Icofont from 'react-icofont';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { fetchUser } from '../../store/actions/fetchAction';
+import { fetchUser } from '../../store/actions/userAction';
 import AddHouse from '../houses/AddHouse';
 import './NavBar.scss';
 
@@ -126,9 +126,9 @@ NavBar.propTypes = {
 
 const mapStateToProps = state => ({
   errors: state.error.err,
-  currentUser: state.data.currentUser,
-  loading: state.data.loading,
-  loggedIn: state.data.loggedIn,
+  currentUser: state.userData.currentUser,
+  loading: state.userData.loading,
+  loggedIn: state.userData.loggedIn,
 });
 const ShowTheLocationWithRouter = withRouter(NavBar)
 export default connect(mapStateToProps, { fetchUser })(ShowTheLocationWithRouter);

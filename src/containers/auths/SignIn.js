@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { authUser, fetchUser } from '../../store/actions/fetchAction';
+import { authUser, fetchUser } from '../../store/actions/userAction';
 import ErrOrs from '../../components/ErrOrs';
 import Loading from '../../components/Loading';
 
@@ -140,10 +140,10 @@ SignIn.propTypes = {
 
 const mapStateToProps = state => ({
   errors: state.error.err,
-  username: state.data.username,
-  loading: state.data.loading,
-  currentUser: state.data.currentUser,
-  loggedIn: state.data.loggedIn,
+  username: state.userData.username,
+  loading: state.userData.loading,
+  currentUser: state.userData.currentUser,
+  loggedIn: state.userData.loggedIn,
 });
 
 export default connect(mapStateToProps, { authUser })(SignIn);

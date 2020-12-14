@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchUser } from '../store/actions/fetchAction';
-import { fetchUserFavs } from '../store/actions/userAction'
+import { fetchUserFavs, fetchUser} from '../store/actions/userAction'
 import NavBar from '../components/layouts/NavBar';
 import ErrOrs from '../components/ErrOrs';
 import Loading from '../components/Loading';
@@ -111,8 +110,8 @@ Favorites.propTypes = {
 };
 const mapStateToProps = state => ({
   errors: state.error.err,
-  currentUser: state.data.currentUser,
-  loading: state.data.loading,
+  currentUser: state.userData.currentUser,
+  loading: state.userData.loading,
   favorites: state.userData.user_favorites
 });
 

@@ -5,7 +5,7 @@ import Icofont from 'react-icofont';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchUser } from '../../store/actions/fetchAction';
+import { fetchUser } from '../../store/actions/userAction';
 import AddHouse from '../houses/AddHouse';
 
 class MobileNav extends Component {
@@ -107,9 +107,9 @@ MobileNav.propTypes = {
 
 const mapStateToProps = state => ({
   errors: state.error.err,
-  currentUser: state.data.currentUser,
-  loading: state.data.loading,
-  loggedIn: state.data.loggedIn,
+  currentUser: state.userData.currentUser,
+  loading: state.userData.loading,
+  loggedIn: state.userData.loggedIn,
 });
 
 const ShowTheLocationWithRouter = withRouter(MobileNav)

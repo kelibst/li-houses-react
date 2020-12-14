@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import {
   fetchHouse,
   dropHouse,
-  fetchUser,
   addToFav,
   removeFromFav,
   unLoad,
 } from '../store/actions/fetchAction';
+import { fetchUser } from '../store/actions/userAction'
 import ErrOrs from './ErrOrs';
 import AddHouse from './houses/AddHouse';
 import Footer from './layouts/Footer';
@@ -189,10 +189,10 @@ HouseDetails.propTypes = {
 const mapStateToProps = state => ({
   house: state.data.house,
   errors: state.error.err,
-  currentUser: state.data.currentUser,
+  currentUser: state.userData.currentUser,
   loading: state.data.loading,
   fav: state.data.fav,
-  loggedIn: state.data.loggedIn,
+  loggedIn: state.userData.loggedIn,
 });
 
 export default connect(mapStateToProps, {

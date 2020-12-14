@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ErrOrs from '../../components/ErrOrs';
 import {
+  unLoad,
+} from '../../store/actions/fetchAction';
+import {
   createUser,
   authUser,
   fetchUser,
-  unLoad,
-} from '../../store/actions/fetchAction';
+} from '../../store/actions/userAction';
 import Loading from '../../components/Loading';
 
 class SignUp extends Component {
@@ -195,10 +197,10 @@ SignUp.propTypes = {
   history: PropTypes.any,
 };
 const mapStateToProps = state => ({
-  loading: state.data.loading,
+  loading: state.userData.loading,
   errors: state.error.err,
-  loggedIn: state.data.loggedIn,
-  currentUser: state.data.currentUser,
+  loggedIn: state.userData.loggedIn,
+  currentUser: state.userData.currentUser,
 });
 export default connect(mapStateToProps, {
   createUser,

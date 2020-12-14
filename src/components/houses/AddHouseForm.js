@@ -175,9 +175,9 @@ AddHouseForm.propTypes = {
 const mapStateToProps = state => ({
   errors: state.error.err,
   houseImgUrl: state.data.houseImgUrl,
-  currentUser: state.data.currentUser,
+  currentUser: state.userData.currentUser,
   house: state.data.house,
-  loading: state.data.loading,
+  loading: state.userData.loading,
 });
 
 const ShowTheLocationWithRouter = withRouter(AddHouseForm);
