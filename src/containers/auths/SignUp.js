@@ -38,6 +38,12 @@ class SignUp extends Component {
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
+  componentDidUpdate(){
+    const jwt = localStorage.getItem('jwt'); 
+    const { history, currentUser } = this.props
+    currentUser.id && history.push(`/dashboard/${this.state.userData.username}`);
+  }
+
   render() {
     const handleChange = e => {
       const { userData } = this.state;
@@ -178,15 +184,15 @@ class SignUp extends Component {
   }
 }
 SignUp.propTypes = {
-  currentUser: PropTypes.shape.isRequired,
-  errors: PropTypes.shape.isRequired,
-  loggedIn: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
+  errors: PropTypes.any,
+  loggedIn: PropTypes.any,
   createUser: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
+  username: PropTypes.any,
   authUser: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   unLoad: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
 };
 const mapStateToProps = state => ({
   loading: state.data.loading,

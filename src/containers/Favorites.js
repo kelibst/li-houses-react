@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { fetchUser } from '../store/actions/fetchAction';
 import { fetchUserFavs } from '../store/actions/userAction'
 import NavBar from '../components/layouts/NavBar';
-import Favorite from '../components/Favorite';
 import ErrOrs from '../components/ErrOrs';
 import Loading from '../components/Loading';
 import MobileNav from '../components/layouts/MobileNav';
@@ -18,7 +17,7 @@ class Favorites extends Component {
   }
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
-    const { history, errors, fetchUser, favorites, fetchUserFavs, currentUser } = this.props;
+    const { history, errors, fetchUser, fetchUserFavs, currentUser } = this.props;
     const username = localStorage.getItem('username');
     
     jwt && username && fetchUser(username);
@@ -53,7 +52,7 @@ class Favorites extends Component {
       </div>
     ) : (
       favorites.favorites.map(fav => (
-        <div className="card p-4 fav-card shadow-lg p-o">
+        <div className="card p-4 fav-card shadow-lg p-o" key={fav.id}>
          <Card.Img 
            variant="top"
            src={fav.image ? fav.image : srcImg}
@@ -97,19 +96,19 @@ class Favorites extends Component {
       <div className="favorites">
         <NavBar />
         <MobileNav />
-        <div className="fav-container">{favList}</div>
+        <div className="fav-container">{ favList}</div>
       </div>
     );
   }
 }
 
 Favorites.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  loading: PropTypes.string.isRequired,
-  history: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
+  loading: PropTypes.any,
+  history: PropTypes.any,
   fetchUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.func.isRequired,
-  favorites: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
+  favorites: PropTypes.any,
   fetchUserFavs: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({

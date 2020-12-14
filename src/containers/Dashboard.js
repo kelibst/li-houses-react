@@ -19,11 +19,12 @@ class Dashboard extends Component {
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
     const {
-      fetchUser, errors, history, match,
+      fetchUser, errors, history, match, currentUser
     } = this.props;
 
     const { username } = match.params;
-    jwt && username ? fetchUser(username) : history.push('/signin');
+    jwt && username && !currentUser.id  && fetchUser(username) 
+    !jwt && !username && history.push('/signin');
     if (errors.response) {
       errors.response.status === 401 && history.push('/signin');
     }
@@ -31,10 +32,12 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate() {
+    const jwt = localStorage.getItem('jwt');
+    
     const {
-       errors, history,
+       errors, history, match, currentUser
     } = this.props;
-
+    const { username } = match.params;
     fetchHouses();
     if (errors.response) {
       errors.response.status === 401 && history.push('/signin');

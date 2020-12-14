@@ -128,13 +128,13 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  errors: PropTypes.shape.isRequired,
-  loggedIn: PropTypes.shape.isRequired,
+  errors: PropTypes.any,
+  loggedIn: PropTypes.any,
   username: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
-  currentUser: PropTypes.shape.isRequired,
+  currentUser: PropTypes.any,
   authUser: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
 };
 
 const mapStateToProps = state => ({
