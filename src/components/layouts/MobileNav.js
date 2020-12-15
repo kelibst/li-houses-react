@@ -103,7 +103,7 @@ class MobileNav extends Component {
 
 MobileNav.propTypes = {
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
   currentUser: PropTypes.any,
 };
 

@@ -80,7 +80,7 @@ class SignIn extends Component {
             Sign In
           </h1>
           <p className="auth-desc pb-5 font-weight-bolder">
-            Hey! Log In to manager your account.
+            Hey! Log In to manage your account.
           </p>
         </div>
         <Form
@@ -120,7 +120,8 @@ class SignIn extends Component {
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
-          <a href="/signup" className="btn my-3 bg-success hero-btn w-100">
+          <p className="text-center mt-3 font-weight-bolder auth-text">OR</p>
+          <a href="/signup" className="my-3 text-center w-100 btn-link">
             {' '}
             Register
           </a>

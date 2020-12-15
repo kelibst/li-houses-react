@@ -205,7 +205,7 @@ class HouseDetails extends Component {
 }
 
 HouseDetails.propTypes = {
-  errors: PropTypes.shape,
+  errors: PropTypes.any,
   match: PropTypes.any,
   house: PropTypes.any,
   loading: PropTypes.any,

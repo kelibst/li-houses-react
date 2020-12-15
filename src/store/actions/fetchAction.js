@@ -1,6 +1,5 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable camelcase */
-/* eslint-disable no-console */
 import Axios from 'axios';
 
 const unLoad = states => dispatch => {
@@ -118,7 +117,6 @@ const addToFav = (data, user) => dispatch => {
       'Content-Type': 'application/json',
     },
   });
-  console.log(user);
 
   const hseData = {
     favorite: data,
@@ -163,10 +161,7 @@ const removeFromFav = (house_id, user) => dispatch => {
   authAxios
     .delete(`/api/v1/favorites/${id}.json`)
     .then(() => {
-      const newUserFav = user.favorites.filter(userfav => {
-        console.log(userfav.id, id);
-        return userfav.id != id;
-      });
+      const newUserFav = user.favorites.filter(userfav => userfav.id != id);
       const newUser = { ...user, favorites: [...newUserFav] };
 
       dispatch({

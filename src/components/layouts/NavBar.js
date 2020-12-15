@@ -123,7 +123,7 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.any,
   currentUser: PropTypes.any,
 };
 

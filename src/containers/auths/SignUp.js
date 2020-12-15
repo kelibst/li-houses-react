@@ -178,7 +178,9 @@ class SignUp extends Component {
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
-          <a href="/signin" className="btn my-3 bg-primary hero-btn w-100">
+          <p className="text-center mt-3 font-weight-bolder auth-text">OR</p>
+
+          <a href="/signin" className="my-3 text-center w-100 btn-link">
             {' '}
             Log In
           </a>
