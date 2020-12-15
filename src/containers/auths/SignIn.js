@@ -2,6 +2,8 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
+/* eslint-disable react/no-did-update-set-state */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
@@ -25,8 +27,17 @@ class SignIn extends Component {
   }
 
   componentDidUpdate() {
-    const { loggedIn, username, history } = this.props;
+    const {
+      loggedIn, username, history, errors,
+    } = this.props;
     const jwt = localStorage.getItem('jwt');
+    const { isSubmit } = this.state;
+    isSubmit
+    && errors
+    && this.setState({
+      ...this.state,
+      isSubmit: false,
+    });
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
@@ -48,7 +59,6 @@ class SignIn extends Component {
       currentUser,
       loggedIn,
       errors,
-      loading,
       history,
     } = this.props;
     const handleSubmit = e => {
@@ -65,17 +75,14 @@ class SignIn extends Component {
     const { isSubmit } = this.state;
     return (
       <div className="signin auth">
-        {errors && (
-          <div className="loading">
-            <ErrOrs />
-          </div>
-        )}
-        {loading && isSubmit && !errors && (
-          <div className="loading">
-            <Loading />
-          </div>
-        )}
+
         <div className="auth-header-container">
+          {errors && (
+            <div className="loading">
+              <ErrOrs />
+            </div>
+          )}
+
           <h1 className="auth-header py-5 text-center font-weight-bolder">
             Sign In
           </h1>
@@ -117,6 +124,12 @@ class SignIn extends Component {
             />
           </Form.Group>
 
+          {isSubmit && !errors && (
+            <div className="loading">
+              <Loading />
+            </div>
+          )}
+
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
@@ -135,7 +148,6 @@ SignIn.propTypes = {
   errors: PropTypes.any,
   loggedIn: PropTypes.any,
   username: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
   currentUser: PropTypes.any,
   authUser: PropTypes.func.isRequired,
   history: PropTypes.any,
@@ -144,7 +156,6 @@ SignIn.propTypes = {
 const mapStateToProps = state => ({
   errors: state.error.err,
   username: state.userData.username,
-  loading: state.userData.loading,
   currentUser: state.userData.currentUser,
   loggedIn: state.userData.loggedIn,
 });

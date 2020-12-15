@@ -2,14 +2,14 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
+/* eslint-disable react/no-did-update-set-state */
+
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ErrOrs from '../../components/ErrOrs';
-import {
-  unLoad,
-} from '../../store/actions/fetchAction';
+import { unLoad } from '../../store/actions/fetchAction';
 import {
   createUser,
   authUser,
@@ -43,8 +43,13 @@ class SignUp extends Component {
   }
 
   componentDidUpdate() {
-    const { history, currentUser } = this.props;
-    const { userData } = this.state;
+    const { history, currentUser, errors } = this.props;
+    const { userData, isSubmit } = this.state;
+    isSubmit
+      && errors
+      && this.setState({
+        isSubmit: false,
+      });
     currentUser.id && history.push(`/dashboard/${userData.username}`);
   }
 
@@ -66,6 +71,7 @@ class SignUp extends Component {
       loggedIn,
       authUser,
       errors,
+      loading,
       history,
       unLoad,
     } = this.props;
@@ -101,16 +107,6 @@ class SignUp extends Component {
 
     return (
       <div className="signup auth">
-        {isSubmit && (
-          <div className="loading">
-            <Loading />
-          </div>
-        )}
-        {errors && (
-          <div className="loading">
-            <ErrOrs />
-          </div>
-        )}
         <h1 className="display-6 mb-3  font-weight-bolder text-center">
           Sign Up
         </h1>
@@ -118,6 +114,14 @@ class SignUp extends Component {
           className="user-form p-5 mb-2 shadow-lg bg-white"
           onSubmit={handleSubmit}
         >
+          {errors && (
+            <div className="form-width">
+              <div className="loading">
+                <ErrOrs />
+              </div>
+            </div>
+          )}
+
           <Form.Group controlId="firstname">
             <Form.Control
               required
@@ -175,6 +179,14 @@ class SignUp extends Component {
             />
           </Form.Group>
 
+          {loading && isSubmit && !errors && (
+            <div className="col-10">
+              <div className="loading">
+                <Loading />
+              </div>
+            </div>
+          )}
+
           <Button className="btn hero-btn w-100" type="submit">
             Submit
           </Button>
@@ -191,6 +203,7 @@ class SignUp extends Component {
 }
 SignUp.propTypes = {
   currentUser: PropTypes.any,
+  loading: PropTypes.string,
   errors: PropTypes.any,
   loggedIn: PropTypes.any,
   createUser: PropTypes.func.isRequired,

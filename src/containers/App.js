@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import '../App.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HouseDetails from '../components/HouseDetails';
