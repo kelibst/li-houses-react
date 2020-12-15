@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';

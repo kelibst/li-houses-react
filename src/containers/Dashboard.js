@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import Switch from 'react-bootstrap/esm/Switch';
 import { connect } from 'react-redux';

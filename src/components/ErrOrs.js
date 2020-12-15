@@ -74,8 +74,13 @@ class ErrOrs extends Component {
     );
   }
 }
+
+ErrOrs.defaultProps = {
+  errors: PropTypes.shape,
+};
 ErrOrs.propTypes = {
-  errors: PropTypes.any,
+  errors: PropTypes.shape,
+
   unloadError: PropTypes.func.isRequired,
 };
 

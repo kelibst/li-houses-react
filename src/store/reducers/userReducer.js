@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 const initialState = {
   loading: true,
   username: '',

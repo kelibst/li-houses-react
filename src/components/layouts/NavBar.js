@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -121,6 +123,7 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   fetchUser: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
   currentUser: PropTypes.any,
 };
 

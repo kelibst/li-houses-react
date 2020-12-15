@@ -83,19 +83,19 @@ input.form-control {
   background-position: center;
 }
 
-.user{
-
-  &-form{
+.user {
+  &-form {
     border-radius: 1rem;
   }
 }
 
 .fav {
   &-container {
-  display: flex;
-  overflow: auto;
+    display: flex;
+    overflow: auto;
   }
-  &-card{
+
+  &-card {
     min-width: 350px;
     max-width: 400px;
   }
@@ -125,7 +125,6 @@ h1.uploader-header {
   font-weight: bolder;
   margin: 2rem;
 }
-
 
 input[type="file"] {
   padding: 2rem;

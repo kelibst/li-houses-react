@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Icofont from 'react-icofont';
@@ -101,6 +103,7 @@ class MobileNav extends Component {
 
 MobileNav.propTypes = {
   fetchUser: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
   currentUser: PropTypes.any,
 };
 

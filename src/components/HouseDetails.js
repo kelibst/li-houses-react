@@ -2,6 +2,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable  consistent-return */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable  eqeqeq */
 import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import Icofont from 'react-icofont';
@@ -45,11 +49,12 @@ class HouseDetails extends Component {
     const username = localStorage.getItem('username');
     jwt && username && fetchUser(username);
     fetchHouse(house_id);
+    const { favorite_data } = this.state;
 
     this.setState({
       ...this.state,
       favorite_data: {
-        ...this.state.favorite_data,
+        ...favorite_data,
         user_id: currentUser.id,
         house_id,
       },
@@ -87,7 +92,7 @@ class HouseDetails extends Component {
       unLoad,
       removeFromFav,
     } = this.props;
-    console.log(fav);
+    const { favorite_data } = this.state;
     const { house_id } = match.params;
     const handleDelete = () => {
       unLoad({ loading: true });
@@ -101,13 +106,13 @@ class HouseDetails extends Component {
         {
           ...this.state,
           favorite_data: {
-            ...this.state.favorite_data,
+            ...favorite_data,
             user_id: currentUser.id,
             house_id,
           },
         },
         () => {
-          addToFav(this.state.favorite_data, currentUser);
+          addToFav(favorite_data, currentUser);
         },
       );
     };
@@ -200,7 +205,7 @@ class HouseDetails extends Component {
 }
 
 HouseDetails.propTypes = {
-  errors: PropTypes.any,
+  errors: PropTypes.shape,
   match: PropTypes.any,
   house: PropTypes.any,
   loading: PropTypes.any,

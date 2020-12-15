@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable  react/no-did-update-set-state */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -11,14 +14,21 @@ import Loading from '../components/Loading';
 import MobileNav from '../components/layouts/MobileNav';
 
 class Favorites extends Component {
-  state = {
-    userFavsLoaded: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      userFavsLoaded: false,
+    };
   }
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
     const {
-      history, errors, fetchUser, fetchUserFavs, currentUser,
+      history,
+      errors,
+      fetchUser,
+      fetchUserFavs,
+      currentUser,
     } = this.props;
     const username = localStorage.getItem('username');
 
@@ -33,17 +43,21 @@ class Favorites extends Component {
 
   componentDidUpdate() {
     const { favorites, fetchUserFavs, currentUser } = this.props;
+    const { userFavsLoaded } = this.state;
     currentUser.id && !favorites.favorites && fetchUserFavs(currentUser.id);
-    favorites.favorites && !this.state.userFavsLoaded && this.setState({
-      userFavsLoaded: true,
-    });
+    favorites.favorites
+      && userFavsLoaded
+      && this.setState({
+        userFavsLoaded: true,
+      });
   }
 
   render() {
     const srcImg = 'https://images.unsplash.com/photo-1575263977165-207a71e8f31f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9';
     const { favorites, loading, errors } = this.props;
-    console.log(favorites);
-    const favList = !this.state.userFavsLoaded ? (
+    const { userFavsLoaded } = this.state;
+
+    const favList = userFavsLoaded ? (
       <div className="loading">
         {loading && <Loading />}
         {errors && <ErrOrs />}
@@ -51,17 +65,14 @@ class Favorites extends Component {
     ) : (
       favorites.favorites.map(fav => (
         <div className="card p-4 fav-card shadow-lg p-o" key={fav.id}>
-          <Card.Img
-            variant="top"
-            src={fav.image ? fav.image : srcImg}
-          />
+          <Card.Img variant="top" src={fav.image ? fav.image : srcImg} />
 
           <div className="house-status">
             <div className="house-state">{fav.status}</div>
             {fav.status === 'available' && (
-            <button type="button" className="house-btn btn hero-btn">
-              Make an offer
-            </button>
+              <button type="button" className="house-btn btn hero-btn">
+                Make an offer
+              </button>
             )}
           </div>
           <Card.Body className="mb-5">
@@ -86,7 +97,6 @@ class Favorites extends Component {
               View House
             </Link>
           </Card.Body>
-
         </div>
       ))
     );
@@ -94,7 +104,7 @@ class Favorites extends Component {
       <div className="favorites">
         <NavBar />
         <MobileNav />
-        <div className="fav-container">{ favList}</div>
+        <div className="fav-container">{favList}</div>
       </div>
     );
   }
@@ -116,4 +126,6 @@ const mapStateToProps = state => ({
   favorites: state.userData.user_favorites,
 });
 
-export default connect(mapStateToProps, { fetchUser, fetchUserFavs })(Favorites);
+export default connect(mapStateToProps, { fetchUser, fetchUserFavs })(
+  Favorites,
+);

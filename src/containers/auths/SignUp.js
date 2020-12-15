@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -41,9 +43,9 @@ class SignUp extends Component {
   }
 
   componentDidUpdate() {
-    const jwt = localStorage.getItem('jwt');
     const { history, currentUser } = this.props;
-    currentUser.id && history.push(`/dashboard/${this.state.userData.username}`);
+    const { userData } = this.state;
+    currentUser.id && history.push(`/dashboard/${userData.username}`);
   }
 
   render() {
