@@ -2,48 +2,70 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable  consistent-return */
-import React, { Component } from 'react';
-import { Button, Card } from 'react-bootstrap';
-import Icofont from 'react-icofont';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Button, Card } from "react-bootstrap";
+import Icofont from "react-icofont";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   fetchHouse,
   dropHouse,
   addToFav,
   removeFromFav,
   unLoad,
-} from '../store/actions/fetchAction';
-import { fetchUser } from '../store/actions/userAction'
-import ErrOrs from './ErrOrs';
-import AddHouse from './houses/AddHouse';
-import Footer from './layouts/Footer';
-import NavBar from './layouts/NavBar';
-import Loading from './Loading';
-import MobileNav from './layouts/MobileNav';
+  isFav,
+} from "../store/actions/fetchAction";
+import { fetchUser } from "../store/actions/userAction";
+import ErrOrs from "./ErrOrs";
+import AddHouse from "./houses/AddHouse";
+import Footer from "./layouts/Footer";
+import NavBar from "./layouts/NavBar";
+import Loading from "./Loading";
+import MobileNav from "./layouts/MobileNav";
 
 class HouseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: 0,
-      house_id: 0,
+      favorite: false,
+      favorite_data: {
+        user_id: 0,
+        house_id: 0,
+      },
     };
   }
 
   componentDidMount() {
-    const {
-      fetchHouse, fetchUser, currentUser, match,
-    } = this.props;
+    const { fetchHouse, fetchUser, currentUser, match, isFav } = this.props;
     const { house_id } = match.params;
-    const jwt = localStorage.getItem('jwt');
-    const username = localStorage.getItem('username');
+
+    const jwt = localStorage.getItem("jwt");
+    const username = localStorage.getItem("username");
     jwt && username && fetchUser(username);
     fetchHouse(house_id);
+
     this.setState({
-      user_id: currentUser.id,
-      house_id,
+      ...this.state,
+      favorite_data: {
+        ...this.state.favorite_data,
+        user_id: currentUser.id,
+        house_id,
+      },
     });
+  }
+
+  componentDidUpdate(nextProps) {
+    const { currentUser, match, isFav, fav } = this.props;
+    const { house_id } = match.params;
+    let favorite = false;
+    if (currentUser.favorites !== nextProps.currentUser.favorites) {
+      if (currentUser.id && !fav) {
+        favorite = currentUser.favorites.some(
+          (fav) => fav.house_id == house_id
+        );
+        favorite && isFav();
+      }
+    }
   }
 
   render() {
@@ -60,6 +82,7 @@ class HouseDetails extends Component {
       unLoad,
       removeFromFav,
     } = this.props;
+    console.log(fav);
     const { house_id } = match.params;
     const handleDelete = () => {
       unLoad({ loading: true });
@@ -71,19 +94,21 @@ class HouseDetails extends Component {
     const addToFavorite = () => {
       this.setState(
         {
-          user_id: currentUser.id,
-          house_id,
+          ...this.state,
+          favorite_data: {
+            ...this.state.favorite_data,
+            user_id: currentUser.id,
+            house_id,
+          },
         },
         () => {
-          addToFav(this.state);
-        },
+          addToFav(this.state.favorite_data, currentUser);
+        }
       );
-        
     };
 
     const rmFromFav = () => {
-      removeFromFav(house_id, currentUser.favorites);
-      
+      removeFromFav(house_id, currentUser);
     };
 
     const houseDetails = house.body ? (
@@ -91,12 +116,12 @@ class HouseDetails extends Component {
         <NavBar />
         <MobileNav />
         <div className="house-details d-flex justify-content-center">
-          <div className="card shadow-lg col-sm-8 col-lg-6 d-md-flex p-0">
+          <div className="card shadow-lg col-sm-8 col-lg-6 col-xl-4 d-md-flex p-0">
             <Card.Img variant="top" src={house.body.image} />
             {house.body && (
               <div className="house-status">
                 <div className="house-state">{house.body.status}</div>
-                {house.body.status === 'available' && (
+                {house.body.status === "available" && (
                   <button type="button" className="house-btn btn hero-btn">
                     Make an offer
                   </button>
@@ -105,29 +130,22 @@ class HouseDetails extends Component {
             )}
             <Card.Body>
               <Card.Title className="text-uppercase text-center font-weight-bolder">
-                {house.name}
-                {' '}
-                {!fav ? (
-                  <button
-                    type="button"
-                    onClick={addToFavorite}
-                    className=" btn btn-transparent hero-btn"
-                  >
-                    <Icofont icon="heart" />
-                    {' '}
-                    Add to Favorites
-                    {' '}
-                  </button>
-                ) : (
+                {house.name}{" "}
+                {fav ? (
                   <button
                     type="button"
                     onClick={rmFromFav}
                     className=" btn btn-transparent hero-btn"
                   >
-                    <Icofont icon="heart-alt" />
-                    {' '}
-                    Remove from Favorites
-                    {' '}
+                    <Icofont icon="heart-alt" /> Remove from Favorites{" "}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={addToFavorite}
+                    className=" btn btn-transparent hero-btn"
+                  >
+                    <Icofont icon="heart" /> Add to Favorites{" "}
                   </button>
                 )}
               </Card.Title>
@@ -183,10 +201,11 @@ HouseDetails.propTypes = {
   fetchHouse: PropTypes.func.isRequired,
   removeFromFav: PropTypes.func.isRequired,
   unLoad: PropTypes.func.isRequired,
+  isFav: PropTypes.func.isRequired,
   history: PropTypes.any,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   house: state.data.house,
   errors: state.error.err,
   currentUser: state.userData.currentUser,
@@ -202,4 +221,5 @@ export default connect(mapStateToProps, {
   fetchUser,
   removeFromFav,
   unLoad,
+  isFav,
 })(HouseDetails);

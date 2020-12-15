@@ -2,8 +2,6 @@
 const initialState = {
   loading: true,
   houses: [],
-  currentUser: {},
-  username: "",
   fav: false,
   house: [],
   houseImgUrl: "",
@@ -22,7 +20,7 @@ const fetchReducer = (state = initialState, action) => {
         houses: action.payload,
       };
 
-      case 'FETCH_HOUSE':
+    case "FETCH_HOUSE":
       return {
         ...state,
         loading: false,
@@ -48,15 +46,12 @@ const fetchReducer = (state = initialState, action) => {
         loading: false,
       };
 
-    
-
     case "CLEAR_IMG":
       return {
         ...state,
         houseImgUrl: {},
       };
 
-    
     case "ADD_IMAGE":
       return {
         ...state,
