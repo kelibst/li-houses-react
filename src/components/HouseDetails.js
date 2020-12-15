@@ -56,11 +56,12 @@ class HouseDetails extends Component {
 
   componentDidUpdate(nextProps) {
     const { currentUser, match, isFav, fav } = this.props;
+    const { id, favorites } = currentUser
     const { house_id } = match.params;
     let favorite = false;
-    if (currentUser.favorites !== nextProps.currentUser.favorites) {
-      if (currentUser.id && !fav) {
-        favorite = currentUser.favorites.some(
+    if (favorites !== nextProps.currentUser.favorites) {
+      if ( id && !fav) {
+        favorite = favorites.some(
           (fav) => fav.house_id == house_id
         );
         favorite && isFav();
