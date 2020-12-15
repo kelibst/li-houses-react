@@ -6,6 +6,6 @@ import userReducer from './userReducer';
 const rootReducer = combineReducers({
   data: fetchReducer,
   error: errorReducer,
-  userData: userReducer
+  userData: userReducer,
 });
 export default rootReducer;

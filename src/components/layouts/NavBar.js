@@ -24,9 +24,9 @@ class NavBar extends Component {
     const logUserOut = () => {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
-      history.push('/signin')
+      history.push('/signin');
     };
-    
+
     return (
       <Navbar
         collapseOnSelect
@@ -130,5 +130,5 @@ const mapStateToProps = state => ({
   loading: state.userData.loading,
   loggedIn: state.userData.loggedIn,
 });
-const ShowTheLocationWithRouter = withRouter(NavBar)
+const ShowTheLocationWithRouter = withRouter(NavBar);
 export default connect(mapStateToProps, { fetchUser })(ShowTheLocationWithRouter);

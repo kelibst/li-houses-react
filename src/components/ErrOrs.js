@@ -22,13 +22,11 @@ class ErrOrs extends Component {
     const { errors } = this.props;
 
     const setShow = () => {
-      const { unloadError } = this.props
-      unloadError()
+      const { unloadError } = this.props;
+      unloadError();
       this.setState({
         show: false,
       });
-      
-
     };
 
     return (
@@ -40,8 +38,14 @@ class ErrOrs extends Component {
               <h6 className="my-5">{errors.request.response}</h6>
             )}
 
-            {errors.message && errors.message.includes('timeout') (
-              <h6 className="my-5">{errors.message} <br/> Check your internet connection!</h6>
+            {errors.message && errors.message.includes('timeout')(
+              <h6 className="my-5">
+                {errors.message}
+                {' '}
+                <br />
+                {' '}
+                Check your internet connection!
+              </h6>,
             )}
             {errors.response && (
               <h6 className="my-5">{errors.response.data.error}</h6>

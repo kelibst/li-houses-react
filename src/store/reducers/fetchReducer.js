@@ -4,67 +4,67 @@ const initialState = {
   houses: [],
   fav: false,
   house: [],
-  houseImgUrl: "",
+  houseImgUrl: '',
 };
 const fetchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CLEAR_STATE":
+    case 'CLEAR_STATE':
       return {
         ...state,
         ...action.payload,
       };
-    case "FETCH_HOUSES":
+    case 'FETCH_HOUSES':
       return {
         ...state,
         loading: false,
         houses: action.payload,
       };
 
-    case "FETCH_HOUSE":
+    case 'FETCH_HOUSE':
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
 
-    case "UPDATE_HOUSE":
+    case 'UPDATE_HOUSE':
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
 
-    case "CREATE_HOUSE":
+    case 'CREATE_HOUSE':
       return {
         ...state,
         loading: false,
         house: action.payload,
       };
-    case "DROP_HOUSE":
+    case 'DROP_HOUSE':
       return {
         ...state,
         loading: false,
       };
 
-    case "CLEAR_IMG":
+    case 'CLEAR_IMG':
       return {
         ...state,
         houseImgUrl: {},
       };
 
-    case "ADD_IMAGE":
+    case 'ADD_IMAGE':
       return {
         ...state,
         houseImgUrl: action.payload,
       };
 
-    case "UPDATE_FAV":
+    case 'UPDATE_FAV':
       return {
         ...state,
         fav: true,
       };
 
-    case "REMOVE_FAV":
+    case 'REMOVE_FAV':
       return {
         ...state,
         fav: false,

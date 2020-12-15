@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { fetchHouse } from "../store/actions/fetchAction";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchHouse } from '../store/actions/fetchAction';
 
 class Favorite extends Component {
   render() {
@@ -17,7 +17,7 @@ Favorite.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentUser: state.data.currentUser,
   house: state.data.house,
 });

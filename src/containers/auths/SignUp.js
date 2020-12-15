@@ -40,9 +40,9 @@ class SignUp extends Component {
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
-  componentDidUpdate(){
-    const jwt = localStorage.getItem('jwt'); 
-    const { history, currentUser } = this.props
+  componentDidUpdate() {
+    const jwt = localStorage.getItem('jwt');
+    const { history, currentUser } = this.props;
     currentUser.id && history.push(`/dashboard/${this.state.userData.username}`);
   }
 

@@ -18,14 +18,13 @@ class MobileNav extends Component {
 
   render() {
     const jwt = localStorage.getItem('jwt');
-    const username = localStorage.getItem('username'); 
+    const username = localStorage.getItem('username');
     const { currentUser, history } = this.props;
     const logUserOut = () => {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
-      history.push('/signin')
+      history.push('/signin');
     };
-   
 
     return (
       <Navbar
@@ -112,5 +111,5 @@ const mapStateToProps = state => ({
   loggedIn: state.userData.loggedIn,
 });
 
-const ShowTheLocationWithRouter = withRouter(MobileNav)
+const ShowTheLocationWithRouter = withRouter(MobileNav);
 export default connect(mapStateToProps, { fetchUser })(ShowTheLocationWithRouter);
