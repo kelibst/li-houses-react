@@ -26,7 +26,9 @@ class NavBar extends Component {
     const logUserOut = () => {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
+
       history.push('/signin');
+      window.location.reload()
     };
 
     return (

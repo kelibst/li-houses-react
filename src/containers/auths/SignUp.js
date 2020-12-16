@@ -40,20 +40,33 @@ class SignUp extends Component {
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
-  componentDidUpdate() {
-    const { history, currentUser, errors, loggedIn } = this.props;
+  componentDidUpdate(nextProps) {
+    const { history, currentUser, errors, loggedIn, authUser } = this.props;
     const { userData, isSubmit } = this.state;
     isSubmit &&
       errors &&
       this.setState({
         isSubmit: false,
       });
+      if(this.props !== nextProps ){
+        if (currentUser.id) {
+        const { email, password, username } = userData;
+        const data = {
+          username,
+          email,
+          password,
+        };
+
+        authUser(data)
+        
+        
+        } 
+      }
+       
+      
       const jwt = localStorage.getItem("jwt");
       jwt && userData.username && fetchUser(userData.username);
-      jwt && loggedIn && history.push(`/dashboard/${userData.username}`);
-    
-    
-      // currentUser.id && history.push(`/dashboard/${userData.username}`);
+      loggedIn && history.push(`/dashboard/${userData.username}`);
   }
 
   render() {
@@ -86,7 +99,7 @@ class SignUp extends Component {
       const { userData } = this.state;
       this.setState({ isSubmit: true });
       createUser(userData);
-      debugger;
+       ;
       unLoad({ loading: true });
       if (currentUser.id) {
         const { email, password, username } = userData;
@@ -96,10 +109,7 @@ class SignUp extends Component {
           password,
         };
         authUser(data);
-        const jwt = localStorage.getItem("jwt");
-        jwt && username && fetchUser(userData.username);
-        jwt && loggedIn && history.push(`/dashboard/${username}`)
-        debugger
+         
       }
     };
 

@@ -24,13 +24,15 @@ const authUser = data => dispatch => {
   const userData = {
     auth: data,
   };
-debugger
+ 
   Axios.post(url, userData)
-    .then(res => dispatch({
+    .then(res => {
+       
+      dispatch({
       type: 'AUTH_USER',
       payload: res.data,
       username: userData.auth.username,
-    }))
+    })})
     .catch(err => dispatch({
       type: 'CREATE_ERROR',
       payload: err,
@@ -42,7 +44,7 @@ const createUser = data => dispatch => {
   const userData = {
     user: data,
   };
-  debugger
+   
   Axios.post(url, userData)
     .then(res => dispatch({
       type: 'CREATE_USER',
@@ -63,7 +65,7 @@ const fetchUser = username => dispatch => {
       Authorization: `Bearer ${token}`,
     },
   });
-  debugger
+   
   userAxios
     .get(`/api/v1/dashboard/${username}.json`)
     .then(res => dispatch({
