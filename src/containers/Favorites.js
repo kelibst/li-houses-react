@@ -99,8 +99,6 @@ class Favorites extends Component {
     );
     return (
       <div className="favorites">
-        <NavBar />
-        <MobileNav />
         <div className="fav-container">{ favList}</div>
       </div>
     );

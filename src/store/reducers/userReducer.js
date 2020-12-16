@@ -18,6 +18,7 @@ const userReducer = (state = initialState, action) => {
       const { jwt } = action.payload;
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('username', action.username);
+      debugger
       return {
         ...state,
         loading: false,
@@ -26,6 +27,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case 'CREATE_USER':
+      debugger
       return {
         ...state,
         loading: false,
@@ -33,6 +35,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case 'FETCH_USER':
+      debugger
       return {
         ...state,
         loading: false,

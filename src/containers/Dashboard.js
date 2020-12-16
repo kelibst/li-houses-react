@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import Switch from 'react-bootstrap/esm/Switch';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Footer from '../components/layouts/Footer';
 import NavBar from '../components/layouts/NavBar';
@@ -13,6 +13,10 @@ import { fetchHouses } from '../store/actions/fetchAction';
 import { fetchUser, logCurrentUserOut } from '../store/actions/userAction';
 import Houses from './Houses';
 import MobileNav from '../components/layouts/MobileNav';
+import Users from './Users';
+import Favorites from './Favorites';
+import HouseDetails from '../components/HouseDetails';
+import HomePage from '../components/HomePage';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -42,16 +46,26 @@ class Dashboard extends Component {
   }
 
   render() {
+    
     return (
       <div className="dashboard bg-white">
+      <BrowserRouter>
+      
         <NavBar />
         <MobileNav />
         <div className="container-fluid card-list">
           <Switch>
-            <Route exact path="/dashboard/:username" component={Houses} />
+
+           <Route exact path="/" component={HomePage} />
+            <Route exact path="/houses/:house_id" component={HouseDetails} /> 
+            <Route exact path="/user/favorites/:username" component={Favorites} />
+
+            <Route exact path="/users" component={Users} />
+            <Route path="/dashboard/:username" component={Houses} /> 
           </Switch>
         </div>
         <Footer />
+      </BrowserRouter>
       </div>
     );
   }

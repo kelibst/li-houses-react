@@ -4,18 +4,18 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/no-did-update-set-state */
 
-import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ErrOrs from '../../components/ErrOrs';
-import { unLoad } from '../../store/actions/fetchAction';
+import React, { Component } from "react";
+import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ErrOrs from "../../components/ErrOrs";
+import { unLoad } from "../../store/actions/fetchAction";
 import {
   createUser,
   authUser,
   fetchUser,
-} from '../../store/actions/userAction';
-import Loading from '../../components/Loading';
+} from "../../store/actions/userAction";
+import Loading from "../../components/Loading";
 
 class SignUp extends Component {
   constructor(props) {
@@ -23,38 +23,41 @@ class SignUp extends Component {
     this.state = {
       isSubmit: false,
       userData: {
-        email: '',
-        password: '',
-        username: '',
-        firstname: '',
-        lastname: '',
-        password_confirmation: '',
+        email: "",
+        password: "",
+        username: "",
+        firstname: "",
+        lastname: "",
+        password_confirmation: "",
       },
     };
   }
 
   componentDidMount() {
-    const {
-      loggedIn, username, history, fetchUser,
-    } = this.props;
-    const jwt = localStorage.getItem('jwt');
+    const { loggedIn, username, history, fetchUser } = this.props;
+    const jwt = localStorage.getItem("jwt");
     jwt && username && fetchUser(username);
     jwt && loggedIn && history.push(`/dashboard/${username}`);
   }
 
   componentDidUpdate() {
-    const { history, currentUser, errors } = this.props;
+    const { history, currentUser, errors, loggedIn } = this.props;
     const { userData, isSubmit } = this.state;
-    isSubmit
-      && errors
-      && this.setState({
+    isSubmit &&
+      errors &&
+      this.setState({
         isSubmit: false,
       });
-    currentUser.id && history.push(`/dashboard/${userData.username}`);
+      const jwt = localStorage.getItem("jwt");
+      jwt && userData.username && fetchUser(userData.username);
+      jwt && loggedIn && history.push(`/dashboard/${userData.username}`);
+    
+    
+      // currentUser.id && history.push(`/dashboard/${userData.username}`);
   }
 
   render() {
-    const handleChange = e => {
+    const handleChange = (e) => {
       const { userData } = this.state;
       const { id, value } = e.target;
       this.setState({
@@ -69,6 +72,7 @@ class SignUp extends Component {
       createUser,
       currentUser,
       loggedIn,
+      fetchUser,
       authUser,
       errors,
       loading,
@@ -77,32 +81,26 @@ class SignUp extends Component {
     } = this.props;
     const { isSubmit } = this.state;
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       const { userData } = this.state;
       this.setState({ isSubmit: true });
       createUser(userData);
+      debugger;
       unLoad({ loading: true });
       if (currentUser.id) {
-        const { email, password } = userData;
+        const { email, password, username } = userData;
         const data = {
+          username,
           email,
           password,
         };
         authUser(data);
-        history.push(`/dashboard/${currentUser.username}`);
+        const jwt = localStorage.getItem("jwt");
+        jwt && username && fetchUser(userData.username);
+        jwt && loggedIn && history.push(`/dashboard/${username}`)
+        debugger
       }
-      loggedIn
-        && this.setState({
-          userData: {
-            email: '',
-            password: '',
-            username: '',
-            firstname: '',
-            lastname: '',
-            password_confirmation: '',
-          },
-        });
     };
 
     return (
@@ -193,7 +191,7 @@ class SignUp extends Component {
           <p className="text-center mt-3 font-weight-bolder auth-text">OR</p>
 
           <a href="/signin" className="my-3 text-center w-100 btn-link">
-            {' '}
+            {" "}
             Log In
           </a>
         </Form>
@@ -213,7 +211,7 @@ SignUp.propTypes = {
   unLoad: PropTypes.func.isRequired,
   history: PropTypes.any,
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.userData.loading,
   errors: state.error.err,
   loggedIn: state.userData.loggedIn,

@@ -123,8 +123,6 @@ class HouseDetails extends Component {
 
     const houseDetails = house.body ? (
       <div className="house-content">
-        <NavBar />
-        <MobileNav />
         <div className="house-details d-flex justify-content-center">
           <div className="card shadow-lg col-sm-8 col-lg-6 col-xl-4 d-md-flex p-0">
             <Card.Img variant="top" src={house.body.image} />
@@ -192,7 +190,6 @@ class HouseDetails extends Component {
             </Card.Body>
           </div>
         </div>
-        <Footer />
       </div>
     ) : (
       <div className="loading">

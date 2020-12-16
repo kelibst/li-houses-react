@@ -61,7 +61,7 @@ class MobileNav extends Component {
                 {currentUser ? currentUser.username : 'Profile'}
               </NavDropdown.Item>
               <NavDropdown.Item href="/users">Users</NavDropdown.Item>
-              <NavDropdown.Item href={`/dashboard/${currentUser.username}/favorites`}>
+              <NavDropdown.Item href={`/dashboard/favorites/${currentUser.username}`}>
                 <Icofont icon="heart" />
                 {' '}
                 Favs

@@ -90,8 +90,6 @@ const HomePage = () => (
         Free Trial
       </Link>
     </section>
-
-    <Footer />
   </div>
 );
 

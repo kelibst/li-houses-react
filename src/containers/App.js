@@ -12,16 +12,13 @@ import Favorites from './Favorites';
 const App = () => (
   <BrowserRouter>
     <div className="App">
-      <Switch>
-        <Route exact path="/" component={HomePage} />
+      <Switch>      
 
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
 
-        <Route exact path="/dashboard/:username" component={Dashboard} />
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/houses/:house_id" component={HouseDetails} />
-        <Route exact path="/dashboard/:username/favorites" component={Favorites} />
+        <Route path="/" component={Dashboard} />
+        
       </Switch>
     </div>
   </BrowserRouter>
