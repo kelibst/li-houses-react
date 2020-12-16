@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 const initialState = {
   loading: true,
-  username: '',
+  username: "",
   loggedIn: false,
   currentUser: {},
   user_favorites: [],
@@ -9,17 +9,16 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'USER_FAVS':
+    case "USER_FAVS":
       return {
         ...state,
         user_favorites: action.payload,
       };
-    case 'AUTH_USER':
+    case "AUTH_USER":
       const { jwt } = action.payload;
-      localStorage.setItem('jwt', jwt);
-      localStorage.setItem('username', action.username);
-      console.log('authuser  ')
-       
+      localStorage.setItem("jwt", jwt);
+      localStorage.setItem("username", action.username);
+
       return {
         ...state,
         loading: false,
@@ -27,27 +26,25 @@ const userReducer = (state = initialState, action) => {
         username: action.username,
       };
 
-    case 'CREATE_USER':
-       
+    case "CREATE_USER":
       return {
         ...state,
         loading: false,
         currentUser: action.payload,
       };
 
-    case 'FETCH_USER':
-       
+    case "FETCH_USER":
       return {
         ...state,
         loading: false,
         currentUser: action.payload,
       };
 
-    case 'LOG_OUT':
+    case "LOG_OUT":
       return {
         ...state,
         currentUser: {},
-        username: '',
+        username: "",
       };
 
     default:
