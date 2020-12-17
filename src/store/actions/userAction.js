@@ -3,7 +3,7 @@ import Axios from 'axios';
 const fetchUserFavs = id => dispatch => {
   const token = localStorage.getItem('jwt');
   const favAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -20,7 +20,7 @@ const fetchUserFavs = id => dispatch => {
 };
 
 const authUser = data => dispatch => {
-  const url = 'https://lihouses-api.herokuapp.com/api/v1/auth/signin.json';
+  const url = ' https://lihouses-api.herokuapp.com/api/v1/auth/signin.json';
   const userData = {
     auth: data,
   };
@@ -40,7 +40,7 @@ const authUser = data => dispatch => {
 };
 
 const createUser = data => dispatch => {
-  const url = 'https://lihouses-api.herokuapp.com/api/v1/create/signup.json';
+  const url = ' https://lihouses-api.herokuapp.com/api/v1/create/signup.json';
   const userData = {
     user: data,
   };
@@ -60,7 +60,7 @@ const fetchUser = username => dispatch => {
   const token = localStorage.getItem('jwt');
 
   const userAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },

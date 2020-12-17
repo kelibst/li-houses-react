@@ -9,7 +9,7 @@ const unLoad = states => dispatch => {
   });
 };
 const fetchHouses = () => dispatch => {
-  const url = 'https://lihouses-api.herokuapp.com/api/v1/houses.json';
+  const url = ' https://lihouses-api.herokuapp.com/api/v1/houses.json';
   Axios.get(url)
     .then(res => dispatch({
       type: 'FETCH_HOUSES',
@@ -24,7 +24,7 @@ const fetchHouses = () => dispatch => {
 const fetchHouse = id => dispatch => {
   const token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -43,18 +43,26 @@ const fetchHouse = id => dispatch => {
 
 const dropHouse = id => dispatch => {
   const token = localStorage.getItem('jwt');
+
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+  
   authAxios
     .delete(`/api/v1/houses/${id}.json`)
-    .then(res => dispatch({
+    .then(res => {
+      dispatch({
+        type: 'SUCC_MSG',
+        payload: "You have successfully deleted a house."
+      })
+
+      dispatch({
       type: 'DROP_HOUSE',
       payload: res.data,
-    }))
+    })})
     .catch(err => dispatch({
       type: 'CREATE_ERROR',
       payload: err,
@@ -64,7 +72,7 @@ const dropHouse = id => dispatch => {
 const createHouse = data => dispatch => {
   const token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -87,7 +95,7 @@ const createHouse = data => dispatch => {
 const updateHouse = (data, id) => dispatch => {
   const token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -111,7 +119,7 @@ const updateHouse = (data, id) => dispatch => {
 const addToFav = (data, user) => dispatch => {
   const token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -133,6 +141,11 @@ const addToFav = (data, user) => dispatch => {
       });
 
       dispatch({
+        type: 'SUCC_MSG',
+        payload: "House was successfully added to Favorites!"
+      })
+
+      dispatch({
         type: 'FETCH_USER',
         payload: curRes,
       });
@@ -150,7 +163,7 @@ const removeFromFav = (house_id, user) => dispatch => {
 
   const token = localStorage.getItem('jwt');
   const authAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -169,6 +182,11 @@ const removeFromFav = (house_id, user) => dispatch => {
       });
 
       dispatch({
+        type: 'SUCC_MSG',
+        payload: "House was successfully removed from Favorites!"
+      })
+
+      dispatch({
         type: 'FETCH_USER',
         payload: newUser,
       });
@@ -182,7 +200,7 @@ const removeFromFav = (house_id, user) => dispatch => {
 const uploadImage = image => dispatch => {
   const token = localStorage.getItem('jwt');
   const userAxios = Axios.create({
-    baseURL: 'https://lihouses-api.herokuapp.com',
+    baseURL: ' https://lihouses-api.herokuapp.com',
     headers: {
       Authorization: `Bearer ${token}`,
     },

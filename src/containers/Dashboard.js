@@ -17,6 +17,7 @@ import Users from './Users';
 import Favorites from './Favorites';
 import HouseDetails from '../components/HouseDetails';
 import HomePage from '../components/HomePage';
+import Success from '../components/Success';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -46,13 +47,14 @@ class Dashboard extends Component {
   }
 
   render() {
-    
+    const { success } = this.props
     return (
       <div className="dashboard bg-white">
       <BrowserRouter>
       
         <NavBar />
         <MobileNav />
+        {success.length && <Success/> }
         <div className="container-fluid card-list">
           <Switch>
 
@@ -84,6 +86,7 @@ const mapStateToProps = state => ({
   errors: state.error.err,
   currentUser: state.userData.currentUser,
   username: state.userData.username,
+  success: state.succMsg.message,
   loggedIn: state.userData.loggedIn,
 });
 export default connect(mapStateToProps, { fetchUser, logCurrentUserOut })(

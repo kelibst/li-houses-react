@@ -88,6 +88,7 @@ class HouseDetails extends Component {
       addToFav,
       fav,
       history,
+      success,
       match,
       unLoad,
       removeFromFav,
@@ -97,8 +98,7 @@ class HouseDetails extends Component {
     const handleDelete = () => {
       unLoad({ loading: true });
       dropHouse(house.id);
-      errors && <ErrOrs />;
-      !loading && history.push(`/dashboard/${currentUser.username}`);
+      success.length && history.push(`/dashboard/${currentUser.username}`)
     };
 
     const addToFavorite = () => {
@@ -206,6 +206,7 @@ HouseDetails.propTypes = {
   match: PropTypes.any,
   house: PropTypes.any,
   loading: PropTypes.any,
+  success: PropTypes.string,
   fav: PropTypes.any,
   username: PropTypes.any,
   addToFav: PropTypes.func.isRequired,
@@ -222,8 +223,10 @@ HouseDetails.propTypes = {
 const mapStateToProps = state => ({
   house: state.data.house,
   errors: state.error.err,
+  success: state.succMsg.message,
   currentUser: state.userData.currentUser,
   loading: state.data.loading,
+  success: state.succMsg.message,
   fav: state.data.fav,
   loggedIn: state.userData.loggedIn,
 });
