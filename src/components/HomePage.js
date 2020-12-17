@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './layouts/Header';
 import './HomePage.scss';
-
-import Footer from './layouts/Footer';
 import ilus1 from '../assets/ilus1.svg';
 import ilus2 from '../assets/ilus2.svg';
 

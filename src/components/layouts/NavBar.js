@@ -28,7 +28,7 @@ class NavBar extends Component {
       localStorage.removeItem('username');
 
       history.push('/signin');
-      window.location.reload()
+      window.location.reload();
     };
 
     return (

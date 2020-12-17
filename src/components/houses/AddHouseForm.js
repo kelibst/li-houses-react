@@ -44,15 +44,16 @@ class AddHouseForm extends Component {
       : history.push('/signin');
   }
 
-  componentDidUpdate(nextProps){
-    if(this.props !== nextProps){
-       const { type, close, house, history,loading, status } = this.props
-       
-    if (type === 'create_house' && !loading ){
-      
-      house.id && status !== 'Update'  && history.push(`/houses/${house.id}`)
-      close()
-    } 
+  componentDidUpdate(nextProps) {
+    if (this.props !== nextProps) {
+      const {
+        type, close, house, history, loading, status,
+      } = this.props;
+
+      if (type === 'create_house' && !loading) {
+        house.id && status !== 'Update' && history.push(`/houses/${house.id}`);
+        close();
+      }
     }
   }
 
@@ -61,13 +62,10 @@ class AddHouseForm extends Component {
       createHouse,
       house,
       status,
-      loading,
       updateHouse,
-      history,
       unLoad,
       errors,
       houseImgUrl,
-      close,
     } = this.props;
 
     const availability = ['available', 'processing', 'unavailable'];
@@ -187,7 +185,7 @@ const mapStateToProps = state => ({
   currentUser: state.userData.currentUser,
   house: state.data.house,
   loading: state.userData.loading,
-  type: state.succMsg.type
+  type: state.succMsg.type,
 });
 
 const ShowTheLocationWithRouter = withRouter(AddHouseForm);

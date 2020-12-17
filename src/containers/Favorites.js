@@ -10,10 +10,9 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { fetchUserFavs, fetchUser } from '../store/actions/userAction';
-import NavBar from '../components/layouts/NavBar';
+
 import ErrOrs from '../components/ErrOrs';
 import Loading from '../components/Loading';
-import MobileNav from '../components/layouts/MobileNav';
 
 class Favorites extends Component {
   constructor(props) {

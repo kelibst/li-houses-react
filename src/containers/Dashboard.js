@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/require-default-props */
+
 import React, { Component } from 'react';
 import Switch from 'react-bootstrap/esm/Switch';
 import { connect } from 'react-redux';
@@ -47,40 +47,49 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { success } = this.props
-    console.log(success)
+    const { success } = this.props;
     return (
       <div className="dashboard bg-white">
-      <BrowserRouter>
-      
-        <NavBar />
-        <MobileNav />
-        {success && <Success/> }
-        <div className="container-fluid card-list">
-          <Switch>
+        <BrowserRouter>
 
-           <Route exact path="/" component={HomePage} />
-            <Route exact path="/houses/:house_id" component={HouseDetails} /> 
-            <Route exact path="/user/favorites/:username" component={Favorites} />
+          <NavBar />
+          <MobileNav />
+          {success && <Success /> }
+          <div className="container-fluid card-list">
+            <Switch>
 
-            <Route exact path="/users" component={Users} />
-            <Route path="/dashboard/:username" component={Houses} /> 
-          </Switch>
-        </div>
-        <Footer />
-      </BrowserRouter>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/houses/:house_id" component={HouseDetails} />
+              <Route exact path="/user/favorites/:username" component={Favorites} />
+
+              <Route exact path="/users" component={Users} />
+              <Route path="/dashboard/:username" component={Houses} />
+            </Switch>
+          </div>
+          <Footer />
+        </BrowserRouter>
       </div>
     );
   }
 }
 
+Dashboard.defaultProps = {
+  errors: PropTypes.shape,
+  match: PropTypes.shape,
+  success: PropTypes.shape,
+  currentUser: PropTypes.shape,
+  username: PropTypes.string,
+  history: PropTypes.shape,
+};
+
 Dashboard.propTypes = {
   errors: PropTypes.any,
-  match: PropTypes.objectOf(PropTypes.any),
-  currentUser: PropTypes.any,
+  match: PropTypes.shape,
+  success: PropTypes.shape,
+  currentUser: PropTypes.shape,
   username: PropTypes.string,
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.objectOf(PropTypes.any),
+  history: PropTypes.shape,
 };
 
 const mapStateToProps = state => ({

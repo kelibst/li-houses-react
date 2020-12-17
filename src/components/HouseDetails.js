@@ -3,9 +3,10 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable  consistent-return */
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/require-default-props */
+/* eslint-disable  react/no-did-update-set-state */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable  eqeqeq */
+/* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import Icofont from 'react-icofont';
@@ -22,10 +23,7 @@ import {
 import { fetchUser } from '../store/actions/userAction';
 import ErrOrs from './ErrOrs';
 import AddHouse from './houses/AddHouse';
-import Footer from './layouts/Footer';
-import NavBar from './layouts/NavBar';
 import Loading from './Loading';
-import MobileNav from './layouts/MobileNav';
 
 class HouseDetails extends Component {
   constructor(props) {
@@ -71,17 +69,16 @@ class HouseDetails extends Component {
     let favorite = false;
     if (favorites !== nextProps.currentUser.favorites) {
       this.setState({
-        favBtn:false
-      })
+        favBtn: false,
+      });
       if (id && !fav) {
-        favorite = favorites.some(
-          fav => fav.house_id == house_id,
-        );
+        favorite = favorites.some(fav => fav.house_id == house_id);
         favorite && isFav();
       }
     }
 
-    type === 'delete_house' && history.push(`/dashboard/${currentUser.username}`)
+    type === 'delete_house'
+      && history.push(`/dashboard/${currentUser.username}`);
   }
 
   render() {
@@ -93,8 +90,6 @@ class HouseDetails extends Component {
       loading,
       addToFav,
       fav,
-      history,
-      success,
       match,
       unLoad,
       removeFromFav,
@@ -110,7 +105,7 @@ class HouseDetails extends Component {
       this.setState(
         {
           ...this.state,
-          favBtn:true,
+          favBtn: true,
           favorite_data: {
             ...favorite_data,
             user_id: currentUser.id,
@@ -125,8 +120,8 @@ class HouseDetails extends Component {
 
     const rmFromFav = () => {
       this.setState({
-        favBtn:true,
-      })
+        favBtn: true,
+      });
       removeFromFav(house_id, currentUser);
     };
 
