@@ -117,13 +117,22 @@ const updateHouse = (data, id) => dispatch => {
   const hseData = {
     house: data,
   };
-
+  const payload = {
+    message: 'You have successfully updated a house!',
+    type: 'update_house',
+  };
   authAxios
     .patch(`/api/v1/houses/${id}.json`, hseData)
-    .then(res => dispatch({
-      type: 'UPDATE_HOUSE',
-      payload: res.data,
-    }))
+    .then(res => {
+      dispatch({
+        type: 'SUCC_MSG',
+        payload,
+      });
+      dispatch({
+        type: 'UPDATE_HOUSE',
+        payload: res.data,
+      });
+    })
     .catch(err => dispatch({
       type: 'CREATE_ERROR',
       payload: err,

@@ -44,26 +44,17 @@ class AddHouseForm extends Component {
       : history.push('/signin');
   }
 
-  componentDidUpdate(nextProps) {
-    if (this.props !== nextProps) {
-      const {
-        type, close, house, history, loading, status,
-      } = this.props;
-
-      if (type === 'create_house' && !loading) {
-        house.id && status !== 'Update' && history.push(`/houses/${house.id}`);
-        close();
-      }
-    }
-  }
-
   render() {
     const {
       createHouse,
       house,
       status,
+      close,
+      loading,
       updateHouse,
       unLoad,
+      history,
+      type,
       errors,
       houseImgUrl,
     } = this.props;
@@ -88,6 +79,10 @@ class AddHouseForm extends Component {
             },
             () => {
               createHouse(this.state);
+              if (type === 'create_house' && !loading) {
+                house.id && status !== 'Update' && history.push(`/houses/${house.id}`);
+                close();
+              }
             },
           );
       } else if (status === 'Update') {
@@ -101,10 +96,12 @@ class AddHouseForm extends Component {
             },
             () => {
               updateHouse(this.state, house.id);
+              close();
             },
           );
         } else {
           updateHouse(this.state, house.id);
+          close();
         }
       }
     };
