@@ -31,6 +31,7 @@ class HouseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      favBtn: false,
       favorite: false,
       favorite_data: {
         user_id: 0,
@@ -63,12 +64,15 @@ class HouseDetails extends Component {
 
   componentDidUpdate(nextProps) {
     const {
-      currentUser, match, isFav, fav,
+      currentUser, match, isFav, fav, type, history,
     } = this.props;
     const { id, favorites } = currentUser;
     const { house_id } = match.params;
     let favorite = false;
     if (favorites !== nextProps.currentUser.favorites) {
+      this.setState({
+        favBtn:false
+      })
       if (id && !fav) {
         favorite = favorites.some(
           fav => fav.house_id == house_id,
@@ -76,6 +80,8 @@ class HouseDetails extends Component {
         favorite && isFav();
       }
     }
+
+    type === 'delete_house' && history.push(`/dashboard/${currentUser.username}`)
   }
 
   render() {
@@ -93,18 +99,18 @@ class HouseDetails extends Component {
       unLoad,
       removeFromFav,
     } = this.props;
-    const { favorite_data } = this.state;
+    const { favorite_data, favBtn } = this.state;
     const { house_id } = match.params;
     const handleDelete = () => {
       unLoad({ loading: true });
       dropHouse(house.id);
-      success.length && history.push(`/dashboard/${currentUser.username}`)
     };
 
     const addToFavorite = () => {
       this.setState(
         {
           ...this.state,
+          favBtn:true,
           favorite_data: {
             ...favorite_data,
             user_id: currentUser.id,
@@ -118,6 +124,9 @@ class HouseDetails extends Component {
     };
 
     const rmFromFav = () => {
+      this.setState({
+        favBtn:true,
+      })
       removeFromFav(house_id, currentUser);
     };
 
@@ -144,6 +153,7 @@ class HouseDetails extends Component {
                   <button
                     type="button"
                     onClick={rmFromFav}
+                    disabled={favBtn}
                     className=" btn btn-transparent hero-btn"
                   >
                     <Icofont icon="heart-alt" />
@@ -154,6 +164,7 @@ class HouseDetails extends Component {
                 ) : (
                   <button
                     type="button"
+                    disabled={favBtn}
                     onClick={addToFavorite}
                     className=" btn btn-transparent hero-btn"
                   >
@@ -206,7 +217,7 @@ HouseDetails.propTypes = {
   match: PropTypes.any,
   house: PropTypes.any,
   loading: PropTypes.any,
-  success: PropTypes.string,
+  type: PropTypes.string,
   fav: PropTypes.any,
   username: PropTypes.any,
   addToFav: PropTypes.func.isRequired,
@@ -223,10 +234,9 @@ HouseDetails.propTypes = {
 const mapStateToProps = state => ({
   house: state.data.house,
   errors: state.error.err,
-  success: state.succMsg.message,
+  type: state.succMsg.type,
   currentUser: state.userData.currentUser,
   loading: state.data.loading,
-  success: state.succMsg.message,
   fav: state.data.fav,
   loggedIn: state.userData.loggedIn,
 });

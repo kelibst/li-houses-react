@@ -33,7 +33,7 @@ class Success extends Component {
     return (
       <div className="alert-success col-sm-10 col-md-6 col-ld-4 mx-auto">
         <Alert show={show} variant="success">
-          <Alert.Heading>{success}</Alert.Heading>
+          <Alert.Heading>{success.message}</Alert.Heading>
           
           <div className="d-flex justify-content-end">
             <Button onClick={setShow} variant="outline-success">
@@ -47,10 +47,10 @@ class Success extends Component {
 }
 
 Success.defaultProps = {
-  errors: PropTypes.shape,
+  success: PropTypes.shape,
 };
 Success.propTypes = {
-  success: PropTypes.string,
+  success: PropTypes.shape,
 
   successWithMessage: PropTypes.func.isRequired,
 };

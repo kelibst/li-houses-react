@@ -1,7 +1,12 @@
-const successWithMessage = (message) => dispatch => {
+const successWithMessage = (message, type="default") => dispatch => {
+  const payload = {
+    message: message,
+    type: type
+  }
+  
     dispatch({
       type: 'SUCC_MSG',
-      payload: message,
+      payload: payload,
     });
   };
   export default successWithMessage

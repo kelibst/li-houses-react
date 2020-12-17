@@ -48,13 +48,14 @@ class Dashboard extends Component {
 
   render() {
     const { success } = this.props
+    console.log(success)
     return (
       <div className="dashboard bg-white">
       <BrowserRouter>
       
         <NavBar />
         <MobileNav />
-        {success.length && <Success/> }
+        {success && <Success/> }
         <div className="container-fluid card-list">
           <Switch>
 

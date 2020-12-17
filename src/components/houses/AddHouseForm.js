@@ -44,6 +44,18 @@ class AddHouseForm extends Component {
       : history.push('/signin');
   }
 
+  componentDidUpdate(nextProps){
+    if(this.props !== nextProps){
+       const { type, close, house, history,loading, status } = this.props
+       
+    if (type === 'create_house' && !loading ){
+      
+      house.id && status !== 'Update'  && history.push(`/houses/${house.id}`)
+      close()
+    } 
+    }
+  }
+
   render() {
     const {
       createHouse,
@@ -78,8 +90,6 @@ class AddHouseForm extends Component {
             },
             () => {
               createHouse(this.state);
-              !loading && close();
-              !loading && history.push(`/houses/${house.id}`);
             },
           );
       } else if (status === 'Update') {
@@ -93,14 +103,10 @@ class AddHouseForm extends Component {
             },
             () => {
               updateHouse(this.state, house.id);
-              !loading && close();
-              !loading && window.location.reload(false);
             },
           );
         } else {
           updateHouse(this.state, house.id);
-          !loading && close();
-          !loading && window.location.reload(false);
         }
       }
     };
@@ -172,6 +178,7 @@ AddHouseForm.propTypes = {
   createHouse: PropTypes.any,
   close: PropTypes.func.isRequired,
   history: PropTypes.any,
+  type: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
@@ -180,6 +187,7 @@ const mapStateToProps = state => ({
   currentUser: state.userData.currentUser,
   house: state.data.house,
   loading: state.userData.loading,
+  type: state.succMsg.type
 });
 
 const ShowTheLocationWithRouter = withRouter(AddHouseForm);
