@@ -84,12 +84,12 @@ Dashboard.defaultProps = {
 
 Dashboard.propTypes = {
   errors: PropTypes.any,
-  match: PropTypes.shape,
-  success: PropTypes.shape,
-  currentUser: PropTypes.shape,
+  match: PropTypes.any,
+  success: PropTypes.any,
+  currentUser: PropTypes.any,
   username: PropTypes.string,
   fetchUser: PropTypes.func.isRequired,
-  history: PropTypes.shape,
+  history: PropTypes.any,
 };
 
 const mapStateToProps = state => ({
