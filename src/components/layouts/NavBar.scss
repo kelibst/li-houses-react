@@ -1,0 +1,60 @@
+.sidebar.navbar-collapse {
+  position: absolute;
+  top: 54px;
+  right: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.sidebar.navbar-collapse.collapsing {
+  height: auto !important;
+  margin-right: 50%;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.sidebar.navbar-collapse.show {
+  right: 0;
+  height: 100vh;
+  position: absolute;
+}
+
+.nav-link.user-pic {
+  width: 10rem;
+  min-height: 10rem;
+  border-radius: 10rem;
+  background: red;
+  justify-self: center;
+  align-self: center;
+}
+
+.nav-icon {
+  font-size: 1.4rem;
+}
+
+.mobile-icon {
+  font-size: 2.5rem;
+}
+
+.dropdown-menu.show {
+  left: -7.3rem;
+}
+
+@media (max-width: 576px) {
+  .mobile.navbar-nav {
+    justify-content: space-evenly;
+    width: 100%;
+    z-index: 100;
+    background: white;
+  }
+
+  .dropdown-menu.show {
+    top: -20rem;
+    padding: 1rem;
+    text-align: center;
+  }
+}

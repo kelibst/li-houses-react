@@ -1,0 +1,92 @@
+$primary-color: rgb(233, 90, 7);
+
+.header {
+  min-height: 70vh;
+  background: rebeccapurple;
+  color: white;
+  background-image: url(https://images.unsplash.com/photo-1584467541268-b040f83be3fd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.hero {
+  position: absolute;
+  top: 30%;
+  color: white;
+  background: linear-gradient(0deg, black, transparent);
+  padding: 3rem;
+  max-width: 30rem;
+
+  &-header {
+    font-size: 2.8rem;
+    font-weight: bolder;
+    padding-bottom: 1rem;
+  }
+
+  &-button {
+    display: flex;
+  }
+
+  &-btn {
+    color: white;
+    font-weight: bolder;
+    background: $primary-color;
+    padding: 0.5rem 1.7rem;
+    border-radius: 2rem;
+  }
+}
+
+.some {
+  &-content {
+    line-height: 2.5;
+  }
+
+  &-two {
+    flex-direction: row-reverse;
+  }
+}
+
+.pre-footer {
+  background: rgb(195, 163, 34);
+  background: linear-gradient(75deg, rgba(195, 163, 34, 1) 0%, rgba(253, 65, 45, 1) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0;
+  padding: 3rem;
+}
+
+.card-details {
+  font-weight: bolder;
+  display: flex;
+}
+
+.card-details p {
+  color: black;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+.ilus {
+  width: 100%;
+}
+
+.house-status {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  position: absolute;
+}
+
+.house-state {
+  padding: 1rem;
+  text-transform: capitalize;
+  font-weight: bolder;
+  background: white;
+  border-radius: 1.6rem;
+  margin-right: 1rem;
+}
